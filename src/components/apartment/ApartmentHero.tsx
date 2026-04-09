@@ -94,7 +94,7 @@ const ApartmentHero = () => {
             </div>
 
             {/* Tabs */}
-            <div className="mt-4 flex gap-1 flex-wrap">
+            <div className="mt-4 flex gap-1 flex-wrap justify-center">
               {tabs.map((tab, i) => (
                 <button
                   key={tab}
