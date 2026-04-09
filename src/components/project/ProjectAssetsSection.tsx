@@ -37,20 +37,7 @@ const assetCards = [
   },
 ] as const;
 
-// Replace with actual YouTube video ID for the project
-const PROJECT_VIDEO_ID = "dQw4w9WgXcQ";
-
-const SLIDES = [
-  { type: "video" as const },
-  { type: "image" as const },
-];
-
 const ProjectAssetsSection = () => {
-  const [slide, setSlide] = useState(0);
-  const total = SLIDES.length;
-  const prev = () => setSlide((s) => (s - 1 + total) % total);
-  const next = () => setSlide((s) => (s + 1) % total);
-
   return (
     <section id="project-assets" className="pt-16 pb-16 md:pt-24 md:pb-24">
       <div className="site-container">
@@ -80,79 +67,12 @@ const ProjectAssetsSection = () => {
         >
           <div className="pb-3 md:pb-4">
             <div className="relative overflow-hidden rounded-[28px] bg-muted h-[360px] md:h-[620px]">
-              <AnimatePresence mode="wait" initial={false}>
-                {SLIDES[slide].type === "video" ? (
-                  <motion.div
-                    key="video"
-                    className="absolute inset-0"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <iframe
-                      src={`https://www.youtube.com/embed/${PROJECT_VIDEO_ID}?rel=0&modestbranding=1`}
-                      title="Видео о проекте"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="absolute inset-0 w-full h-full"
-                    />
-                  </motion.div>
-                ) : (
-                  <motion.img
-                    key="image"
-                    src={parkingStorageHero}
-                    alt="Подземный паркинг и инфраструктура хранения в проекте"
-                    className="absolute inset-0 h-full w-full object-cover"
-                    loading="lazy"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.4 }}
-                  />
-                )}
-              </AnimatePresence>
-
-              {slide === 1 && (
-                <button
-                  type="button"
-                  className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-background text-foreground shadow-sm transition-transform hover:scale-105 md:right-6 md:top-6"
-                  aria-label="Открыть изображение крупнее"
-                >
-                  <Expand className="h-4 w-4" />
-                </button>
-              )}
-
-              <button
-                type="button"
-                onClick={prev}
-                className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-background text-foreground shadow-sm transition-transform hover:scale-105 md:left-6"
-                aria-label="Предыдущий слайд"
-              >
-                <ArrowLeft className="h-4 w-4" />
-              </button>
-
-              <button
-                type="button"
-                onClick={next}
-                className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-background text-foreground shadow-sm transition-transform hover:scale-105 md:right-6"
-                aria-label="Следующий слайд"
-              >
-                <ArrowRight className="h-4 w-4" />
-              </button>
-
-              <div className="absolute inset-x-0 bottom-4 flex items-center justify-center gap-2 md:bottom-6">
-                {SLIDES.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setSlide(i)}
-                    className={`transition-all ${i === slide ? "rounded-pill bg-background px-4 py-2 text-sm font-medium text-foreground" : "h-2.5 w-2.5 rounded-full bg-background/45 hover:bg-background/70"}`}
-                    aria-label={`Слайд ${i + 1}`}
-                  >
-                    {i === slide ? `${i + 1} / ${total}` : null}
-                  </button>
-                ))}
-              </div>
+              <img
+                src={parkingStorageHero}
+                alt="Подземный паркинг и инфраструктура хранения в проекте"
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
             </div>
           </div>
 
