@@ -163,12 +163,11 @@ const ProjectsFilter = ({
 
         {/* CTA — always navigates to catalog */}
         <button
-          className="ml-4"
           onClick={() => {
             const params = buildParams(selectedProject, selectedRooms, selectedDeadline);
             navigate(`/catalog${params ? `?${params}` : ""}`);
           }}
-          className="rounded-pill bg-primary text-primary-foreground h-12 px-8 text-sm font-medium uppercase tracking-wide hover:bg-primary/90 transition-colors whitespace-nowrap"
+          className="ml-4 rounded-pill bg-primary text-primary-foreground h-12 px-8 text-sm font-medium uppercase tracking-wide hover:bg-primary/90 transition-colors whitespace-nowrap"
         >
           Показать квартиры <span className="ml-2 font-bold">804</span>
         </button>
