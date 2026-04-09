@@ -163,8 +163,8 @@ const ProjectFilter = () => {
           </button>
         </motion.div>
 
-        {/* Apartment cards — always visible */}
-        <motion.div
+        {/* Apartment cards — shown after filter change */}
+        {filtersChanged && <motion.div
           className="mt-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
