@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Slider } from "@/components/ui/slider";
 import { Heart } from "lucide-react";
 import FilterDropdown from "@/components/FilterDropdown";
@@ -49,7 +49,7 @@ const ProjectFilter = () => {
   const [area, setArea] = useState([28, 120]);
   const [price, setPrice] = useState([4_000_000, 15_000_000]);
   const [selectedDeadline, setSelectedDeadline] = useState("Все");
-  const [showApartments, setShowApartments] = useState(false);
+  const navigate = useNavigate();
   const [visibleCount, setVisibleCount] = useState(APARTMENTS_PER_PAGE);
   const [favorites, setFavorites] = useState<number[]>([]);
 
@@ -60,11 +60,6 @@ const ProjectFilter = () => {
 
   const toggleFavorite = (id: number) =>
     setFavorites((prev) => prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]);
-
-  const handleShowApartments = () => {
-    setShowApartments(true);
-    setVisibleCount(APARTMENTS_PER_PAGE);
-  };
 
   const filtered = selectedRooms.length
     ? mockApartments.filter(apt =>
@@ -150,24 +145,20 @@ const ProjectFilter = () => {
 
           {/* CTA */}
           <button
-            onClick={handleShowApartments}
+            onClick={() => navigate(`/catalog${catalogParams ? `?${catalogParams}` : ""}`)}
             className="rounded-pill bg-primary text-primary-foreground h-12 px-8 text-sm font-medium uppercase tracking-wide hover:bg-primary/90 transition-colors whitespace-nowrap"
           >
             Показать квартиры
           </button>
         </motion.div>
 
-        {/* Apartment cards */}
-        <AnimatePresence>
-          {showApartments && (
-            <motion.div
-              key="apartments"
-              className="mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            >
+        {/* Apartment cards — always visible */}
+        <motion.div
+          className="mt-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
               {(() => {
                 const visible = filtered.slice(0, visibleCount);
                 const hasMore = visibleCount < filtered.length;
@@ -281,9 +272,7 @@ const ProjectFilter = () => {
                   </>
                 );
               })()}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
