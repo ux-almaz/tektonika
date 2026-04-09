@@ -254,13 +254,13 @@ const ProjectFilter = () => {
                       })}
                     </div>
 
-                    {hasMore ? (
+                    {hasMore && visibleCount < APARTMENTS_PER_PAGE * 3 ? (
                       <div className="flex justify-center mt-8">
                         <button
                           onClick={() => setVisibleCount((c) => c + APARTMENTS_PER_PAGE)}
                           className="rounded-pill border border-border px-10 h-12 text-sm font-medium hover:bg-muted transition-colors"
                         >
-                          Ещё квартиры
+                          Показать ещё
                         </button>
                       </div>
                     ) : (
