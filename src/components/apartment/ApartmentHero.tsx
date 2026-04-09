@@ -94,15 +94,15 @@ const ApartmentHero = () => {
             </div>
 
             {/* Tabs */}
-            <div className="mt-4 flex border border-border rounded-pill overflow-hidden">
+            <div className="mt-4 flex gap-1 flex-wrap">
               {tabs.map((tab, i) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(i)}
-                  className={`flex-1 py-3.5 text-sm font-medium text-center transition-colors ${
+                  className={`h-12 px-5 rounded-pill text-sm font-medium transition-colors border ${
                     activeTab === i
-                      ? "bg-foreground text-background"
-                      : "text-muted-foreground hover:bg-muted"
+                      ? "bg-foreground text-background border-foreground"
+                      : "border-border text-muted-foreground hover:bg-muted"
                   }`}
                 >
                   {tab}
