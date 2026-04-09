@@ -111,7 +111,7 @@ const ProjectsFilter = ({
       {/* Filter row */}
       <div className="flex flex-col md:flex-row gap-4 items-end">
         {/* Project — tabs */}
-        <div className="flex-1">
+        <div>
           <p className="text-muted-foreground text-xs mb-2">Проект</p>
           <div className="flex gap-1 flex-wrap">
             {projectTabs.map((tab) => (
