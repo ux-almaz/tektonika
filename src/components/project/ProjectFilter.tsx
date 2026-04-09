@@ -44,7 +44,7 @@ const mockApartments = [
   { id: 12, rooms: "2-комн.", area: 48.9, floor: 4, totalFloors: 9, building: "корп. 2", price: 9_800_000, discount: true, tags: ["вид на горы"] },
 ];
 
-const INITIAL_ROOMS = ["2"];
+const INITIAL_ROOMS: string[] = [];
 const INITIAL_AREA = [28, 120];
 const INITIAL_PRICE = [4_000_000, 15_000_000];
 const INITIAL_DEADLINE = "Все";
