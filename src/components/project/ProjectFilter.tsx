@@ -53,6 +53,14 @@ const ProjectFilter = () => {
   const [visibleCount, setVisibleCount] = useState(APARTMENTS_PER_PAGE);
   const [favorites, setFavorites] = useState<number[]>([]);
 
+  const toggleRoom = (r: string) =>
+    setSelectedRooms((prev) =>
+      prev.includes(r) ? prev.filter((x) => x !== r) : [...prev, r]
+    );
+
+  const toggleFavorite = (id: number) =>
+    setFavorites((prev) => prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]);
+
   const filtered = selectedRooms.length
     ? mockApartments.filter(apt =>
         selectedRooms.some(r => ROOM_MAP[r] === apt.rooms)
