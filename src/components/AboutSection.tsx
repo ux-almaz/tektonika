@@ -36,6 +36,12 @@ const team = [
   { photo: aboutConstruction, name: "Анна Смирнова",     role: "Главный инженер" },
   { photo: aboutHero,         name: "Павел Орлов",       role: "Директор по маркетингу" },
   { photo: aboutCourtyard,    name: "Ирина Волкова",     role: "Руководитель юр. отдела" },
+  { photo: aboutConstruction, name: "Андрей Морозов",    role: "Директор по строительству" },
+  { photo: aboutHero,         name: "Ольга Федорова",    role: "HR-директор" },
+  { photo: aboutCourtyard,    name: "Виктор Кузнецов",   role: "Главный проектировщик" },
+  { photo: aboutConstruction, name: "Наталья Белова",    role: "Руководитель дизайна" },
+  { photo: aboutHero,         name: "Роман Захаров",     role: "Директор по закупкам" },
+  { photo: aboutCourtyard,    name: "Елена Попова",      role: "Руководитель сервиса" },
 ];
 
 const AboutSection = () => {
