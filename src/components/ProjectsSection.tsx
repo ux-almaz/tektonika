@@ -142,8 +142,8 @@ const ProjectsSection = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: i * 0.05 }}
                   >
-                    <div
-                      onClick={() => openSheet(apt)}
+                    <Link
+                      to={`/flats/${apt.id}`}
                       className="group bg-card border border-border rounded-3xl overflow-hidden flex flex-col h-full hover:shadow-lg transition-shadow cursor-pointer"
                     >
                       <div className="px-6 pt-5 pb-0">
@@ -155,7 +155,7 @@ const ProjectsSection = () => {
                             </p>
                           </div>
                           <button
-                            onClick={(e) => { e.stopPropagation(); toggleFavorite(apt.id); }}
+                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(apt.id); }}
                             className="rounded-full border border-border p-3 text-muted-foreground transition-colors hover:text-primary"
                           >
                             <Heart className={`h-4 w-4 ${favorites.includes(apt.id) ? "fill-primary text-primary" : ""}`} />
@@ -206,7 +206,7 @@ const ProjectsSection = () => {
                       ) : (
                         <div className="pb-5" />
                       )}
-                    </div>
+                    </Link>
                   </motion.div>
                 );
               })}
