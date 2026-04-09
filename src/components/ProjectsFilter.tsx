@@ -109,7 +109,7 @@ const ProjectsFilter = ({
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
     >
       {/* Filter row */}
-      <div className="flex flex-col md:flex-row gap-4 items-end">
+      <div className="flex flex-col md:flex-row gap-4 items-end justify-between">
         {/* Project — tabs */}
         <div>
           <p className="text-muted-foreground text-xs mb-2">Проект</p>
