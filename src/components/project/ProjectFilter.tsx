@@ -283,7 +283,7 @@ const ProjectFilter = () => {
                   </>
                 );
               })()}
-        </motion.div>
+        </motion.div>}
       </div>
     </section>
   );
