@@ -109,7 +109,7 @@ const ProjectsFilter = ({
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
     >
       {/* Filter row */}
-      <div className="flex flex-col md:flex-row gap-4 items-end justify-between">
+      <div className="flex flex-col md:flex-row gap-0 items-end justify-between">
         {/* Project — tabs */}
         <div>
           <p className="text-muted-foreground text-xs mb-2">Проект</p>
@@ -167,7 +167,7 @@ const ProjectsFilter = ({
             const params = buildParams(selectedProject, selectedRooms, selectedDeadline);
             navigate(`/catalog${params ? `?${params}` : ""}`);
           }}
-          className="rounded-pill bg-primary text-primary-foreground h-12 px-8 text-sm font-medium uppercase tracking-wide hover:bg-primary/90 transition-colors whitespace-nowrap"
+          className="ml-4 rounded-pill bg-primary text-primary-foreground h-12 px-8 text-sm font-medium uppercase tracking-wide hover:bg-primary/90 transition-colors whitespace-nowrap"
         >
           Показать квартиры <span className="ml-2 font-bold">804</span>
         </button>
