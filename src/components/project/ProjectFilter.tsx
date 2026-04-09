@@ -54,9 +54,6 @@ const ProjectFilter = () => {
   const [area, setArea] = useState(INITIAL_AREA);
   const [price, setPrice] = useState(INITIAL_PRICE);
   const [selectedDeadline, setSelectedDeadline] = useState(INITIAL_DEADLINE);
-  const [area, setArea] = useState([28, 120]);
-  const [price, setPrice] = useState([4_000_000, 15_000_000]);
-  const [selectedDeadline, setSelectedDeadline] = useState("Все");
   const navigate = useNavigate();
   const [visibleCount, setVisibleCount] = useState(APARTMENTS_PER_PAGE);
   const [favorites, setFavorites] = useState<number[]>([]);
