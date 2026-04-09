@@ -131,7 +131,7 @@ const ProjectsSection = () => {
               const visible = filtered.slice(0, visibleCount);
               const hasMore = visibleCount < filtered.length;
               return (<>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-6">
               {visible.map((apt, i) => {
                 const monthly = calcMonthly(apt.price);
                 const downPayment = Math.round(apt.price * 0.2);
