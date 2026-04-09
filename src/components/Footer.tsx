@@ -86,22 +86,22 @@ const Footer = () => (
     <div className="site-container">
 
       {/* Top block: Logo + phone + call button */}
-      <div className="py-10 md:py-12 flex flex-col sm:flex-row items-center justify-between gap-6">
-        {/* Logo + Phone — left */}
-        <div className="flex items-center gap-6">
-          <img src={tektonika} alt="Тектоника" className="h-7 w-auto" />
+      <div className="py-10 md:py-12 flex flex-col gap-6">
+        {/* Logo */}
+        <img src={tektonika} alt="Тектоника" className="h-7 w-auto self-start" />
+
+        {/* Phone + Button */}
+        <div className="flex items-center justify-between">
           <a href="tel:+79001234567" className="text-base font-medium tracking-tight hover:text-primary transition-colors">
             +7 (900) 123-45-67
           </a>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
+          >
+            Заказать звонок
+          </button>
         </div>
-
-        {/* Button — right */}
-        <button
-          type="button"
-          className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
-        >
-          Заказать звонок
-        </button>
       </div>
 
       {/* Divider */}
