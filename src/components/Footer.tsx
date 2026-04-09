@@ -130,7 +130,7 @@ const Footer = () => (
         </div>
 
         {/* Right: Navigation columns */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 justify-items-end">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
           {navColumns.map((col) => (
             <div key={col.title}>
               <h4 className="text-sm font-medium text-background mb-4">{col.title}</h4>
