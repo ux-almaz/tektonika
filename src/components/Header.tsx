@@ -168,11 +168,11 @@ const Header = ({ introDone = false }: { introDone?: boolean }) => {
 
       {/* Mobile burger — separate fixed element above header */}
       <button
-        className="fixed top-4 right-4 z-[60] lg:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-background border border-border shadow-sm text-foreground"
+        className="fixed top-4 right-4 z-[60] lg:hidden flex items-center justify-center w-10 h-10 text-foreground"
         onClick={() => setOpen(!open)}
         aria-label="Меню"
       >
-        {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
 
       {/* Mobile menu overlay */}
