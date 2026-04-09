@@ -44,8 +44,16 @@ const mockApartments = [
   { id: 12, rooms: "2-комн.", area: 48.9, floor: 4, totalFloors: 9, building: "корп. 2", price: 9_800_000, discount: true, tags: ["вид на горы"] },
 ];
 
+const INITIAL_ROOMS = ["2"];
+const INITIAL_AREA = [28, 120];
+const INITIAL_PRICE = [4_000_000, 15_000_000];
+const INITIAL_DEADLINE = "Все";
+
 const ProjectFilter = () => {
-  const [selectedRooms, setSelectedRooms] = useState<string[]>(["2"]);
+  const [selectedRooms, setSelectedRooms] = useState<string[]>(INITIAL_ROOMS);
+  const [area, setArea] = useState(INITIAL_AREA);
+  const [price, setPrice] = useState(INITIAL_PRICE);
+  const [selectedDeadline, setSelectedDeadline] = useState(INITIAL_DEADLINE);
   const [area, setArea] = useState([28, 120]);
   const [price, setPrice] = useState([4_000_000, 15_000_000]);
   const [selectedDeadline, setSelectedDeadline] = useState("Все");
@@ -60,6 +68,12 @@ const ProjectFilter = () => {
 
   const toggleFavorite = (id: number) =>
     setFavorites((prev) => prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]);
+
+  const filtersChanged =
+    JSON.stringify(selectedRooms) !== JSON.stringify(INITIAL_ROOMS) ||
+    JSON.stringify(area) !== JSON.stringify(INITIAL_AREA) ||
+    JSON.stringify(price) !== JSON.stringify(INITIAL_PRICE) ||
+    selectedDeadline !== INITIAL_DEADLINE;
 
   const filtered = selectedRooms.length
     ? mockApartments.filter(apt =>
