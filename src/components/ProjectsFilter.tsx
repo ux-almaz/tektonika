@@ -110,7 +110,7 @@ const ProjectsFilter = ({
     >
       {/* Filter row */}
       <div className="flex flex-col md:flex-row items-end justify-between">
-        <div className="flex flex-col md:flex-row gap-3 items-end">
+        <div className="flex flex-col md:flex-row gap-3 items-start md:items-end">
         {/* Project — tabs */}
         <div>
           <p className="text-muted-foreground text-xs mb-2">Проект</p>
@@ -131,8 +131,8 @@ const ProjectsFilter = ({
           </div>
         </div>
 
-        {/* Deadline */}
-        <div>
+        {/* Deadline — hidden on mobile */}
+        <div className="hidden md:block">
           <p className="text-muted-foreground text-xs mb-2">Готовность</p>
           <FilterDropdown
             value={selectedDeadline}
@@ -143,7 +143,7 @@ const ProjectsFilter = ({
         </div>
 
         {/* Rooms */}
-        <div>
+        <div className="mb-2 md:mb-0">
           <p className="text-muted-foreground text-xs mb-2">Комнат</p>
           <div className="flex gap-1">
             {roomOptions.map((r) => (
