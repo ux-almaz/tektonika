@@ -161,6 +161,7 @@ const ProjectsFilter = ({
             ))}
           </div>
         </div>
+        </div>
 
         {/* CTA — always navigates to catalog */}
         <button
