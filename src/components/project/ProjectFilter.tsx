@@ -272,9 +272,7 @@ const ProjectFilter = () => {
                   </>
                 );
               })()}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
