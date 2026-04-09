@@ -1,7 +1,6 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Expand } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import SectionHeading from "../SectionHeading";
 import parkingStorageHero from "@/assets/project-parking-storage-hero.jpg";
 import { parkingAssets } from "@/data/parkingAssets";
