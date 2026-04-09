@@ -157,7 +157,7 @@ const Footer = () => (
         <a href="#" style={{ textDecoration: "underline", color: "inherit" }}>
           Политика конфиденциальности и обработки персональных данных
         </a>
-        <span>Разработка сайта</span>
+        
       </div>
     </div>
   </footer>
