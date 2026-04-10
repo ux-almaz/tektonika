@@ -97,7 +97,7 @@ const Footer = () => {
 
         {/* Phone + Button */}
         <div className="flex items-center justify-between md:gap-8">
-          <a href="tel:+79001234567" className="text-base font-medium tracking-tight hover:text-primary transition-colors">
+          <a href="tel:+79001234567" className="tracking-tight hover:text-primary transition-colors text-3xl font-light">
             +7 (900) 123-45-67
           </a>
           <button
