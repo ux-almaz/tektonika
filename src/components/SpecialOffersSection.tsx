@@ -136,14 +136,16 @@ const CardWrapper = ({ id, href, i, light, isMobile, children }: { id: string; h
   </motion.div>
 );
 
-const SpecialOffersSection = () => (
+const SpecialOffersSection = () => {
+  const isMobile = useIsMobile();
+  return (
   <section className="w-full pt-3 pb-2">
-    <div className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+    <div className="overflow-x-auto overflow-y-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       <div className="flex gap-3 px-5 md:px-10 lg:px-16 xl:px-[100px] 2xl:px-[140px] md:max-w-[2000px] md:mx-auto">
         {cards.map((card, i) => {
           if (card.type === "image") {
             return (
-              <CardWrapper key={card.id} id={card.id} href={card.href} i={i}>
+              <CardWrapper key={card.id} id={card.id} href={card.href} i={i} isMobile={isMobile}>
                 <div className="relative w-full h-full">
                   <img
                     src={(card as ImageCard).image}
