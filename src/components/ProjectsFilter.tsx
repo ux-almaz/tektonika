@@ -169,7 +169,7 @@ const ProjectsFilter = ({
             const params = buildParams(selectedProject, selectedRooms, selectedDeadline);
             navigate(`/catalog${params ? `?${params}` : ""}`);
           }}
-          className="w-full rounded-pill bg-primary text-primary-foreground h-12 px-8 text-sm font-medium uppercase tracking-wide hover:bg-primary/90 transition-colors whitespace-nowrap"
+          className="w-full md:w-auto rounded-pill bg-primary text-primary-foreground h-12 px-8 text-sm font-medium uppercase tracking-wide hover:bg-primary/90 transition-colors whitespace-nowrap"
         >
           Показать квартиры <span className="ml-2 font-bold">804</span>
         </button>
