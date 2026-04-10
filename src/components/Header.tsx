@@ -7,6 +7,7 @@ import tektonika from "@/assets/tektonika-logo.svg";
 import ProjectsDropdown from "./header/ProjectsDropdown";
 import ApartmentsDropdown from "./header/ApartmentsDropdown";
 import HeaderStories from "./header/HeaderStories";
+import ConsultationSheet from "./ConsultationSheet";
 
 const MotionLink = motion(Link);
 
@@ -23,6 +24,7 @@ const navLinks = [
 
 const Header = ({ introDone = false }: { introDone?: boolean }) => {
   const [open, setOpen] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<DropdownKey | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -158,7 +160,7 @@ const Header = ({ introDone = false }: { introDone?: boolean }) => {
               <Phone className="h-4 w-4" />
               +7 (900) 123-45-67
             </a>
-            <PillButton variant="outline" className="py-3 px-6 text-xs hidden 2xl:inline-flex">
+            <PillButton variant="outline" className="py-3 px-6 text-xs hidden 2xl:inline-flex" onClick={() => setSheetOpen(true)}>
               Заказать звонок
             </PillButton>
           </motion.div>
@@ -201,13 +203,15 @@ const Header = ({ introDone = false }: { introDone?: boolean }) => {
                 <Phone className="h-4 w-4" />
                 +7 (900) 123-45-67
               </a>
-              <PillButton variant="outline" className="mt-3 w-full">
+              <PillButton variant="outline" className="mt-3 w-full" onClick={() => { setOpen(false); setSheetOpen(true); }}>
                 Заказать звонок
               </PillButton>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <ConsultationSheet open={sheetOpen} onOpenChange={setSheetOpen} />
     </>
   );
 };
