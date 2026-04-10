@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import project1 from "@/assets/project1.webp";
 import project2 from "@/assets/project2.jpg";
@@ -13,7 +13,18 @@ import ProjectsFilter from "./ProjectsFilter";
 import ConsultationSheet from "./ConsultationSheet";
 import type { FilterValues } from "./ProjectsFilter";
 
-const APARTMENTS_PER_PAGE = 6;
+function useApartmentsPerPage() {
+  const [count, setCount] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(min-width: 1800px)").matches ? 8 : 6
+  );
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 1800px)");
+    const handler = () => setCount(mql.matches ? 8 : 6);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+  return count;
+}
 
 const ROOM_MAP: Record<string, string> = {
   "Студия": "Студия",
@@ -77,7 +88,8 @@ const mapProjects = [
 const ProjectsSection = () => {
   const [view, setView] = useState<"params" | "map">("params");
   const [showApartments, setShowApartments] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(APARTMENTS_PER_PAGE);
+  const apartmentsPerPage = useApartmentsPerPage();
+  const [visibleCount, setVisibleCount] = useState(apartmentsPerPage);
   const [favorites, setFavorites] = useState<number[]>([]);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [selectedApt, setSelectedApt] = useState<typeof mockApartments[0] | null>(null);
@@ -105,7 +117,7 @@ const ProjectsSection = () => {
           onFilterChange={(show, params, filters) => {
             setShowApartments(show);
             if (show) {
-              setVisibleCount(APARTMENTS_PER_PAGE);
+              setVisibleCount(apartmentsPerPage);
               setCatalogParams(params);
               setActiveFilters(filters);
             }
@@ -215,7 +227,7 @@ const ProjectsSection = () => {
             {hasMore ? (
               <div className="flex justify-center mt-8">
                 <button
-                  onClick={() => setVisibleCount((c) => c + APARTMENTS_PER_PAGE)}
+                  onClick={() => setVisibleCount((c) => c + apartmentsPerPage)}
                   className="rounded-pill border border-border px-10 h-12 text-sm font-medium hover:bg-muted transition-colors"
                 >
                   Ещё квартиры
