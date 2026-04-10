@@ -103,7 +103,7 @@ const AboutSection = () => {
         </div>
 
         {/* Team photos */}
-        <div>
+        <div className="overflow-hidden">
           <div className="flex items-center justify-between mb-6">
             <motion.p
               className="text-xs uppercase tracking-widest text-muted-foreground"
