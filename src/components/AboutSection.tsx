@@ -1,6 +1,5 @@
-import { useRef } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import PillButton from "./PillButton";
 import TextReveal from "./TextReveal";
 import CountUp from "./CountUp";
@@ -45,12 +44,6 @@ const team = [
 ];
 
 const AboutSection = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 380 : -380, behavior: "smooth" });
-  };
 
   return (
   <section id="about" className="py-16 md:py-24 bg-muted">
