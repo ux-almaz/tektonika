@@ -214,7 +214,6 @@ const SpecialOffersSection = () => {
       </div>
     </div>
   </section>
-);
-
-
+  );
+};
 export default SpecialOffersSection;
