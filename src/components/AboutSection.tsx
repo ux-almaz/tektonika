@@ -1,6 +1,5 @@
-import { useRef } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import PillButton from "./PillButton";
 import TextReveal from "./TextReveal";
 import CountUp from "./CountUp";
@@ -45,12 +44,6 @@ const team = [
 ];
 
 const AboutSection = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 380 : -380, behavior: "smooth" });
-  };
 
   return (
   <section id="about" className="py-16 md:py-24 bg-muted">
@@ -104,58 +97,38 @@ const AboutSection = () => {
 
         {/* Team photos */}
         <div>
-          <div className="flex items-center justify-between mb-6">
-            <motion.p
-              className="text-xs uppercase tracking-widest text-muted-foreground"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              Команда
-            </motion.p>
-            <div className="flex gap-2">
-              <button
-                onClick={() => scroll("left")}
-                className="flex items-center justify-center w-9 h-9 rounded-full border border-foreground/20 hover:border-foreground/50 hover:bg-foreground/5 transition-colors"
-                aria-label="Назад"
+          <motion.p
+            className="text-xs uppercase tracking-widest text-muted-foreground mb-6"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            Команда
+          </motion.p>
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3">
+            {team.map((member, i) => (
+              <motion.div
+                key={member.name}
+                className="relative overflow-hidden rounded-2xl bg-background"
+                style={{ aspectRatio: "3/4" }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.07 * i }}
               >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => scroll("right")}
-                className="flex items-center justify-center w-9 h-9 rounded-full border border-foreground/20 hover:border-foreground/50 hover:bg-foreground/5 transition-colors"
-                aria-label="Вперёд"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-          <div ref={scrollRef} className="overflow-x-auto overflow-y-hidden scrollbar-hide -mx-4 px-4">
-            <div className="flex gap-3" style={{ width: "max-content", paddingRight: "calc(max(1rem, (100vw - 2000px) / 2 + 140px))" }}>
-              {team.map((member, i) => (
-                <motion.div
-                  key={member.name}
-                  className="relative overflow-hidden rounded-2xl bg-background shrink-0"
-                  style={{ width: 180, aspectRatio: "3/4" }}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.07 * i }}
-                >
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3">
-                    <p className="text-white text-sm font-medium leading-tight">{member.name}</p>
-                    <p className="text-white/65 text-xs mt-0.5">{member.role}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-3">
+                  <p className="text-white text-sm font-medium leading-tight">{member.name}</p>
+                  <p className="text-white/65 text-xs mt-0.5">{member.role}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
 
