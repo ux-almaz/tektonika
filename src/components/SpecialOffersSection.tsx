@@ -179,7 +179,7 @@ const SpecialOffersSection = () => {
 
           if (card.type === "dark") {
             return (
-              <CardWrapper key={card.id} id={card.id} href={card.href} i={i}>
+              <CardWrapper key={card.id} id={card.id} href={card.href} i={i} isMobile={isMobile}>
                 <div className="bg-foreground w-full h-full flex flex-col justify-between p-5">
                   <img src={tektonikLight} alt="Тектоника" className="h-[14px] w-auto" />
                   <div>
