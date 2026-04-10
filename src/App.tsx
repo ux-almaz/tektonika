@@ -5,8 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import Index from "./pages/Index";
-import Login from "./pages/Login";
-import RequirePassword from "./components/RequirePassword";
 
 const Project = lazy(() => import("./pages/Project"));
 const Catalog = lazy(() => import("./pages/Catalog"));
@@ -32,10 +30,6 @@ const ScrollToTop = () => {
   return null;
 };
 
-const P = ({ children }: { children: React.ReactNode }) => (
-  <RequirePassword>{children}</RequirePassword>
-);
-
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -46,20 +40,19 @@ const App = () => (
         <ScrollToTop />
         <Suspense fallback={null}>
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<P><Index /></P>} />
-            <Route path="/project" element={<P><Project /></P>} />
-            <Route path="/catalog" element={<P><Catalog /></P>} />
-            <Route path="/parking" element={<P><ParkingCatalog /></P>} />
-            <Route path="/parking/:id" element={<P><ParkingAssetDetail /></P>} />
-            <Route path="/flats/:id" element={<P><Apartment /></P>} />
-            <Route path="/about" element={<P><About /></P>} />
-            <Route path="/purchase" element={<P><HowToBuy /></P>} />
-            <Route path="/projects" element={<P><Projects /></P>} />
-            <Route path="/contacts" element={<P><Contacts /></P>} />
-            <Route path="/media" element={<P><Media /></P>} />
-            <Route path="/media/:id" element={<P><Publication /></P>} />
-            <Route path="*" element={<P><NotFound /></P>} />
+            <Route path="/" element={<Index />} />
+            <Route path="/project" element={<Project />} />
+            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/parking" element={<ParkingCatalog />} />
+            <Route path="/parking/:id" element={<ParkingAssetDetail />} />
+            <Route path="/flats/:id" element={<Apartment />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/purchase" element={<HowToBuy />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contacts" element={<Contacts />} />
+            <Route path="/media" element={<Media />} />
+            <Route path="/media/:id" element={<Publication />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
