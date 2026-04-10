@@ -120,7 +120,8 @@ const CARD_H = "h-[200px] md:h-[260px]";
 const CardWrapper = ({ id, href, i, light, isMobile, children }: { id: string; href: string; i: number; light?: boolean; isMobile?: boolean; children: React.ReactNode }) => (
   <motion.div
     key={id}
-    initial={isMobile ? false : { opacity: 0, y: 50 }}
+    initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+    animate={isMobile ? { opacity: 1, y: 0 } : undefined}
     whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-60px" }}
     transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.08 * i }}
