@@ -117,11 +117,11 @@ const cards: OfferCard[] = [
 
 const CARD_H = "h-[200px] md:h-[260px]";
 
-const CardWrapper = ({ id, href, i, light, children }: { id: string; href: string; i: number; light?: boolean; children: React.ReactNode }) => (
+const CardWrapper = ({ id, href, i, light, isMobile, children }: { id: string; href: string; i: number; light?: boolean; isMobile?: boolean; children: React.ReactNode }) => (
   <motion.div
     key={id}
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
+    initial={isMobile ? false : { opacity: 0, y: 50 }}
+    whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-60px" }}
     transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.08 * i }}
     className="group w-[170px] hover:w-[220px] shrink-0 md:w-auto md:hover:w-auto md:flex-1 md:min-w-[120px] md:hover:[flex-grow:1.8] transition-[width,flex-grow] duration-300 ease-out relative"
