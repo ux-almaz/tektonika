@@ -83,7 +83,10 @@ const socialLinks = [
 ];
 
 
-const Footer = () => (
+const Footer = () => {
+  const [sheetOpen, setSheetOpen] = useState(false);
+
+  return (
   <footer id="footer" className="bg-foreground text-background overflow-hidden">
     <div className="site-container">
 
@@ -100,6 +103,7 @@ const Footer = () => (
           <button
             type="button"
             className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
+            onClick={() => setSheetOpen(true)}
           >
             Заказать звонок
           </button>
@@ -162,7 +166,10 @@ const Footer = () => (
         
       </div>
     </div>
+
+    <ConsultationSheet open={sheetOpen} onOpenChange={setSheetOpen} />
   </footer>
-);
+  );
+};
 
 export default Footer;
