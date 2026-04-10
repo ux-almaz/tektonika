@@ -159,6 +159,8 @@ const AboutSection = () => {
               ))}
             </div>
           </div>
+          <div className="pointer-events-none absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-muted to-transparent" />
+          </div>
         </div>
 
         {/* Partners ticker */}
