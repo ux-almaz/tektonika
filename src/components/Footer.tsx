@@ -86,12 +86,12 @@ const Footer = () => (
     <div className="site-container">
 
       {/* Top block: Logo + phone + call button */}
-      <div className="py-10 md:py-12 flex flex-col gap-6">
+      <div className="py-10 md:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         {/* Logo */}
-        <img src={tektonika} alt="Тектоника" className="h-7 w-auto self-start" />
+        <img src={tektonika} alt="Тектоника" className="h-7 w-auto self-start md:self-center" />
 
         {/* Phone + Button */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between md:gap-8">
           <a href="tel:+79001234567" className="text-base font-medium tracking-tight hover:text-primary transition-colors">
             +7 (900) 123-45-67
           </a>
