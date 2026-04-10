@@ -82,8 +82,8 @@ const socialLinks = [
 
 
 const Footer = () => (
-  <footer id="footer" className="relative bg-foreground text-background overflow-hidden border-0 outline-none">
-    <div className="site-container">
+  <footer id="footer" className="relative bg-foreground text-background overflow-hidden border-0 outline-none before:absolute before:inset-x-0 before:top-[-2px] before:h-[4px] before:bg-foreground before:z-10">
+    <div className="site-container relative z-20">
 
       {/* Top block: Logo + phone + call button */}
       <div className="py-10 md:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
