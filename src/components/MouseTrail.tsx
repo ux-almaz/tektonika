@@ -13,9 +13,11 @@ const MAX_SIZE = 14;
 const MouseTrail = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const points = useRef<Point[]>([]);
+  const mouse = useRef({ x: -100, y: -100 });
   const animRef = useRef<number>(0);
 
   useEffect(() => {
+    // Only show on devices with a mouse
     if (!window.matchMedia("(pointer: fine)").matches) return;
 
     const canvas = canvasRef.current;
@@ -30,17 +32,8 @@ const MouseTrail = () => {
     resize();
     window.addEventListener("resize", resize);
 
-    const getFooterTop = () => {
-      const footer = document.getElementById("footer");
-      if (!footer) return window.innerHeight;
-      const rect = footer.getBoundingClientRect();
-      return Math.max(0, rect.top);
-    };
-
     const onMove = (e: MouseEvent) => {
-      const footerTop = getFooterTop();
-      if (e.clientY >= footerTop) return;
-
+      mouse.current = { x: e.clientX, y: e.clientY };
       points.current.unshift({ x: e.clientX, y: e.clientY, opacity: 1 });
       if (points.current.length > TRAIL_LENGTH) {
         points.current.length = TRAIL_LENGTH;
@@ -50,8 +43,6 @@ const MouseTrail = () => {
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const footerTop = getFooterTop();
-      points.current = points.current.filter((point) => point.y < footerTop);
 
       for (let i = 0; i < points.current.length; i++) {
         const p = points.current[i];
@@ -83,7 +74,13 @@ const MouseTrail = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 z-[9999]" aria-hidden="true" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="pointer-events-none fixed inset-0 z-[9999]"
+      aria-hidden="true"
+    />
+  );
 };
 
 export default MouseTrail;
