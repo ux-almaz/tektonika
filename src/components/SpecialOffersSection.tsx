@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import projectHero from "@/assets/project-hero-1.webp";
 import aboutHero from "@/assets/about-hero.jpg";
 import valueInterior from "@/assets/value-interior.webp";
