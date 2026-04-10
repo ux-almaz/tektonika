@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import projectHero from "@/assets/project-hero-1.webp";
 import aboutHero from "@/assets/about-hero.jpg";
 import valueInterior from "@/assets/value-interior.webp";
@@ -116,11 +117,11 @@ const cards: OfferCard[] = [
 
 const CARD_H = "h-[200px] md:h-[260px]";
 
-const CardWrapper = ({ id, href, i, light, children }: { id: string; href: string; i: number; light?: boolean; children: React.ReactNode }) => (
+const CardWrapper = ({ id, href, i, light, isMobile, children }: { id: string; href: string; i: number; light?: boolean; isMobile?: boolean; children: React.ReactNode }) => (
   <motion.div
     key={id}
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
+    initial={isMobile ? false : { opacity: 0, y: 50 }}
+    whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-60px" }}
     transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.08 * i }}
     className="group w-[170px] hover:w-[220px] shrink-0 md:w-auto md:hover:w-auto md:flex-1 md:min-w-[120px] md:hover:[flex-grow:1.8] transition-[width,flex-grow] duration-300 ease-out relative"
@@ -135,14 +136,16 @@ const CardWrapper = ({ id, href, i, light, children }: { id: string; href: strin
   </motion.div>
 );
 
-const SpecialOffersSection = () => (
+const SpecialOffersSection = () => {
+  const isMobile = useIsMobile();
+  return (
   <section className="w-full pt-3 pb-2">
-    <div className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+    <div className="overflow-x-auto overflow-y-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       <div className="flex gap-3 px-5 md:px-10 lg:px-16 xl:px-[100px] 2xl:px-[140px] md:max-w-[2000px] md:mx-auto">
         {cards.map((card, i) => {
           if (card.type === "image") {
             return (
-              <CardWrapper key={card.id} id={card.id} href={card.href} i={i}>
+              <CardWrapper key={card.id} id={card.id} href={card.href} i={i} isMobile={isMobile}>
                 <div className="relative w-full h-full">
                   <img
                     src={(card as ImageCard).image}
@@ -176,7 +179,7 @@ const SpecialOffersSection = () => (
 
           if (card.type === "dark") {
             return (
-              <CardWrapper key={card.id} id={card.id} href={card.href} i={i}>
+              <CardWrapper key={card.id} id={card.id} href={card.href} i={i} isMobile={isMobile}>
                 <div className="bg-foreground w-full h-full flex flex-col justify-between p-5">
                   <img src={tektonikLight} alt="Тектоника" className="h-[14px] w-auto" />
                   <div>
@@ -193,7 +196,7 @@ const SpecialOffersSection = () => (
           }
 
           return (
-            <CardWrapper key={card.id} id={card.id} href={card.href} i={i} light>
+            <CardWrapper key={card.id} id={card.id} href={card.href} i={i} light isMobile={isMobile}>
               <div className="bg-muted w-full h-full flex flex-col justify-between p-5">
                 <img src={tektonikaDark} alt="Тектоника" className="h-[14px] w-auto opacity-40" />
                 <div>
@@ -211,7 +214,6 @@ const SpecialOffersSection = () => (
       </div>
     </div>
   </section>
-);
-
-
+  );
+};
 export default SpecialOffersSection;
