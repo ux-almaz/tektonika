@@ -82,7 +82,7 @@ const socialLinks = [
 
 
 const Footer = () => (
-  <footer id="footer" className="bg-foreground text-background overflow-hidden border-0 outline-none [&>*]:border-0 [&_div]:border-0 [&_ul]:border-0 [&_li]:border-0 [&_p]:border-0 [&_a]:border-0 [&_span]:border-0 [&_h4]:border-0 [&_img]:border-0 [&_section]:border-0">
+  <footer id="footer" className="bg-foreground text-background overflow-hidden border-0 outline-none">
     <div className="site-container">
 
       {/* Top block: Logo + phone + call button */}
