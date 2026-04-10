@@ -196,7 +196,7 @@ const SpecialOffersSection = () => {
           }
 
           return (
-            <CardWrapper key={card.id} id={card.id} href={card.href} i={i} light>
+            <CardWrapper key={card.id} id={card.id} href={card.href} i={i} light isMobile={isMobile}>
               <div className="bg-muted w-full h-full flex flex-col justify-between p-5">
                 <img src={tektonikaDark} alt="Тектоника" className="h-[14px] w-auto opacity-40" />
                 <div>
