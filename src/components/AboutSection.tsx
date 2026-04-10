@@ -132,7 +132,7 @@ const AboutSection = () => {
             </div>
           </div>
           <div ref={scrollRef} className="overflow-x-auto overflow-y-hidden scrollbar-hide -mx-4 px-4">
-            <div className="flex gap-3 pr-4" style={{ width: "max-content" }}>
+            <div className="flex gap-3" style={{ width: "max-content", paddingRight: "calc(max(1rem, (100vw - 2000px) / 2 + 140px))" }}>
               {team.map((member, i) => (
                 <motion.div
                   key={member.name}
