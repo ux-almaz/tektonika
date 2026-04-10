@@ -131,7 +131,9 @@ const AboutSection = () => {
               </button>
             </div>
           </div>
+          <div className="relative">
           <div ref={scrollRef} className="overflow-x-auto overflow-y-hidden scrollbar-hide -mx-4 px-4">
+
             <div className="flex gap-3 pr-4" style={{ width: "max-content" }}>
               {team.map((member, i) => (
                 <motion.div
@@ -156,6 +158,8 @@ const AboutSection = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+          <div className="pointer-events-none absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-muted to-transparent" />
           </div>
         </div>
 
