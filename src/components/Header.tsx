@@ -7,6 +7,7 @@ import tektonika from "@/assets/tektonika-logo.svg";
 import ProjectsDropdown from "./header/ProjectsDropdown";
 import ApartmentsDropdown from "./header/ApartmentsDropdown";
 import HeaderStories from "./header/HeaderStories";
+import ConsultationSheet from "./ConsultationSheet";
 
 const MotionLink = motion(Link);
 
