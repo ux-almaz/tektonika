@@ -42,18 +42,19 @@ const App = () => (
         <ScrollToTop />
         <Suspense fallback={null}>
           <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/project" element={<Project />} />
-            <Route path="/catalog" element={<Catalog />} />
-            <Route path="/parking" element={<ParkingCatalog />} />
-            <Route path="/parking/:id" element={<ParkingAssetDetail />} />
-            <Route path="/flats/:id" element={<Apartment />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/purchase" element={<HowToBuy />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/contacts" element={<Contacts />} />
-            <Route path="/media" element={<Media />} />
-            <Route path="/media/:id" element={<Publication />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<RequirePassword><Index /></RequirePassword>} />
+            <Route path="/project" element={<RequirePassword><Project /></RequirePassword>} />
+            <Route path="/catalog" element={<RequirePassword><Catalog /></RequirePassword>} />
+            <Route path="/parking" element={<RequirePassword><ParkingCatalog /></RequirePassword>} />
+            <Route path="/parking/:id" element={<RequirePassword><ParkingAssetDetail /></RequirePassword>} />
+            <Route path="/flats/:id" element={<RequirePassword><Apartment /></RequirePassword>} />
+            <Route path="/about" element={<RequirePassword><About /></RequirePassword>} />
+            <Route path="/purchase" element={<RequirePassword><HowToBuy /></RequirePassword>} />
+            <Route path="/projects" element={<RequirePassword><Projects /></RequirePassword>} />
+            <Route path="/contacts" element={<RequirePassword><Contacts /></RequirePassword>} />
+            <Route path="/media" element={<RequirePassword><Media /></RequirePassword>} />
+            <Route path="/media/:id" element={<RequirePassword><Publication /></RequirePassword>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
