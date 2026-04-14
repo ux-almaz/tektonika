@@ -19,6 +19,7 @@ const Projects = lazy(() => import("./pages/Projects"));
 const Contacts = lazy(() => import("./pages/Contacts"));
 const Media = lazy(() => import("./pages/Media"));
 const Publication = lazy(() => import("./pages/Publication"));
+const Proposal = lazy(() => import("./pages/Proposal"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 import MouseTrail from "./components/MouseTrail";
 
@@ -55,6 +56,7 @@ const App = () => (
             <Route path="/contacts" element={<RequirePassword><Contacts /></RequirePassword>} />
             <Route path="/media" element={<RequirePassword><Media /></RequirePassword>} />
             <Route path="/media/:id" element={<RequirePassword><Publication /></RequirePassword>} />
+            <Route path="/proposal" element={<RequirePassword><Proposal /></RequirePassword>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
