@@ -56,7 +56,7 @@ const App = () => (
             <Route path="/contacts" element={<RequirePassword><Contacts /></RequirePassword>} />
             <Route path="/media" element={<RequirePassword><Media /></RequirePassword>} />
             <Route path="/media/:id" element={<RequirePassword><Publication /></RequirePassword>} />
-            <Route path="/proposal" element={<RequirePassword><Proposal /></RequirePassword>} />
+            <Route path="/proposal" element={<Proposal />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
