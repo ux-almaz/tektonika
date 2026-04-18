@@ -95,33 +95,6 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Media block (merged) */}
-        <div>
-          <SectionHeading
-            title="Медиа"
-            rightElement={
-              <a href="/media" className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide hover:text-muted-foreground transition-colors">
-                Все публикации
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
-            }
-          />
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {news.map((n, i) => (
-              <motion.div
-                key={n.title}
-                className="flex"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.12 * i }}
-              >
-                <NewsCard {...n} />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
         {/* Partners ticker */}
         <div>
           <motion.p
@@ -151,6 +124,33 @@ const AboutSection = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Media block (merged) */}
+        <div>
+          <SectionHeading
+            title="Медиа"
+            rightElement={
+              <a href="/media" className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide hover:text-muted-foreground transition-colors">
+                Все публикации
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            }
+          />
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {news.map((n, i) => (
+              <motion.div
+                key={n.title}
+                className="flex"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.12 * i }}
+              >
+                <NewsCard {...n} />
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
