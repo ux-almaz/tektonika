@@ -1,17 +1,16 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import PillButton from "./PillButton";
 import TextReveal from "./TextReveal";
 import CountUp from "./CountUp";
+import NewsCard from "./NewsCard";
+import SectionHeading from "./SectionHeading";
 import tektonika from "@/assets/tektonika-logo.svg";
 import logoSber from "@/assets/logo-sber.png";
 import logoVtb from "@/assets/logo-vtb.png";
 import logoTbank from "@/assets/logo-tbank.png";
-import aboutHero from "@/assets/about-hero.jpg";
-import aboutCourtyard from "@/assets/about-courtyard.jpg";
-import aboutConstruction from "@/assets/about-construction.jpg";
 
 const stats = [
   { value: "20", label: "лет на рынке" },
