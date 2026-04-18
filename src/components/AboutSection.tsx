@@ -102,64 +102,30 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Team photos */}
-        <div className="overflow-hidden">
-          <div className="flex items-center justify-between mb-6">
-            <motion.p
-              className="text-xs uppercase tracking-widest text-muted-foreground"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              Команда
-            </motion.p>
-            <div className="flex gap-2">
-              <button
-                onClick={() => scroll("left")}
-                className="flex items-center justify-center w-9 h-9 rounded-full border border-foreground/20 hover:border-foreground/50 hover:bg-foreground/5 transition-colors"
-                aria-label="Назад"
+        {/* Media block (merged) */}
+        <div>
+          <SectionHeading
+            title="Медиа"
+            rightElement={
+              <a href="/media" className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide hover:text-muted-foreground transition-colors">
+                Все публикации
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            }
+          />
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {news.map((n, i) => (
+              <motion.div
+                key={n.title}
+                className="flex"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.12 * i }}
               >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => scroll("right")}
-                className="flex items-center justify-center w-9 h-9 rounded-full border border-foreground/20 hover:border-foreground/50 hover:bg-foreground/5 transition-colors"
-                aria-label="Вперёд"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-          <div className="relative">
-          <div ref={scrollRef} className="overflow-x-auto overflow-y-hidden scrollbar-hide -mx-4 px-4">
-
-            <div className="flex gap-3 pr-4" style={{ width: "max-content" }}>
-              {team.map((member, i) => (
-                <motion.div
-                  key={member.name}
-                  className="relative overflow-hidden rounded-2xl bg-background shrink-0"
-                  style={{ width: 180, aspectRatio: "3/4" }}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.07 * i }}
-                >
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3">
-                    <p className="text-white text-sm font-medium leading-tight">{member.name}</p>
-                    <p className="text-white/65 text-xs mt-0.5">{member.role}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-          <div className="pointer-events-none absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-muted to-transparent" />
+                <NewsCard {...n} />
+              </motion.div>
+            ))}
           </div>
         </div>
 
