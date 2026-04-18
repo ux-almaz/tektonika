@@ -46,7 +46,7 @@ const news = [
 
 const AboutSection = () => {
   return (
-  <section id="about" className="py-12 md:py-16 bg-muted">
+  <section id="about" className="pt-20 pb-20 md:pt-28 md:pb-28 bg-muted">
     <div className="site-container">
       <div className="flex flex-col gap-8 md:gap-10">
         {/* Logo */}
