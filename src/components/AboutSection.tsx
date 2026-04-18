@@ -45,12 +45,6 @@ const news = [
 ];
 
 const AboutSection = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 380 : -380, behavior: "smooth" });
-  };
-
   return (
   <section id="about" className="py-16 md:py-24 bg-muted">
     <div className="site-container">
