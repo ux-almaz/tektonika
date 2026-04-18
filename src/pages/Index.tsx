@@ -38,7 +38,6 @@ const Index = () => {
           {/* <ProjectsSection /> */}
           {/* <MortgageCalculator /> */}
           <AboutSection />
-          <NewsSection />
         </Suspense>
       </main>
       <Footer />
