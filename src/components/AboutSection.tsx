@@ -46,9 +46,9 @@ const news = [
 
 const AboutSection = () => {
   return (
-  <section id="about" className="py-16 md:py-24 bg-muted">
+  <section id="about" className="py-12 md:py-16 bg-muted">
     <div className="site-container">
-      <div className="flex flex-col gap-12">
+      <div className="flex flex-col gap-8 md:gap-10">
         {/* Logo */}
         <TextReveal as="div" className="inline-block">
           <img src={tektonika} alt="Тектоника" className="h-12 md:h-16" />
