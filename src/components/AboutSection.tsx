@@ -27,21 +27,22 @@ const partnerLogos = [
 // Duplicate for seamless loop
 const tickerLogos = [...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos];
 
-const team = [
-  { photo: aboutHero,         name: "Александр Петров",  role: "Генеральный директор" },
-  { photo: aboutCourtyard,    name: "Мария Соколова",    role: "Коммерческий директор" },
-  { photo: aboutConstruction, name: "Дмитрий Козлов",    role: "Главный архитектор" },
-  { photo: aboutHero,         name: "Екатерина Новикова", role: "Финансовый директор" },
-  { photo: aboutCourtyard,    name: "Сергей Лебедев",    role: "Руководитель продаж" },
-  { photo: aboutConstruction, name: "Анна Смирнова",     role: "Главный инженер" },
-  { photo: aboutHero,         name: "Павел Орлов",       role: "Директор по маркетингу" },
-  { photo: aboutCourtyard,    name: "Ирина Волкова",     role: "Руководитель юр. отдела" },
-  { photo: aboutConstruction, name: "Андрей Морозов",    role: "Директор по строительству" },
-  { photo: aboutHero,         name: "Ольга Федорова",    role: "HR-директор" },
-  { photo: aboutCourtyard,    name: "Виктор Кузнецов",   role: "Главный проектировщик" },
-  { photo: aboutConstruction, name: "Наталья Белова",    role: "Руководитель дизайна" },
-  { photo: aboutHero,         name: "Роман Захаров",     role: "Директор по закупкам" },
-  { photo: aboutCourtyard,    name: "Елена Попова",      role: "Руководитель сервиса" },
+const news = [
+  {
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80&fm=webp",
+    title: "Выдача ключей нового корпуса ЖК Тектоника",
+    date: "24.02.2025",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&q=80&fm=webp",
+    title: "Планировки нового формата multispace: удобно работать и жить",
+    date: "24.02.2025",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80&fm=webp",
+    title: "Старт продаж ЖК Тектоника",
+    date: "24.02.2025",
+  },
 ];
 
 const AboutSection = () => {
