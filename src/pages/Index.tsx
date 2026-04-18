@@ -9,7 +9,7 @@ import PageIntro from "@/components/PageIntro";
 const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
 const MortgageCalculator = lazy(() => import("@/components/MortgageCalculator"));
 const AboutSection = lazy(() => import("@/components/AboutSection"));
-const NewsSection = lazy(() => import("@/components/NewsSection"));
+
 
 // Module-level flag: resets on page reload, survives SPA navigation
 let introHasPlayed = false;
