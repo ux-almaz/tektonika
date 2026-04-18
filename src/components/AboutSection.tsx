@@ -1,17 +1,15 @@
-import { useRef } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import PillButton from "./PillButton";
 import TextReveal from "./TextReveal";
 import CountUp from "./CountUp";
+import NewsCard from "./NewsCard";
+import SectionHeading from "./SectionHeading";
 import tektonika from "@/assets/tektonika-logo.svg";
 import logoSber from "@/assets/logo-sber.png";
 import logoVtb from "@/assets/logo-vtb.png";
 import logoTbank from "@/assets/logo-tbank.png";
-import aboutHero from "@/assets/about-hero.jpg";
-import aboutCourtyard from "@/assets/about-courtyard.jpg";
-import aboutConstruction from "@/assets/about-construction.jpg";
 
 const stats = [
   { value: "20", label: "лет на рынке" },
@@ -28,34 +26,29 @@ const partnerLogos = [
 // Duplicate for seamless loop
 const tickerLogos = [...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos];
 
-const team = [
-  { photo: aboutHero,         name: "Александр Петров",  role: "Генеральный директор" },
-  { photo: aboutCourtyard,    name: "Мария Соколова",    role: "Коммерческий директор" },
-  { photo: aboutConstruction, name: "Дмитрий Козлов",    role: "Главный архитектор" },
-  { photo: aboutHero,         name: "Екатерина Новикова", role: "Финансовый директор" },
-  { photo: aboutCourtyard,    name: "Сергей Лебедев",    role: "Руководитель продаж" },
-  { photo: aboutConstruction, name: "Анна Смирнова",     role: "Главный инженер" },
-  { photo: aboutHero,         name: "Павел Орлов",       role: "Директор по маркетингу" },
-  { photo: aboutCourtyard,    name: "Ирина Волкова",     role: "Руководитель юр. отдела" },
-  { photo: aboutConstruction, name: "Андрей Морозов",    role: "Директор по строительству" },
-  { photo: aboutHero,         name: "Ольга Федорова",    role: "HR-директор" },
-  { photo: aboutCourtyard,    name: "Виктор Кузнецов",   role: "Главный проектировщик" },
-  { photo: aboutConstruction, name: "Наталья Белова",    role: "Руководитель дизайна" },
-  { photo: aboutHero,         name: "Роман Захаров",     role: "Директор по закупкам" },
-  { photo: aboutCourtyard,    name: "Елена Попова",      role: "Руководитель сервиса" },
+const news = [
+  {
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80&fm=webp",
+    title: "Выдача ключей нового корпуса ЖК Тектоника",
+    date: "24.02.2025",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&q=80&fm=webp",
+    title: "Планировки нового формата multispace: удобно работать и жить",
+    date: "24.02.2025",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80&fm=webp",
+    title: "Старт продаж ЖК Тектоника",
+    date: "24.02.2025",
+  },
 ];
 
 const AboutSection = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 380 : -380, behavior: "smooth" });
-  };
-
   return (
-  <section id="about" className="py-16 md:py-24 bg-muted">
+  <section id="about" className="py-12 md:py-16 bg-muted">
     <div className="site-container">
-      <div className="flex flex-col gap-12">
+      <div className="flex flex-col gap-8 md:gap-10">
         {/* Logo */}
         <TextReveal as="div" className="inline-block">
           <img src={tektonika} alt="Тектоника" className="h-12 md:h-16" />
@@ -102,64 +95,30 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Team photos */}
-        <div className="overflow-hidden">
-          <div className="flex items-center justify-between mb-6">
-            <motion.p
-              className="text-xs uppercase tracking-widest text-muted-foreground"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              Команда
-            </motion.p>
-            <div className="flex gap-2">
-              <button
-                onClick={() => scroll("left")}
-                className="flex items-center justify-center w-9 h-9 rounded-full border border-foreground/20 hover:border-foreground/50 hover:bg-foreground/5 transition-colors"
-                aria-label="Назад"
+        {/* Media block (merged) */}
+        <div>
+          <SectionHeading
+            title="Медиа"
+            rightElement={
+              <a href="/media" className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide hover:text-muted-foreground transition-colors">
+                Все публикации
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            }
+          />
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {news.map((n, i) => (
+              <motion.div
+                key={n.title}
+                className="flex"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.12 * i }}
               >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => scroll("right")}
-                className="flex items-center justify-center w-9 h-9 rounded-full border border-foreground/20 hover:border-foreground/50 hover:bg-foreground/5 transition-colors"
-                aria-label="Вперёд"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-          <div className="relative">
-          <div ref={scrollRef} className="overflow-x-auto overflow-y-hidden scrollbar-hide -mx-4 px-4">
-
-            <div className="flex gap-3 pr-4" style={{ width: "max-content" }}>
-              {team.map((member, i) => (
-                <motion.div
-                  key={member.name}
-                  className="relative overflow-hidden rounded-2xl bg-background shrink-0"
-                  style={{ width: 180, aspectRatio: "3/4" }}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.07 * i }}
-                >
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3">
-                    <p className="text-white text-sm font-medium leading-tight">{member.name}</p>
-                    <p className="text-white/65 text-xs mt-0.5">{member.role}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-          <div className="pointer-events-none absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-muted to-transparent" />
+                <NewsCard {...n} />
+              </motion.div>
+            ))}
           </div>
         </div>
 
