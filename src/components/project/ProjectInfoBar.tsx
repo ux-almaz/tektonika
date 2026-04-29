@@ -1,6 +1,10 @@
 import { motion } from "framer-motion";
 
-const ProjectInfoBar = () => (
+interface ProjectInfoBarProps {
+  titleOverride?: string;
+}
+
+const ProjectInfoBar = ({ titleOverride }: ProjectInfoBarProps) => (
   <section className="py-8 border-b border-border">
     <div className="site-container">
     <motion.div
@@ -12,7 +16,7 @@ const ProjectInfoBar = () => (
     >
       {/* Left: name + location */}
       <div>
-        <h2 className="font-display text-2xl md:text-3xl font-medium">ЖК Тектоника</h2>
+        <h2 className="font-display text-2xl md:text-3xl font-medium">{titleOverride ?? "ЖК Тектоника"}</h2>
         <p className="text-muted-foreground text-sm mt-1 flex items-center gap-2">
           Симферополь
           <span className="text-border">•</span>

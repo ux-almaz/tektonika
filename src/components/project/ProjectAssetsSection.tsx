@@ -39,7 +39,7 @@ const assetCards = [
 
 const ProjectAssetsSection = () => {
   return (
-    <section id="project-assets" className="pt-16 pb-16 md:pt-24 md:pb-24">
+    <section id="project-assets" className="pt-16 pb-16 md:pt-24 md:pb-24 border-0">
       <div className="site-container">
         <div className="mb-10 md:mb-12">
           <SectionHeading title="Кладовые и машино-места" />
@@ -59,7 +59,7 @@ const ProjectAssetsSection = () => {
         </div>
 
         <motion.div
-          className="w-full overflow-hidden rounded-[32px] bg-card"
+          className="project-assets-shell w-full overflow-hidden rounded-[32px] bg-card"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}

@@ -13,7 +13,7 @@ const ProjectCTANewsletter = () => {
   };
 
   return (
-    <section className="py-16 md:py-24">
+    <section className="py-16 md:py-24 border-0">
       <div className="site-container">
         <motion.div
           className="bg-muted rounded-3xl px-10 py-10 md:px-16 md:py-12 flex flex-col lg:flex-row items-center gap-10 overflow-hidden relative"

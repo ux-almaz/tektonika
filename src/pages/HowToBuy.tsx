@@ -249,7 +249,7 @@ const HowToBuy = () => {
         </section>
 
         {/* ── Mortgage Programs ── */}
-        <section className="py-16 md:py-24">
+        <section className="py-16 md:py-24 border-0">
           <div className="site-container">
             <ScrollReveal>
               <SectionHeading title="Ипотечные программы" />
@@ -326,7 +326,7 @@ const HowToBuy = () => {
         </section>
 
         {/* ── Calculator ── */}
-        <section className="py-16 md:py-24 bg-muted">
+        <section className="py-16 md:py-24 bg-muted border-0">
           <div className="site-container">
             <ScrollReveal>
               <SectionHeading title="Рассчитайте ипотеку" />
@@ -552,7 +552,7 @@ const HowToBuy = () => {
         </section>
 
         {/* ── Steps ── */}
-        <section className="pb-16 md:pb-24 bg-muted">
+        <section className="pb-16 md:pb-24 bg-muted border-0">
           <div className="site-container">
             <ScrollReveal>
               <SectionHeading title="Пять шагов к ипотеке" as="span" hideBar small />
@@ -581,7 +581,7 @@ const HowToBuy = () => {
         </section>
 
         {/* ── Other buy methods + CTA ── */}
-        <section className="py-16 md:py-24">
+        <section className="py-16 md:py-24 border-0">
           <div className="site-container">
             <ScrollReveal>
               <SectionHeading title="Другие способы покупки" />

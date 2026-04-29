@@ -54,7 +54,7 @@ const ProjectConstruction = () => {
   const currentSlide = constructionSlides[activeSlide];
 
   return (
-    <section id="project-construction" className="pt-10 md:pt-14 pb-24 md:pb-36">
+    <section id="project-construction" className="pt-10 md:pt-14 pb-24 md:pb-36 border-0">
       <div className="site-container">
         <div className="mb-12 flex items-center gap-4">
           <SectionHeading title="Ход строительства" />

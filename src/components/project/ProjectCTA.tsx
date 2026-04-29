@@ -3,7 +3,7 @@ import PillButton from "../PillButton";
 import TextReveal from "../TextReveal";
 
 const ProjectCTA = () => (
-  <section className="py-16 md:py-24">
+  <section className="py-16 md:py-24 border-0">
     <div className="site-container">
     <motion.div
       className="bg-foreground text-background p-10 md:p-16 lg:p-20 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 rounded-3xl"

@@ -22,7 +22,7 @@ const news = [
 ];
 
 const NewsSection = () => (
-  <section id="news" className="py-16 md:py-24 bg-muted">
+  <section id="news" className="py-16 md:py-24 bg-muted border-0">
     <div className="site-container">
     <SectionHeading
       title="Медиа"

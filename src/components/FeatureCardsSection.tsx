@@ -23,7 +23,7 @@ const cards = [
 ];
 
 const FeatureCardsSection = () => (
-  <section className="relative z-10 w-full mt-4 pb-4">
+  <section className="relative z-10 w-full mt-4 pb-4 border-0">
     <div className="site-container">
     <div className="flex flex-col md:flex-row w-full min-h-[220px] gap-4">
       {cards.map((card, i) => (

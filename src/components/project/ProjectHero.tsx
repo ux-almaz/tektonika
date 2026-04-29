@@ -8,29 +8,34 @@ const galleryCategories = [
   { label: "Благоустройство", key: "landscape" },
 ];
 
-const galleryImages: Record<string, string[]> = {
-  arch: [
-    projectHero1,
-    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80&fm=webp",
-    "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=1600&q=80&fm=webp",
-  ],
-  entrance: [
-    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1600&q=80&fm=webp",
-    "https://images.unsplash.com/photo-1515263487990-61b07816b324?w=1600&q=80&fm=webp",
-  ],
-  landscape: [
-    "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=1600&q=80&fm=webp",
-    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80&fm=webp",
-  ],
-};
-
 const badges = [
   { text: "Старт продаж", variant: "primary" as const },
   { text: "Вид на горы", variant: "dark" as const },
   { text: "Рассрочка на 5 лет", variant: "dark" as const },
 ];
 
-const ProjectHero = () => {
+interface ProjectHeroProps {
+  heroImageOverride?: string;
+  titleOverride?: string;
+}
+
+const ProjectHero = ({ heroImageOverride, titleOverride }: ProjectHeroProps) => {
+  const galleryImages: Record<string, string[]> = {
+    arch: [
+      heroImageOverride ?? projectHero1,
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=1600&q=80&fm=webp",
+    ],
+    entrance: [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1600&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1515263487990-61b07816b324?w=1600&q=80&fm=webp",
+    ],
+    landscape: [
+      "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=1600&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80&fm=webp",
+    ],
+  };
+
   const [activeCategory, setActiveCategory] = useState("arch");
   const [activeSlide, setActiveSlide] = useState(0);
   const images = galleryImages[activeCategory];
@@ -44,7 +49,7 @@ const ProjectHero = () => {
   const handleNext = () => setActiveSlide((p) => (p === images.length - 1 ? 0 : p + 1));
 
   return (
-    <section className="relative w-full">
+    <section className="relative w-full border-0">
       {/* Full-width hero image */}
       <div className="relative overflow-hidden min-h-[580px] md:min-h-[700px]">
         <AnimatePresence mode="wait">
@@ -57,7 +62,7 @@ const ProjectHero = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-foreground/60 via-foreground/30 to-transparent" />
+            <div className="project-hero-overlay absolute inset-0 bg-gradient-to-r from-foreground/60 via-foreground/30 to-transparent" />
           </motion.div>
         </AnimatePresence>
 
@@ -92,7 +97,7 @@ const ProjectHero = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             >
-              ЖК Тектоника
+              {titleOverride ?? "ЖК Тектоника"}
             </motion.h1>
             <motion.p
               className="mt-4 text-lg md:text-xl text-background/80 max-w-[500px] leading-relaxed"

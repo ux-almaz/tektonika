@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PillButton from "@/components/PillButton";
 import tektonika from "@/assets/tektonika-logo.svg";
 
 const SITE_PASSWORD = "tektonika";
+const PASSWORD_LOGIN_ENABLED = false;
 
 const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!PASSWORD_LOGIN_ENABLED) {
+      navigate("/", { replace: true });
+    }
+  }, [navigate]);
+
+  if (!PASSWORD_LOGIN_ENABLED) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -98,7 +98,7 @@ const Projects = () => {
       <Header introDone />
       <main className="pt-20">
         {/* Hero */}
-        <section className="py-16 md:py-24">
+        <section className="py-16 md:py-24 border-0">
           <div className="site-container">
             <SectionHeading
               title="Наши проекты"
@@ -250,7 +250,7 @@ const Projects = () => {
         </section>
 
         {/* CTA */}
-        <section className="pb-16 md:pb-24">
+        <section className="pb-16 md:pb-24 border-0">
           <div className="site-container">
             <ScrollReveal>
               <div className="bg-foreground text-background rounded-3xl p-10 md:p-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">

@@ -105,7 +105,7 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects" className="py-16 md:py-24">
+    <section id="projects" className="py-16 md:py-24 border-0">
       <div className="site-container">
         <SectionHeading
           title="Наши проекты"

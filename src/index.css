@@ -197,3 +197,101 @@ html {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Alternate project identity: Luxor */
+.luxor-theme {
+  --background: 36 56% 93%;
+  --foreground: 352 44% 14%;
+  --card: 30 30% 85%;
+  --card-foreground: 352 44% 14%;
+  --popover: 30 30% 85%;
+  --popover-foreground: 352 44% 14%;
+  --primary: 356 40% 24%;
+  --primary-foreground: 40 20% 92%;
+  --secondary: 351 36% 20%;
+  --secondary-foreground: 40 20% 92%;
+  --muted: 30 22% 86%;
+  --muted-foreground: 356 26% 30%;
+  --accent: 356 40% 24%;
+  --accent-foreground: 40 20% 92%;
+  --border: 353 30% 30%;
+  --input: 353 30% 30%;
+  --ring: 356 40% 24%;
+}
+
+.luxor-theme .bg-foreground\/30 {
+  background-color: hsl(352 44% 14% / 0.45);
+}
+
+.luxor-theme .bg-foreground\/40 {
+  background-color: hsl(352 44% 14% / 0.55);
+}
+
+.luxor-theme main > section {
+  backdrop-filter: saturate(96%);
+  background-color: hsl(var(--background) / 0.9);
+}
+
+.luxor-theme #project-assets .project-assets-shell,
+.luxor-theme #project-assets .project-assets-shell > .pb-3,
+.luxor-theme #project-assets .project-assets-shell > .grid {
+  background-color: transparent;
+}
+
+.luxor-theme .project-hero-overlay {
+  background: linear-gradient(
+    to right,
+    hsl(0 0% 0% / 0.3),
+    hsl(0 0% 0% / 0.16),
+    hsl(0 0% 0% / 0.06)
+  );
+}
+
+/* Alternate project identity: Coast */
+.coast-theme {
+  --background: 0 0% 100%; /* #FFFFFF */
+  --foreground: 216 22% 33%;
+  --card: 207 42% 80%; /* #B2CFE6 */
+  --card-foreground: 216 22% 33%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 216 22% 33%;
+  --primary: 199 81% 55%; /* #31ABE9 */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 216 21% 63%; /* #8E9EB1 */
+  --secondary-foreground: 0 0% 100%;
+  --muted: 30 20% 96%; /* #F9F6F3 */
+  --muted-foreground: 216 18% 38%;
+  --accent: 199 81% 55%;
+  --accent-foreground: 0 0% 100%;
+  --border: 216 21% 63%;
+  --input: 216 21% 63%;
+  --ring: 199 81% 55%;
+}
+
+.coast-theme .bg-foreground\/30 {
+  background-color: hsl(216 22% 33% / 0.38);
+}
+
+.coast-theme .bg-foreground\/40 {
+  background-color: hsl(216 22% 33% / 0.5);
+}
+
+.coast-theme main > section {
+  backdrop-filter: saturate(98%);
+  background-color: hsl(var(--background) / 0.92);
+}
+
+.coast-theme #project-assets .project-assets-shell,
+.coast-theme #project-assets .project-assets-shell > .pb-3,
+.coast-theme #project-assets .project-assets-shell > .grid {
+  background-color: transparent;
+}
+
+.coast-theme .project-hero-overlay {
+  background: linear-gradient(
+    to right,
+    hsl(0 0% 0% / 0.3),
+    hsl(0 0% 0% / 0.16),
+    hsl(0 0% 0% / 0.06)
+  );
+}

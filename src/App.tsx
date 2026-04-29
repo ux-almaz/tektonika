@@ -9,6 +9,8 @@ import RequirePassword from "./components/RequirePassword";
 
 const Login = lazy(() => import("./pages/Login"));
 const Project = lazy(() => import("./pages/Project"));
+const ProjectLuxor = lazy(() => import("./pages/ProjectLuxor"));
+const ProjectCoast = lazy(() => import("./pages/ProjectCoast"));
 const Catalog = lazy(() => import("./pages/Catalog"));
 const ParkingCatalog = lazy(() => import("./pages/ParkingCatalog"));
 const ParkingAssetDetail = lazy(() => import("./pages/ParkingAssetDetail"));
@@ -46,6 +48,8 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<RequirePassword><Index /></RequirePassword>} />
             <Route path="/project" element={<RequirePassword><Project /></RequirePassword>} />
+            <Route path="/project-luxor" element={<RequirePassword><ProjectLuxor /></RequirePassword>} />
+            <Route path="/project-coast" element={<RequirePassword><ProjectCoast /></RequirePassword>} />
             <Route path="/catalog" element={<RequirePassword><Catalog /></RequirePassword>} />
             <Route path="/parking" element={<RequirePassword><ParkingCatalog /></RequirePassword>} />
             <Route path="/parking/:id" element={<RequirePassword><ParkingAssetDetail /></RequirePassword>} />

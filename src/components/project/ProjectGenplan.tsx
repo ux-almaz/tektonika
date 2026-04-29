@@ -145,7 +145,7 @@ const ProjectGenplan = () => {
   }, []);
 
   return (
-    <section id="project-genplan" className="py-16 md:py-24">
+    <section id="project-genplan" className="py-16 md:py-24 border-0">
       <div className="site-container">
         <SectionHeading title="Генплан" />
 

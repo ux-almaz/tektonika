@@ -32,7 +32,7 @@ const ProjectAbout = () => {
   const next = () => setCurrent((c) => (c === total - 1 ? 0 : c + 1));
 
   return (
-    <section id="project-about" className="py-16 md:py-24">
+    <section id="project-about" className="py-16 md:py-24 border-0">
       <div className="site-container">
         {/* Top: Title + Description */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 mb-12 md:mb-16">

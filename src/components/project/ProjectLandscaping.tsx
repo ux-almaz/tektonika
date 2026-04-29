@@ -16,7 +16,7 @@ const photos = [
 ];
 
 const ProjectLandscaping = () => (
-  <section id="project-landscaping" className="pt-16 md:pt-24 pb-10 md:pb-14 bg-muted">
+  <section id="project-landscaping" className="pt-16 md:pt-24 pb-10 md:pb-14 bg-muted border-0">
     <div className="site-container">
       <SectionHeading title="Благоустройство" />
       <div className="mt-10 md:mt-14 grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-3 md:gap-4" style={{ height: "clamp(400px, 60vw, 700px)" }}>

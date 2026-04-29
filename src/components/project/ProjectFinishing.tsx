@@ -44,7 +44,7 @@ const ProjectFinishing = () => {
   };
 
   return (
-    <section id="project-finishing" className="py-16 md:py-24">
+    <section id="project-finishing" className="py-16 md:py-24 border-0">
       <div className="site-container">
 
         {/* Header */}

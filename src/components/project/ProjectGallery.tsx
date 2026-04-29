@@ -10,7 +10,7 @@ const images = [
 ];
 
 const ProjectGallery = () => (
-  <section className="py-16 md:py-24 bg-muted">
+  <section className="py-16 md:py-24 bg-muted border-0">
     <div className="site-container">
     <SectionHeading title="Галерея" />
 
