@@ -34,7 +34,7 @@ type LabelMarker = {
 
 type Marker = IconMarker | NumberMarker | LabelMarker;
 
-const markers: Marker[] = [
+const defaultMarkers: Marker[] = [
   // Numbered sections (buildings)
   { id: "sec1", type: "number", number: 1, label: "1-я очередь", top: "55%", left: "22%" },
   { id: "sec2", type: "number", number: 2, label: "2-я очередь", top: "72%", left: "45%" },
@@ -58,7 +58,7 @@ const markers: Marker[] = [
   { id: "lbl-parking1", type: "label", label: "Мультипаркинг", badge: "288 м/м", top: "24%", left: "32%" },
 ];
 
-const MapMarkers = ({ showTooltip }: { showTooltip: boolean }) => {
+const MapMarkers = ({ showTooltip, markers }: { showTooltip: boolean; markers: Marker[] }) => {
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
@@ -130,8 +130,20 @@ const MapMarkers = ({ showTooltip }: { showTooltip: boolean }) => {
   );
 };
 
-const ProjectGenplan = () => {
+interface ProjectGenplanProps {
+  imageOverride?: string;
+  markersOverride?: Marker[];
+  markerPositionsOverride?: Partial<Record<string, { top: string; left: string }>>;
+}
+
+const ProjectGenplan = ({ imageOverride, markersOverride, markerPositionsOverride }: ProjectGenplanProps) => {
   const [fullscreen, setFullscreen] = useState(false);
+  const genplanImage = imageOverride ?? genplanImg;
+  const sourceMarkers = markersOverride ?? defaultMarkers;
+  const markers = sourceMarkers.map((marker) => {
+    const pos = markerPositionsOverride?.[marker.id];
+    return pos ? { ...marker, top: pos.top, left: pos.left } : marker;
+  });
 
   useEffect(() => {
     document.body.style.overflow = fullscreen ? "hidden" : "";
@@ -151,9 +163,9 @@ const ProjectGenplan = () => {
 
         <ScrollReveal>
           <div className="mt-8 relative rounded-3xl overflow-hidden border border-border" style={{ minHeight: "680px" }}>
-            <img src={genplanImg} alt="Генплан" className="w-full h-full object-cover absolute inset-0" />
+            <img src={genplanImage} alt="Генплан" className="w-full h-full object-cover absolute inset-0" />
             <div className="absolute inset-0 bg-foreground/5" />
-            <MapMarkers showTooltip={true} />
+            <MapMarkers showTooltip={true} markers={markers} />
 
             <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
               <button
@@ -172,9 +184,9 @@ const ProjectGenplan = () => {
       {fullscreen && createPortal(
         <div className="fixed inset-0 z-[9999] bg-black">
           <div className="relative w-full h-full">
-            <img src={genplanImg} alt="Генплан" className="w-full h-full object-cover absolute inset-0" />
+            <img src={genplanImage} alt="Генплан" className="w-full h-full object-cover absolute inset-0" />
             <div className="absolute inset-0 bg-foreground/5" />
-            <MapMarkers showTooltip={true} />
+            <MapMarkers showTooltip={true} markers={markers} />
 
             <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
               <button

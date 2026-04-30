@@ -25,7 +25,7 @@ const ProjectCTANewsletter = () => {
           {/* Left: text */}
           <div className="shrink-0 max-w-[360px]">
             <TextReveal as="h2" className="font-display text-[24px] md:text-[32px] font-normal leading-[1.1] uppercase tracking-[-0.5px]">
-              Подписывайтесь на&nbsp;рассылку акций
+              Получайте новости<br />о ЛЮКСОР первыми
             </TextReveal>
             <motion.p
               className="mt-3 text-muted-foreground text-sm leading-relaxed"
@@ -34,7 +34,7 @@ const ProjectCTANewsletter = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Получайте информацию о&nbsp;выгодных предложениях и&nbsp;скидках первыми
+              Оставьте контакты, чтобы получать обновления о ходе строительства, новых планировках и специальных предложениях резиденции.
             </motion.p>
           </div>
 
@@ -66,7 +66,7 @@ const ProjectCTANewsletter = () => {
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <PillButton variant="yellow" type="submit" className="shrink-0">
-                Подписаться
+                Получать обновления
               </PillButton>
               <label className="flex items-start gap-3 cursor-pointer group">
                 <button

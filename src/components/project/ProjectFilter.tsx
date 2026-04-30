@@ -193,9 +193,9 @@ const ProjectFilter = () => {
                               <div className="px-6 pt-5 pb-0">
                                 <div className="flex items-start justify-between">
                                   <div>
-                                    <p className="font-display text-base font-medium">ЖК Тектоника</p>
+                                    <p className="font-display text-base font-medium">Резиденция ЛЮКСОР</p>
                                     <p className="text-xs text-muted-foreground mt-1">
-                                      ул. Примерная, 1 <span className="mx-1">·</span> {apt.building}
+                                      Артиллерийская, 90 <span className="mx-1">·</span> {apt.building}
                                     </p>
                                   </div>
                                   <button

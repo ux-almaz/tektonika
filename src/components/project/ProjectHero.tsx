@@ -1,26 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
+import { Maximize2, X } from "lucide-react";
 import projectHero1 from "@/assets/project-hero-1.webp";
 
-const galleryCategories = [
+const defaultGalleryCategories = [
   { label: "Архитектура", key: "arch" },
   { label: "Входные группы", key: "entrance" },
   { label: "Благоустройство", key: "landscape" },
 ];
 
 const badges = [
-  { text: "Старт продаж", variant: "primary" as const },
-  { text: "Вид на горы", variant: "dark" as const },
-  { text: "Рассрочка на 5 лет", variant: "dark" as const },
+  { text: "Бизнес-класс", variant: "primary" as const },
+  { text: "Центральный район", variant: "dark" as const },
+  { text: "Панорамные виды", variant: "dark" as const },
 ];
 
 interface ProjectHeroProps {
   heroImageOverride?: string;
   titleOverride?: string;
+  galleryImagesOverride?: Record<string, string[]>;
+  galleryCategoriesOverride?: Array<{ label: string; key: string }>;
 }
 
-const ProjectHero = ({ heroImageOverride, titleOverride }: ProjectHeroProps) => {
-  const galleryImages: Record<string, string[]> = {
+const ProjectHero = ({
+  heroImageOverride,
+  titleOverride,
+  galleryImagesOverride,
+  galleryCategoriesOverride,
+}: ProjectHeroProps) => {
+  const defaultGalleryImages: Record<string, string[]> = {
     arch: [
       heroImageOverride ?? projectHero1,
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80&fm=webp",
@@ -35,32 +44,58 @@ const ProjectHero = ({ heroImageOverride, titleOverride }: ProjectHeroProps) => 
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80&fm=webp",
     ],
   };
+  const galleryImages = galleryImagesOverride ?? defaultGalleryImages;
+  const galleryCategories = galleryCategoriesOverride ?? defaultGalleryCategories;
 
-  const [activeCategory, setActiveCategory] = useState("arch");
+  const [activeCategory, setActiveCategory] = useState(galleryCategories[0]?.key ?? "arch");
   const [activeSlide, setActiveSlide] = useState(0);
-  const images = galleryImages[activeCategory];
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const images = galleryImages[activeCategory] ?? [];
+
+  useEffect(() => {
+    document.body.style.overflow = isFullscreen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isFullscreen]);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsFullscreen(false);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   const handleCategoryChange = (key: string) => {
     setActiveCategory(key);
     setActiveSlide(0);
   };
 
-  const handlePrev = () => setActiveSlide((p) => (p === 0 ? images.length - 1 : p - 1));
-  const handleNext = () => setActiveSlide((p) => (p === images.length - 1 ? 0 : p + 1));
+  const handlePrev = () => {
+    if (!images.length) return;
+    setActiveSlide((p) => (p === 0 ? images.length - 1 : p - 1));
+  };
+  const handleNext = () => {
+    if (!images.length) return;
+    setActiveSlide((p) => (p === images.length - 1 ? 0 : p + 1));
+  };
 
   return (
     <section className="relative w-full border-0">
       {/* Full-width hero image */}
       <div className="relative overflow-hidden min-h-[580px] md:min-h-[700px]">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           <motion.div
             key={`${activeCategory}-${activeSlide}`}
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${images[activeSlide]})` }}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ x: 24, filter: "blur(8px)" }}
+            animate={{ x: 0, filter: "blur(0px)" }}
+            exit={{ x: -24, filter: "blur(6px)" }}
+            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="project-hero-overlay absolute inset-0 bg-gradient-to-r from-foreground/60 via-foreground/30 to-transparent" />
           </motion.div>
@@ -68,26 +103,36 @@ const ProjectHero = ({ heroImageOverride, titleOverride }: ProjectHeroProps) => 
 
         {/* Content overlay */}
         <div className="relative flex flex-col justify-between h-full min-h-[580px] md:min-h-[700px] site-container">
-          {/* Badges — top */}
-          <motion.div
-            className="flex flex-wrap gap-2 pt-8"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {badges.map((b) => (
-              <span
-                key={b.text}
-                className={`rounded-pill px-5 py-2.5 text-xs font-medium uppercase tracking-wide whitespace-nowrap ${
-                  b.variant === "primary"
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-foreground/70 text-background backdrop-blur-sm"
-                }`}
-              >
-                {b.text}
-              </span>
-            ))}
-          </motion.div>
+          {/* Top row: badges + fullscreen */}
+          <div className="pt-8 flex items-start justify-between gap-4">
+            <motion.div
+              className="flex flex-wrap gap-2"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              {badges.map((b) => (
+                <span
+                  key={b.text}
+                  className={`rounded-pill px-5 py-2.5 text-xs font-medium uppercase tracking-wide whitespace-nowrap ${
+                    b.variant === "primary"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-foreground/70 text-background backdrop-blur-sm"
+                  }`}
+                >
+                  {b.text}
+                </span>
+              ))}
+            </motion.div>
+
+            <button
+              onClick={() => setIsFullscreen(true)}
+              className="w-12 h-12 rounded-full border border-background/30 text-background flex items-center justify-center hover:bg-background/10 transition-colors"
+              aria-label="Открыть на весь экран"
+            >
+              <Maximize2 className="w-4 h-4" />
+            </button>
+          </div>
 
           {/* Title & description */}
           <div className="flex-1 flex flex-col justify-end pb-8">
@@ -105,7 +150,7 @@ const ProjectHero = ({ heroImageOverride, titleOverride }: ProjectHeroProps) => 
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
             >
-              Современный жилой комплекс в Симферополе, где каждый день отдых
+              Дом, который не нужно объяснять: тишина, сервис и продуманная среда для жизни в центре Симферополя
             </motion.p>
           </div>
 
@@ -133,7 +178,7 @@ const ProjectHero = ({ heroImageOverride, titleOverride }: ProjectHeroProps) => 
 
             {/* Tabs + arrows */}
             <div className="flex items-center gap-4">
-              <div className="flex gap-2">
+              <div className="flex gap-2 overflow-x-auto scrollbar-hide">
                 {galleryCategories.map((cat) => (
                   <button
                     key={cat.key}
@@ -167,6 +212,54 @@ const ProjectHero = ({ heroImageOverride, titleOverride }: ProjectHeroProps) => 
           </motion.div>
         </div>
       </div>
+
+      {isFullscreen &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[10000] bg-black"
+            onClick={() => setIsFullscreen(false)}
+          >
+            <img
+              src={images[activeSlide]}
+              alt="Фото проекта в полном экране"
+              className="absolute inset-0 w-full h-full object-contain"
+              onClick={(event) => event.stopPropagation()}
+            />
+            {images.length > 1 && (
+              <div className="absolute inset-y-0 left-0 right-0 z-20 pointer-events-none flex items-center justify-between px-4 md:px-8">
+                <button
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handlePrev();
+                  }}
+                  className="pointer-events-auto w-12 h-12 rounded-full border border-white/35 text-white flex items-center justify-center hover:bg-white/10 transition-colors"
+                  aria-label="Предыдущее фото"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 4L6 8L10 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
+                <button
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleNext();
+                  }}
+                  className="pointer-events-auto w-12 h-12 rounded-full border border-white/35 text-white flex items-center justify-center hover:bg-white/10 transition-colors"
+                  aria-label="Следующее фото"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
+              </div>
+            )}
+            <button
+              onClick={() => setIsFullscreen(false)}
+              className="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/90 text-foreground flex items-center justify-center hover:bg-white transition-colors"
+              aria-label="Закрыть полноэкранный режим"
+              
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>,
+          document.body
+        )}
     </section>
   );
 };

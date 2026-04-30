@@ -9,29 +9,38 @@ const images = [
   { src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80&fm=webp", span: "col-span-1" },
 ];
 
-const ProjectGallery = () => (
+type GalleryImage = {
+  src: string;
+  span: string;
+};
+
+interface ProjectGalleryProps {
+  imagesOverride?: GalleryImage[];
+}
+
+const ProjectGallery = ({ imagesOverride }: ProjectGalleryProps) => (
   <section className="py-16 md:py-24 bg-muted border-0">
     <div className="site-container">
-    <SectionHeading title="Галерея" />
+      <SectionHeading title="Галерея" />
 
-    <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-      {images.map((img, i) => (
-        <motion.div
-          key={i}
-          className={`overflow-hidden ${img.span} min-h-[200px] md:min-h-[280px]`}
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 * i }}
-        >
-          <img
-            src={img.src}
-            alt={`Фото ЖК Тектоника ${i + 1}`}
-            className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-          />
-        </motion.div>
-      ))}
-    </div>
+      <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        {(imagesOverride ?? images).map((img, i) => (
+          <motion.div
+            key={i}
+            className={`overflow-hidden ${img.span} min-h-[200px] md:min-h-[280px]`}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 * i }}
+          >
+            <img
+              src={img.src}
+              alt={`Фото ЖК Тектоника ${i + 1}`}
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+            />
+          </motion.div>
+        ))}
+      </div>
     </div>
   </section>
 );

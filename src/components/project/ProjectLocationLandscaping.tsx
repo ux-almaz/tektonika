@@ -5,32 +5,42 @@ import landscapingImg from "@/assets/advantage-landscaping.jpg";
 import courtyardImg from "@/assets/about-courtyard.jpg";
 
 const photoCards = [
-  { src: landscapingImg, label: "Ландшафтный дизайн", sub: "Профессиональное озеленение территории" },
-  { src: courtyardImg, label: "Закрытый двор", sub: "Без машин и посторонних" },
+  { src: landscapingImg, label: "Авторское благоустройство", sub: "Озеленение с учетом сезонности и гипоаллергенных растений" },
+  { src: courtyardImg, label: "Закрытый двор-сад", sub: "На стилобате: безопасно, приватно, без машин" },
 ];
 
 const featureCards = [
-  { icon: TreePine, title: "Парки и зелёные зоны", desc: "Парк им. Гагарина и скверы — в шаговой доступности" },
-  { icon: GraduationCap, title: "Школы и детские сады", desc: "5 общеобразовательных школ, 6 детских садов в радиусе 1 км" },
-  { icon: Bike, title: "Велодорожки и прогулочные маршруты", desc: "Разветвлённая сеть маршрутов по всему микрорайону" },
-  { icon: ShoppingBag, title: "Торговля и сервисы", desc: "Супермаркеты, кафе и аптеки в пешей доступности" },
-  { icon: Stethoscope, title: "Медицина", desc: "Городская клиника и частные центры рядом с комплексом" },
+  { icon: TreePine, title: "Тихая экологичная локация", desc: "Без магистралей и загазованности — комфортно жить каждый день" },
+  { icon: GraduationCap, title: "Инфраструктура для детей 0–17", desc: "Школа №21 и детский сад №83 находятся прямо напротив комплекса" },
+  { icon: Bike, title: "Умный двор и Wi-Fi", desc: "Бесшовный Wi-Fi, умная мебель со слотами для зарядки, зоны по активности" },
+  { icon: ShoppingBag, title: "Проработанная коммерция", desc: "Кофейни, сервисы, магазины, фитнес и коворкинг у дома" },
+  { icon: Stethoscope, title: "Центр рядом, ритм — ваш", desc: "До исторического центра 5–7 минут: всё рядом, ничто не давит" },
 ];
 
-const ProjectLocationLandscaping = () => (
-  <section id="project-location" className="py-16 md:py-24 border-0">
-    <div className="site-container">
+interface ProjectLocationLandscapingProps {
+  photoCardOverrides?: [string?, string?];
+}
+
+const ProjectLocationLandscaping = ({ photoCardOverrides }: ProjectLocationLandscapingProps) => {
+  const resolvedPhotoCards = photoCards.map((card, index) => ({
+    ...card,
+    src: photoCardOverrides?.[index] ?? card.src,
+  }));
+
+  return (
+    <section id="project-location" className="py-16 md:py-24 border-0">
+      <div className="site-container">
 
       {/* Top: heading + description */}
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 mb-10 md:mb-14">
         <ScrollReveal className="lg:w-[45%] shrink-0">
           <h2 className="font-display text-[28px] md:text-[40px] font-normal leading-[1.1] tracking-[-1px]">
-            Всё необходимое —<br />в шаговой доступности
+            Всё рядом.<br />Ничто не давит.
           </h2>
         </ScrollReveal>
         <ScrollReveal delay={0.15} className="flex-1">
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-            ЖК «Тектоника» расположен в одном из лучших районов Симферополя. Развитая инфраструктура, озеленённые дворы и удобные маршруты — всё для комфортной жизни в сердце Крыма.
+            ЛЮКСОР находится в Центральном районе Симферополя и сочетает редкий для города баланс: приватная тишина и быстрая доступность ключевых точек. Ужин в центре — и через несколько минут вы уже в другом мире, дома.
           </p>
         </ScrollReveal>
       </div>
@@ -43,7 +53,7 @@ const ProjectLocationLandscaping = () => (
 
           {/* Photo cards */}
           <div className="grid grid-cols-2 gap-3">
-            {photoCards.map((card, i) => (
+            {resolvedPhotoCards.map((card, i) => (
               <motion.div
                 key={card.label}
                 className="relative rounded-2xl overflow-hidden"
@@ -92,13 +102,14 @@ const ProjectLocationLandscaping = () => (
             src="https://yandex.ru/map-widget/v1/?ll=34.1008,44.9521&z=15&pt=34.1008,44.9521,pm2rdm"
             className="w-full h-full border-0 min-h-[480px]"
             allowFullScreen
-            title="Расположение ЖК Тектоника на карте"
+            title="Расположение ЛЮКСОР на карте"
           />
         </div>
 
       </div>
     </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default ProjectLocationLandscaping;

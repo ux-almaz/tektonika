@@ -50,11 +50,11 @@ const ProjectFinishing = () => {
         {/* Header */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 mb-10">
           <ScrollReveal className="lg:w-[45%] shrink-0">
-            <SectionHeading title="3 варианта отделки" />
+            <SectionHeading title="Отделка резиденций" />
           </ScrollReveal>
           <ScrollReveal delay={0.15} className="flex-1 flex items-end">
             <p className="text-muted-foreground text-base leading-relaxed">
-              Для быстрого переезда без ремонтной суеты — квартиры с готовой дизайнерской отделкой в светлом и тёмном исполнении. Для свободы самовыражения — предчистовая или без отделки.
+              В ЛЮКСОР доступны решения под ваш сценарий: предчистовая база для индивидуального дизайна и форматы, где можно быстрее перейти к жизни в новом доме.
             </p>
           </ScrollReveal>
         </div>
@@ -96,7 +96,7 @@ const ProjectFinishing = () => {
                 <div className="relative h-full flex flex-col justify-between p-5">
                   <div />
                   <div>
-                    <p className="text-white text-base font-medium leading-snug">Выберите стиль отделки<br />вашей будущей квартиры</p>
+                    <p className="text-white text-base font-medium leading-snug">Подберите формат отделки<br />для вашей резиденции</p>
                     <p className="text-white/65 text-xs mt-1.5 leading-snug">узнайте больше о вариантах<br />готовой дизайнерской отделки</p>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ const ProjectFinishing = () => {
 
               {/* Info card 1 */}
               <div className="bg-muted rounded-3xl p-6 flex flex-col justify-between flex-1 min-h-[140px] relative group cursor-pointer hover:bg-muted/80 transition-colors">
-                <p className="font-display text-xl font-normal leading-snug">Видеообзоры<br />и живые детали</p>
+                <p className="font-display text-xl font-normal leading-snug">Материалы,<br />фактуры и детали</p>
                 <button className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-background flex items-center justify-center shadow-sm">
                   <ArrowUpRight className="w-4 h-4" />
                 </button>

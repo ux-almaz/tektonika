@@ -14,7 +14,7 @@ const ProjectCTA = () => (
     >
       <div className="max-w-[500px]">
         <TextReveal as="h2" className="font-display text-[28px] md:text-[40px] font-normal leading-[1.1] uppercase tracking-[-1px]">
-          Запишитесь на&nbsp;экскурсию
+          Оцените ЛЮКСОР<br />вживую
         </TextReveal>
         <motion.p
           className="mt-6 text-background/60 text-base md:text-lg leading-relaxed"
@@ -23,7 +23,7 @@ const ProjectCTA = () => (
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          Приезжайте в наш офис продаж и&nbsp;убедитесь в&nbsp;качестве лично. Мы закажем вам такси бесплатно.
+          Приезжайте на персональную презентацию резиденции: покажем лобби, сценарии планировок и всё, за что ЛЮКСОР выбирают семьи, которые привыкли к лучшему.
         </motion.p>
       </div>
 
@@ -35,7 +35,7 @@ const ProjectCTA = () => (
         transition={{ duration: 0.6, delay: 0.4 }}
       >
         <PillButton variant="yellow" withArrow>
-          Записаться
+          Записаться на встречу
         </PillButton>
         <PillButton variant="outline" className="border-background/30 text-background hover:bg-background/10">
           Позвонить

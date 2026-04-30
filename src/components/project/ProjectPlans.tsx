@@ -7,9 +7,9 @@ import floorplanImg from "@/assets/floorplan-1room.svg";
 
 const planTypes = [
   { label: "Студия", area: "от 28 м²", price: "от 5,6 млн ₽", rooms: "Студия" },
-  { label: "1-комн.", area: "от 38 м²", price: "от 7,6 млн ₽", rooms: "1 комната" },
-  { label: "2-комн.", area: "от 58 м²", price: "от 11,3 млн ₽", rooms: "2 комнаты" },
-  { label: "3-комн.", area: "от 85 м²", price: "от 16,9 млн ₽", rooms: "3 комнаты" },
+  { label: "1-комн.", area: "от 38 м²", price: "от 7,6 млн ₽", rooms: "1-комнатная" },
+  { label: "2-комн.", area: "от 58 м²", price: "от 11,3 млн ₽", rooms: "2-комнатная" },
+  { label: "3-комн.", area: "от 85 м²", price: "от 16,9 млн ₽", rooms: "3-комнатная" },
 ];
 
 const ProjectPlans = () => {
@@ -19,7 +19,7 @@ const ProjectPlans = () => {
   return (
     <section id="project-plans" className="py-16 md:py-24 border-0">
       <div className="site-container">
-      <SectionHeading title="Планировки" />
+      <SectionHeading title="Планировки ЛЮКСОР" />
 
       {/* Tabs */}
       <div className="mt-12 flex flex-wrap gap-3">
@@ -75,7 +75,7 @@ const ProjectPlans = () => {
                     <span className="text-muted-foreground text-xs uppercase tracking-wide">Ипотека</span>
                     <p className="font-display text-2xl font-medium text-primary mt-0.5">от 36 432 ₽<span className="text-base font-normal text-muted-foreground">/мес</span></p>
                   </div>
-                  <span className="text-xs text-muted-foreground bg-background rounded-full px-3 py-1.5 border border-border">от 6%</span>
+                  <span className="text-xs text-muted-foreground bg-background rounded-full px-3 py-1.5 border border-border">40 вариантов</span>
                 </div>
               </div>
             </div>

@@ -4,17 +4,19 @@ import ScrollReveal from "../ScrollReveal";
 import { ChevronLeft, ChevronRight, MapPin, TreePine, Plane, GraduationCap, FileText } from "lucide-react";
 
 const highlights = [
-  { icon: MapPin, title: "Центр Симферополя", subtitle: "в 10 минутах" },
-  { icon: TreePine, title: "Парки и скверы", subtitle: "рядом с комплексом" },
-  { icon: Plane, title: "Аэропорт", subtitle: "в 15 минутах на авто" },
-  { icon: TreePine, title: "Побережье Крыма", subtitle: "в 30 минутах на авто" },
-  { icon: FileText, title: "Городская прописка", subtitle: "для жителей комплекса" },
-  { icon: GraduationCap, title: "Школы и детские сады", subtitle: "в шаговой доступности" },
+  { icon: MapPin, title: "Центральный район", subtitle: "тихая локация без магистралей" },
+  { icon: GraduationCap, title: "Школа и детский сад", subtitle: "напротив комплекса, через дорогу" },
+  { icon: TreePine, title: "Закрытый двор-сад", subtitle: "на стилобате, только для резидентов" },
+  { icon: Plane, title: "Удобная логистика", subtitle: "быстрый выезд к объездным Симферополя" },
+  { icon: FileText, title: "40 планировок", subtitle: "от эргономичных форматов до террас" },
+  { icon: TreePine, title: "Высота 300 м", subtitle: "панорамный обзор на весь город" },
 ];
 
 const PROJECT_VIDEO_ID = "dQw4w9WgXcQ"; // Replace with actual YouTube video ID
 
-const gallerySlides = [
+type GallerySlide = { type: "video" } | { type: "image"; src: string };
+
+const gallerySlides: GallerySlide[] = [
   { type: "video" as const },
   { type: "image" as const, src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80&fm=webp" },
   { type: "image" as const, src: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=1200&q=80&fm=webp" },
@@ -23,11 +25,16 @@ const gallerySlides = [
   { type: "image" as const, src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80&fm=webp" },
 ];
 
-const ProjectAbout = () => {
+interface ProjectAboutProps {
+  gallerySlidesOverride?: GallerySlide[];
+}
+
+const ProjectAbout = ({ gallerySlidesOverride }: ProjectAboutProps) => {
   const [current, setCurrent] = useState(0);
   const [expanded, setExpanded] = useState(false);
+  const slides = gallerySlidesOverride ?? gallerySlides;
 
-  const total = gallerySlides.length;
+  const total = slides.length;
   const prev = () => setCurrent((c) => (c === 0 ? total - 1 : c - 1));
   const next = () => setCurrent((c) => (c === total - 1 ? 0 : c + 1));
 
@@ -38,17 +45,17 @@ const ProjectAbout = () => {
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 mb-12 md:mb-16">
           <ScrollReveal className="lg:w-[45%] shrink-0">
             <h2 className="font-display text-[28px] md:text-[40px] font-normal leading-[1.1] tracking-[-1px]">
-              Комфортная жизнь<br />в&nbsp;сердце Крыма
+              ЛЮКСОР — дом,<br />который не задаёт вопросов
             </h2>
           </ScrollReveal>
 
           <ScrollReveal className="flex-1" delay={0.15}>
             <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-              ЖК «Тектоника» — это современный жилой комплекс бизнес-класса, расположенный в одном из лучших районов Симферополя. Комплекс включает несколько корпусов с разнообразными планировками квартир — от уютных студий до просторных четырёхкомнатных апартаментов.
+              ЛЮКСОР — резиденция бизнес-класса в Центральном районе Симферополя. Это единый независимый квартал с закрытым двором, проработанной коммерцией и сервисом, где каждый сценарий повседневной жизни уже предусмотрен.
             </p>
             {expanded && (
               <p className="text-muted-foreground text-base md:text-lg leading-relaxed mt-4">
-                Архитектура комплекса выполнена в современном стиле с использованием натуральных материалов. Панорамное остекление обеспечивает максимум естественного света, а продуманные планировки позволяют эффективно использовать каждый квадратный метр. Все квартиры сдаются с предчистовой отделкой. Высота потолков — 3,1 метра.
+                Архитектура с узнаваемым фасадом и световым дизайном формирует новый ориентир города, а панорамное остекление раскрывает свободные виды благодаря малоэтажному окружению. Внутри — лобби уровня 5*, консьерж-сервис, бесшумные лифты в паркинг и 40 планировок: от функциональных решений до резиденций с террасами и патио.
               </p>
             )}
             <button
@@ -99,7 +106,7 @@ const ProjectAbout = () => {
           <ScrollReveal className="flex-1 min-h-[400px] md:min-h-[580px]" delay={0.2}>
             <div className="relative w-full h-full rounded-3xl overflow-hidden bg-muted">
               <AnimatePresence mode="wait" initial={false}>
-                {gallerySlides[current].type === "video" ? (
+                {slides[current].type === "video" ? (
                   <motion.div
                     key="video"
                     className="absolute inset-0"
@@ -119,8 +126,8 @@ const ProjectAbout = () => {
                 ) : (
                   <motion.img
                     key={current}
-                    src={(gallerySlides[current] as { type: "image"; src: string }).src}
-                    alt={`Фото ЖК Тектоника ${current}`}
+                    src={(slides[current] as { type: "image"; src: string }).src}
+                    alt={`Фото ЛЮКСОР ${current}`}
                     className="absolute inset-0 w-full h-full object-cover"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

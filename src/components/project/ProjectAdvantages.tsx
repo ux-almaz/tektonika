@@ -5,38 +5,45 @@ import ecologyImg from "@/assets/advantage-ecology.jpg";
 import landscapingImg from "@/assets/advantage-landscaping.jpg";
 import infrastructureImg from "@/assets/advantage-infrastructure.jpg";
 
+type AdvantagePhotoKey = "ecology" | "landscaping" | "infrastructure";
+
 const advantages = [
   {
-    title: "Экология\nи природное окружение",
-    desc: "Благоприятная экология, зелёные зоны и парки в шаговой доступности",
+    key: "ecology" as const,
+    title: "Тишина и\nприватность",
+    desc: "Центральная локация без шума магистралей: здесь слышно, как вы живёте",
     image: ecologyImg,
     type: "photo" as const,
     icon: null,
   },
   {
-    title: "Школы и детские сады",
-    desc: "Школы и садики с собственной образовательной концепцией",
+    key: "education" as const,
+    title: "Для семей\nс детьми",
+    desc: "Школа №21 и детский сад №83 находятся напротив комплекса, через дорогу",
     image: null,
     type: "icon" as const,
     icon: GraduationCap,
   },
   {
-    title: "Продуманное\nблагоустройство",
-    desc: "Набережная, бульвар с ресторанами, площадки для отдыха и спорта",
+    key: "landscaping" as const,
+    title: "Закрытый двор-сад\nна стилобате",
+    desc: "Авторское благоустройство, безопасность и комфортная среда без автомобилей",
     image: landscapingImg,
     type: "photo" as const,
     icon: null,
   },
   {
-    title: "Транспортная\nдоступность",
-    desc: "Удобные выезды на трассу, остановки общественного транспорта рядом",
+    key: "transport" as const,
+    title: "Паркинг без\nскопления машин",
+    desc: "Двухуровневый подземный паркинг на 200 мест с электрозарядками и гостевыми местами",
     image: null,
     type: "icon" as const,
     icon: Car,
   },
   {
-    title: "Развитая\nинфраструктура",
-    desc: "Всё для жизни — клиники, кафе, магазины в черте района",
+    key: "infrastructure" as const,
+    title: "Сервис и smart-\nинфраструктура",
+    desc: "Консьерж, коммерция у дома и технологичные сценарии для жизни без лишних усилий",
     image: infrastructureImg,
     type: "photo" as const,
     icon: null,
@@ -111,24 +118,37 @@ const AdvantageCard = ({
   );
 };
 
-const ProjectAdvantages = () => (
-  <section id="project-advantages" className="py-16 md:py-24 border-0">
-    <div className="site-container">
-      <SectionHeading title="Преимущества проекта" />
+interface ProjectAdvantagesProps {
+  photoOverrides?: Partial<Record<AdvantagePhotoKey, string>>;
+}
 
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-        {advantages.slice(0, 2).map((adv, i) => (
-          <AdvantageCard key={adv.title} index={i} {...adv} />
-        ))}
-      </div>
+const ProjectAdvantages = ({ photoOverrides }: ProjectAdvantagesProps) => {
+  const resolvedAdvantages = advantages.map((adv) => {
+    if (adv.type !== "photo") return adv;
 
-      <div className="mt-4 md:mt-5 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-        {advantages.slice(2).map((adv, i) => (
-          <AdvantageCard key={adv.title} index={i + 2} {...adv} />
-        ))}
+    const override = photoOverrides?.[adv.key as AdvantagePhotoKey];
+    return override ? { ...adv, image: override } : adv;
+  });
+
+  return (
+    <section id="project-advantages" className="py-16 md:py-24 border-0">
+      <div className="site-container">
+        <SectionHeading title="Преимущества проекта" />
+
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+          {resolvedAdvantages.slice(0, 2).map((adv, i) => (
+            <AdvantageCard key={adv.title} index={i} {...adv} />
+          ))}
+        </div>
+
+        <div className="mt-4 md:mt-5 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+          {resolvedAdvantages.slice(2).map((adv, i) => (
+            <AdvantageCard key={adv.title} index={i + 2} {...adv} />
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default ProjectAdvantages;
