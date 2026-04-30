@@ -35,18 +35,6 @@ const ProjectInfoBar = ({ titleOverride, addressOverride }: ProjectInfoBarProps)
           <p className="text-muted-foreground text-xs">Класс жилья</p>
         </div>
         <div>
-          <p className="font-display text-lg md:text-xl font-medium">40 планировок</p>
-          <p className="text-muted-foreground text-xs">Под разные сценарии жизни</p>
-        </div>
-        <div>
-          <p className="font-display text-lg md:text-xl font-medium">200 м/м + зарядки</p>
-          <p className="text-muted-foreground text-xs">Двухуровневый паркинг</p>
-        </div>
-        <div>
-          <p className="font-display text-lg md:text-xl font-medium">442 резиденции</p>
-          <p className="text-muted-foreground text-xs">Бизнес-уровень проживания</p>
-        </div>
-        <div>
           <p className="font-display text-lg md:text-xl font-medium">от 11,3 млн ₽</p>
           <p className="text-muted-foreground text-xs">Стоимость квартир</p>
         </div>

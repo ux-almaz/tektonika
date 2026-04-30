@@ -115,13 +115,19 @@ const ProjectLuxor = () => {
         <ProjectInfoBar titleOverride="ЛЮКСОР" addressOverride="Артиллерийская, 90" />
         <ProjectFilter />
         <ProjectAbout gallerySlidesOverride={luxorAboutSlides} />
-        <ProjectAdvantages photoOverrides={{ landscaping: "/blagoustroistvo.png" }} />
+        <ProjectAdvantages
+          photoOverrides={{
+            ecology: "/private.png",
+            landscaping: "/blagoustroistvo.png",
+            infrastructure: "/apteka.png",
+          }}
+        />
         <ProjectGenplan imageOverride="/luxor1.jpg" markerPositionsOverride={luxorGenplanMarkerPositions} />
         <ProjectLocationLandscaping photoCardOverrides={["/landscapedesign.png", "/dvor.png"]} />
         <ProjectPlans />
         <ProjectCTA />
         <ProjectFinishing />
-        <ProjectAssetsSection />
+        <ProjectAssetsSection heroImageOverride="/luxor-parking.png" />
         <ProjectConstruction />
         <ProjectCTANewsletter />
       </main>

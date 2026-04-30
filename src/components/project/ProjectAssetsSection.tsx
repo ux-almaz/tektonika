@@ -37,7 +37,13 @@ const assetCards = [
   },
 ] as const;
 
-const ProjectAssetsSection = () => {
+interface ProjectAssetsSectionProps {
+  heroImageOverride?: string;
+}
+
+const ProjectAssetsSection = ({ heroImageOverride }: ProjectAssetsSectionProps) => {
+  const heroImage = heroImageOverride ?? parkingStorageHero;
+
   return (
     <section id="project-assets" className="pt-16 pb-16 md:pt-24 md:pb-24 border-0">
       <div className="site-container">
@@ -68,7 +74,7 @@ const ProjectAssetsSection = () => {
           <div className="pb-3 md:pb-4">
             <div className="relative overflow-hidden rounded-[28px] bg-muted h-[360px] md:h-[620px]">
               <img
-                src={parkingStorageHero}
+                src={heroImage}
                 alt="Подземный паркинг и инфраструктура хранения в проекте"
                 className="absolute inset-0 h-full w-full object-cover"
                 loading="lazy"
