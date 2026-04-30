@@ -64,6 +64,100 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
+## Deploy on your own hosting (VPS + Nginx)
+
+This project is a Vite static frontend, so production deploy is simple: build files and serve `dist` via Nginx.
+
+### 1) Server requirements
+
+- Ubuntu 22.04+ (or similar Linux distro)
+- Node.js 20+ and npm
+- Nginx
+- Domain pointed to your server IP (optional, but recommended)
+
+### 2) Install dependencies on server
+
+```sh
+sudo apt update
+sudo apt install -y nginx curl git
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+
+### 3) Clone and build project
+
+```sh
+git clone <YOUR_GIT_URL> /var/www/tektonika
+cd /var/www/tektonika
+npm i
+npm run build
+```
+
+After build, static files will be available in `dist/`.
+
+### 4) Configure Nginx
+
+Create config file:
+
+```sh
+sudo nano /etc/nginx/sites-available/tektonika
+```
+
+Paste:
+
+```nginx
+server {
+    listen 80;
+    listen [::]:80;
+    server_name your-domain.com www.your-domain.com;
+
+    root /var/www/tektonika/dist;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|svg|ico|webp|woff2?)$ {
+        expires 30d;
+        add_header Cache-Control "public, no-transform";
+    }
+}
+```
+
+Enable and reload Nginx:
+
+```sh
+sudo ln -s /etc/nginx/sites-available/tektonika /etc/nginx/sites-enabled/tektonika
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+Now the app should open by your domain or server IP.
+
+### 5) Enable HTTPS (recommended)
+
+```sh
+sudo apt install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d your-domain.com -d www.your-domain.com
+```
+
+### 6) How to update after new commits
+
+```sh
+cd /var/www/tektonika
+git pull
+npm i
+npm run build
+sudo systemctl reload nginx
+```
+
+### Troubleshooting
+
+- Blank page: run `npm run build` and check that `/var/www/tektonika/dist/index.html` exists.
+- 404 on refresh: ensure `try_files $uri $uri/ /index.html;` is in Nginx config.
+- Assets not updating: hard refresh browser cache (`Ctrl+F5`) or reduce cache headers while debugging.
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!
