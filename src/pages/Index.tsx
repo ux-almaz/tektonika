@@ -35,8 +35,7 @@ const Index = () => {
         </div>
         <Suspense fallback={null}>
           <ProjectsSection />
-          {/* <ProjectsSection /> */}
-          {/* <MortgageCalculator /> */}
+          <MortgageCalculator />
           <AboutSection />
         </Suspense>
       </main>

@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ReactNode } from "react";
+import { motionEase, revealTransition } from "@/lib/motion";
 
 interface StaggerChildrenProps {
   children: ReactNode;
@@ -7,6 +8,8 @@ interface StaggerChildrenProps {
   staggerDelay?: number;
   duration?: number;
   distance?: number;
+  blur?: boolean;
+  inViewMargin?: string;
 }
 
 const container = (staggerDelay: number) => ({
@@ -18,14 +21,19 @@ const container = (staggerDelay: number) => ({
   },
 });
 
-const item = (duration: number, distance: number) => ({
-  hidden: { opacity: 0, y: distance },
+const item = (duration: number, distance: number, blur: boolean) => ({
+  hidden: {
+    opacity: 0,
+    y: distance,
+    ...(blur ? { filter: "blur(10px)" } : {}),
+  },
   visible: {
     opacity: 1,
     y: 0,
+    ...(blur ? { filter: "blur(0px)" } : {}),
     transition: {
       duration,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+      ease: motionEase,
     },
   },
 });
@@ -33,25 +41,35 @@ const item = (duration: number, distance: number) => ({
 const StaggerChildren = ({
   children,
   className,
-  staggerDelay = 0.12,
+  staggerDelay = 0.1,
   duration = 0.7,
   distance = 50,
-}: StaggerChildrenProps) => (
-  <motion.div
-    variants={container(staggerDelay)}
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true, margin: "-60px" }}
-    className={className}
-  >
-    {Array.isArray(children)
-      ? children.map((child, i) => (
-          <motion.div key={i} variants={item(duration, distance)}>
-            {child}
-          </motion.div>
-        ))
-      : children}
-  </motion.div>
-);
+  blur = true,
+  inViewMargin = "-80px",
+}: StaggerChildrenProps) => {
+  const reduceMotion = useReducedMotion();
+
+  if (reduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      variants={container(staggerDelay)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: inViewMargin }}
+      className={className}
+    >
+      {Array.isArray(children)
+        ? children.map((child, i) => (
+            <motion.div key={i} variants={item(duration, distance, blur)}>
+              {child}
+            </motion.div>
+          ))
+        : children}
+    </motion.div>
+  );
+};
 
 export default StaggerChildren;

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { SlidersHorizontal, MapPin } from "lucide-react";
 import FilterDropdown from "@/components/FilterDropdown";
 
-const projectTabs = ["Все проекты", "Тектоника", "Тектоника Парк", "Тектоника Сити"];
+const projectTabs = ["Все проекты", "Резиденция ЛЮКСОР", "Родная гавань", "Фантастик"];
 const roomOptions = ["Студия", "1к", "2к", "3к", "4к"];
 const deadlineOptions = ["Любой", "Сдан", "2026", "2027", "2028"];
 

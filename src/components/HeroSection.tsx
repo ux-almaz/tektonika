@@ -1,70 +1,81 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PillButton from "./PillButton";
+import BlurReveal from "./BlurReveal";
+import { revealTransition } from "@/lib/motion";
 
 const HeroSection = ({ introDone = false }: { introDone?: boolean }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [bgLoaded, setBgLoaded] = useState(false);
 
   useEffect(() => {
-    if (introDone && videoRef.current && !videoLoaded) {
-      videoRef.current.src = "/videos/hero-bg.mp4";
-      videoRef.current.load();
-      setVideoLoaded(true);
+    if (introDone && !bgLoaded) {
+      setBgLoaded(true);
     }
-  }, [introDone, videoLoaded]);
+  }, [introDone, bgLoaded]);
 
   return (
     <section className="relative pt-0 flex-1 flex flex-col border-0">
       <div className="site-container flex-1 flex flex-col">
-        {/* Background video with padding */}
         <div className="relative overflow-hidden flex-1 min-h-[400px] rounded-3xl flex flex-col">
           <motion.div
             className="absolute inset-0"
-            initial={{ scale: 1.15, opacity: 0 }}
-            animate={introDone ? { scale: 1, opacity: 1 } : { scale: 1.15, opacity: 0 }}
-            transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0 }}
+            animate={introDone ? { opacity: 1 } : { opacity: 0 }}
+            transition={revealTransition(1.2)}
           >
-            <video
-              ref={videoRef}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="none"
+            <img
+              src={bgLoaded ? "/luxor2.jpg" : undefined}
+              alt="Резиденция Люксор"
               className="absolute inset-0 w-full h-full object-cover"
+              decoding="async"
+              fetchPriority="high"
+              draggable={false}
             />
             <div className="absolute inset-0 bg-foreground/40" />
           </motion.div>
 
-          {/* Content */}
           <div className="relative flex flex-col justify-end flex-1 min-h-[400px] px-5 md:px-16 lg:px-20">
-            <div className="pb-10 md:pb-20 pt-12 md:pt-[100px]">
-              <div className="overflow-hidden">
-                <motion.h1
+            <motion.div className="pb-10 md:pb-20 pt-12 md:pt-[100px]">
+              {introDone ? (
+                <BlurReveal
+                  text="Резиденция ЛЮКСОР"
+                  as="h1"
+                  mode="chars"
+                  trigger="immediate"
+                  delay={0.15}
+                  stagger={0.025}
                   className="font-display text-4xl md:text-7xl lg:text-[96px] font-medium uppercase leading-none tracking-[-2.4px] text-background"
-                  initial={{ y: "100%" }}
-                  animate={introDone ? { y: "0%" } : { y: "100%" }}
-                  transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-                >
-                  ЖК Тектоника
-                </motion.h1>
-              </div>
-              <div className="overflow-hidden">
+                />
+              ) : (
+                <h1 className="font-display text-4xl md:text-7xl lg:text-[96px] font-medium uppercase leading-none tracking-[-2.4px] text-background opacity-0">
+                  Резиденция ЛЮКСОР
+                </h1>
+              )}
+
+              <div className="overflow-hidden mt-5">
                 <motion.p
-                  className="mt-5 text-lg md:text-2xl font-medium text-[hsl(0,0%,83%)] leading-[1.17]"
-                  initial={{ y: "100%", opacity: 0 }}
-                  animate={introDone ? { y: "0%", opacity: 1 } : { y: "100%", opacity: 0 }}
-                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+                  className="text-lg md:text-2xl font-medium text-[hsl(0,0%,83%)] leading-[1.17]"
+                  initial={{ y: "100%", opacity: 0, filter: "blur(8px)" }}
+                  animate={
+                    introDone
+                      ? { y: "0%", opacity: 1, filter: "blur(0px)" }
+                      : { y: "100%", opacity: 0, filter: "blur(8px)" }
+                  }
+                  transition={revealTransition(0.85, 0.45)}
                 >
                   Старт продаж!
                 </motion.p>
               </div>
+
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={introDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
+                initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+                animate={
+                  introDone
+                    ? { opacity: 1, y: 0, filter: "blur(0px)" }
+                    : { opacity: 0, y: 24, filter: "blur(8px)" }
+                }
+                transition={revealTransition(0.75, 0.65)}
               >
                 <Link to="/project">
                   <PillButton variant="yellow" withArrow className="mt-10">
@@ -72,7 +83,7 @@ const HeroSection = ({ introDone = false }: { introDone?: boolean }) => {
                   </PillButton>
                 </Link>
               </motion.div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import PillButton from "./PillButton";
 import tektonika from "@/assets/tektonika-logo.svg";
@@ -8,6 +8,8 @@ import ProjectsDropdown from "./header/ProjectsDropdown";
 import ApartmentsDropdown from "./header/ApartmentsDropdown";
 import HeaderStories from "./header/HeaderStories";
 import ConsultationSheet from "./ConsultationSheet";
+import { useLenis } from "lenis/react";
+import { cn } from "@/lib/utils";
 
 const MotionLink = motion(Link);
 
@@ -23,18 +25,73 @@ const navLinks = [
 ];
 
 const Header = ({ introDone = false }: { introDone?: boolean }) => {
+  const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<DropdownKey | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
+  const lastScrollY = useRef(typeof window !== "undefined" ? window.scrollY : 0);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lenis = useLenis();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    setNavHidden(false);
+    lastScrollY.current = typeof lenis?.scroll === "number" ? lenis.scroll : window.scrollY;
+  }, [pathname, lenis]);
+
+  useEffect(() => {
+    const apply = (y: number, velocity?: number) => {
+      setScrolled(y > 10);
+
+      if (open || sheetOpen || activeDropdown) {
+        setNavHidden(false);
+        lastScrollY.current = y;
+        return;
+      }
+
+      if (y < 36) {
+        setNavHidden(false);
+        lastScrollY.current = y;
+        return;
+      }
+
+      if (velocity !== undefined) {
+        if (velocity > 0) setNavHidden(true);
+        else if (velocity < -0.5) setNavHidden(false);
+        return;
+      }
+
+      const delta = y - lastScrollY.current;
+      lastScrollY.current = y;
+      if (delta > 10) setNavHidden(true);
+      else if (delta < -10) setNavHidden(false);
+    };
+
+    if (lenis) {
+      const onLenisScroll = ({ scroll, velocity }: { scroll: number; velocity: number }) => {
+        apply(scroll, velocity);
+      };
+      lenis.on("scroll", onLenisScroll);
+      onLenisScroll({ scroll: lenis.scroll, velocity: lenis.velocity });
+      return () => lenis.off("scroll", onLenisScroll);
+    }
+
+    const onWindowScroll = () => apply(window.scrollY);
+    window.addEventListener("scroll", onWindowScroll, { passive: true });
+    onWindowScroll();
+    return () => window.removeEventListener("scroll", onWindowScroll);
+  }, [lenis, open, sheetOpen, activeDropdown]);
+
+  useEffect(() => {
+    if (navHidden) setActiveDropdown(null);
+  }, [navHidden]);
+
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("tektonika:header-reveal", { detail: { revealed: !navHidden } })
+    );
+  }, [navHidden]);
 
   const handleDropdownEnter = (key: DropdownKey) => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
@@ -62,7 +119,10 @@ const Header = ({ introDone = false }: { introDone?: boolean }) => {
       <AnimatePresence>
         {activeDropdown && (
           <motion.div
-            className="fixed inset-0 top-20 bg-black/50 z-40"
+            className={cn(
+              "fixed inset-x-0 bottom-0 bg-black/50 z-40",
+              navHidden ? "top-0" : "top-20"
+            )}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -72,15 +132,22 @@ const Header = ({ introDone = false }: { introDone?: boolean }) => {
         )}
       </AnimatePresence>
 
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-background/95 backdrop-blur-xl border-b border-border/40"
-            : "bg-background/70 backdrop-blur-xl"
-        }`}
+      <div
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-out will-change-transform",
+          navHidden ? "-translate-y-full pointer-events-none" : "translate-y-0"
+        )}
       >
-        <div className="max-w-[2000px] mx-auto flex items-center justify-between px-5 md:px-10 lg:px-16 xl:px-[100px] 2xl:px-[140px] h-20">
-          <div className="flex min-w-0 items-center overflow-hidden">
+        <header
+          className={cn(
+            "relative w-full transition-[background-color,backdrop-filter,border-color] duration-300",
+            scrolled
+              ? "bg-background/95 backdrop-blur-xl border-b border-border/40"
+              : "bg-background/70 backdrop-blur-xl"
+          )}
+        >
+          <div className="max-w-[2000px] mx-auto flex items-center justify-between px-5 md:px-10 lg:px-16 xl:px-[100px] 2xl:px-[140px] h-20">
+            <div className="flex min-w-0 items-center overflow-hidden">
             <Link to="/" className="shrink-0">
               <img src={tektonika} alt="Тектоника" className="h-5 md:h-6" />
             </Link>
@@ -166,22 +233,26 @@ const Header = ({ introDone = false }: { introDone?: boolean }) => {
           </motion.div>
 
         </div>
-      </header>
 
-      {/* Mobile burger — separate fixed element above header */}
-      <button
-        className="fixed top-4 right-4 z-[60] lg:hidden flex items-center justify-center w-10 h-10 text-foreground"
-        onClick={() => setOpen(!open)}
-        aria-label="Меню"
-      >
-        {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-      </button>
+          <button
+            type="button"
+            className="absolute top-3 right-4 z-[60] lg:hidden flex items-center justify-center w-10 h-10 text-foreground"
+            onClick={() => setOpen(!open)}
+            aria-label="Меню"
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </header>
+      </div>
 
       {/* Mobile menu overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-x-0 top-20 bottom-0 z-[55] bg-background overflow-y-auto lg:hidden"
+            className={cn(
+              "fixed inset-x-0 bottom-0 z-[55] bg-background overflow-y-auto lg:hidden",
+              navHidden ? "top-0" : "top-20"
+            )}
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}

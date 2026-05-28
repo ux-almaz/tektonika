@@ -1,5 +1,6 @@
-import { motion, Variants } from "framer-motion";
+import { motion, useReducedMotion, Variants } from "framer-motion";
 import { ReactNode } from "react";
+import { motionEase, revealTransition, weddingEase } from "@/lib/motion";
 
 type RevealDirection = "up" | "down" | "left" | "right" | "scale" | "none";
 
@@ -11,11 +12,23 @@ interface ScrollRevealProps {
   duration?: number;
   distance?: number;
   once?: boolean;
+  blur?: boolean;
+  inViewMargin?: string;
+  ease?: [number, number, number, number];
 }
 
-const getVariants = (direction: RevealDirection, distance: number): Variants => {
-  const hidden: Record<string, number> = { opacity: 0 };
-  const visible: Record<string, number> = { opacity: 1 };
+const getVariants = (
+  direction: RevealDirection,
+  distance: number,
+  blur: boolean,
+): Variants => {
+  const hidden: Record<string, number | string> = { opacity: 0 };
+  const visible: Record<string, number | string> = { opacity: 1 };
+
+  if (blur) {
+    hidden.filter = "blur(12px)";
+    visible.filter = "blur(0px)";
+  }
 
   switch (direction) {
     case "up":
@@ -35,7 +48,7 @@ const getVariants = (direction: RevealDirection, distance: number): Variants => 
       visible.x = 0;
       break;
     case "scale":
-      hidden.scale = 0.92;
+      hidden.scale = 0.94;
       visible.scale = 1;
       break;
     case "none":
@@ -50,23 +63,27 @@ const ScrollReveal = ({
   className,
   delay = 0,
   direction = "up",
-  duration = 0.9,
-  distance = 80,
+  duration = 0.85,
+  distance = 60,
   once = true,
+  blur = true,
+  inViewMargin = "-80px",
+  ease = motionEase,
 }: ScrollRevealProps) => {
-  const variants = getVariants(direction, distance);
+  const reduceMotion = useReducedMotion();
+  const variants = getVariants(direction, distance, blur && !reduceMotion);
+
+  if (reduceMotion) {
+    return <motion.div className={className}>{children}</motion.div>;
+  }
 
   return (
     <motion.div
       variants={variants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, margin: "-60px" }}
-      transition={{
-        duration,
-        ease: [0.22, 1, 0.36, 1],
-        delay,
-      }}
+      viewport={{ once, margin: inViewMargin }}
+      transition={revealTransition(duration, delay, ease)}
       className={className}
     >
       {children}

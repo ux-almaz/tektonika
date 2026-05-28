@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import projectHero from "@/assets/project-hero-1.webp";
 
 const apartmentLinks = [
-  { label: "Все квартиры", href: "/catalog", bold: true },
+  { label: "Все квартиры", href: "/catalog" },
   { label: "Студии от 4,5 млн ₽", href: "/catalog?rooms=studio" },
   { label: "1-комнатные от 5,8 млн ₽", href: "/catalog?rooms=1" },
   { label: "2-комнатные от 7,2 млн ₽", href: "/catalog?rooms=2" },
@@ -29,14 +29,14 @@ const ApartmentsDropdown = ({ onClose }: ApartmentsDropdownProps) => {
     <div className="bg-background rounded-2xl p-6 flex gap-6 min-w-[680px]">
       {/* Left: links */}
       <div className="flex flex-col gap-1 min-w-[240px]">
-        <span className="text-sm text-muted-foreground mb-2 uppercase tracking-wider">
+        <span className="text-sm text-foreground font-semibold mb-2 uppercase tracking-wider">
           Квартиры
         </span>
         {apartmentLinks.map((al) => (
           <Link
             key={al.href}
             to={al.href}
-            className={`text-base py-1.5 hover:text-primary transition-colors ${al.bold ? "font-medium" : ""}`}
+            className="text-base py-1.5 hover:text-primary transition-colors"
             onClick={onClose}
           >
             {al.label}
@@ -54,7 +54,7 @@ const ApartmentsDropdown = ({ onClose }: ApartmentsDropdownProps) => {
           </Link>
         ))}
         <div className="h-px bg-border my-2" />
-        <span className="text-sm text-muted-foreground mb-2 mt-2 uppercase tracking-wider">
+        <span className="text-sm text-foreground font-semibold mb-2 mt-2 uppercase tracking-wider">
           Кроме квартир
         </span>
         {storageLinks.map((item) => (

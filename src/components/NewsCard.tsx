@@ -14,13 +14,15 @@ const NewsCard = ({ id, image, title, date }: NewsCardProps) => {
   return (
     <Wrapper
       {...(wrapperProps as any)}
-      className="flex flex-col group cursor-pointer bg-card flex-1 rounded-3xl overflow-hidden"
+      className="flex flex-col group cursor-pointer bg-muted flex-1 rounded-3xl overflow-hidden"
     >
       <div className="h-[250px] overflow-hidden">
         <img
           src={image}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+          loading="lazy"
+          decoding="async"
         />
       </div>
       <div className="p-6 flex flex-col justify-between flex-1">

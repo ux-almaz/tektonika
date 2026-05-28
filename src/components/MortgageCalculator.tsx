@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { Phone } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { Slider } from "@/components/ui/slider";
 import ScrollReveal from "./ScrollReveal";
@@ -51,15 +52,16 @@ const MortgageCalculator = () => {
       <div className="site-container">
         <SectionHeading title="Способы покупки" />
 
-        {/* Main two-card row */}
+        {/* Main four-card block */}
+        <div className="mt-6 flex flex-col gap-3 lg:gap-4">
         <ScrollReveal>
-          <div className="mt-8 flex flex-col lg:flex-row gap-4 lg:gap-6 items-stretch">
+          <div className="flex flex-col lg:flex-row gap-3 lg:gap-4 items-stretch">
 
             {/* ─── Ипотека card ─── */}
-            <div className="flex-[3] border border-border bg-card rounded-3xl overflow-hidden flex flex-col min-w-0">
+            <div className="flex-[3] bg-card rounded-3xl overflow-hidden flex flex-col min-w-0">
 
               {/* Card header */}
-              <div className="flex items-center justify-between px-8 pt-7 pb-6 border-b border-border gap-4">
+              <div className="flex items-center justify-between px-8 pt-7 pb-6 gap-4 bg-muted/25 border-b border-foreground/[0.06]">
                 <h3 className="font-display text-2xl md:text-[28px] font-medium shrink-0">Ипотека</h3>
                 <p className="text-muted-foreground text-sm text-right hidden md:block">
                   Подберём выгодную программу среди&nbsp;ведущих банков России
@@ -67,10 +69,10 @@ const MortgageCalculator = () => {
               </div>
 
               {/* Card body — 3 columns */}
-              <div className="flex flex-col md:flex-row flex-1 divide-y md:divide-y-0 md:divide-x divide-border">
+              <div className="flex flex-col md:flex-row flex-1">
 
                 {/* Col 1 — Programs */}
-                <div className="p-6 md:w-[260px] md:shrink-0 flex flex-col justify-between gap-6">
+                <div className="p-6 md:w-[260px] md:shrink-0 flex flex-col justify-between gap-6 bg-muted/10 border-b border-foreground/[0.06] md:border-b-0 md:bg-muted/15 md:border-r">
                   <div>
                     <p className="text-xs text-muted-foreground mb-4 uppercase tracking-wide">Программы</p>
                     <div className="flex flex-col gap-1">
@@ -90,7 +92,7 @@ const MortgageCalculator = () => {
                     </div>
                   </div>
                   <Link to="/purchase">
-                    <button className="w-full rounded-pill border border-border px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted text-left flex items-center justify-between group">
+                    <button className="w-full rounded-pill bg-muted px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted/80 text-left flex items-center justify-between group">
                       Подробнее
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-muted-foreground group-hover:text-foreground transition-colors">
                         <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -105,7 +107,7 @@ const MortgageCalculator = () => {
                   {/* Price */}
                   <div>
                     <p className="text-xs text-muted-foreground mb-2">Стоимость жилья</p>
-                    <div className="flex items-center justify-between border border-border border-b-0 rounded-pill px-5 py-3">
+                    <div className="flex items-center justify-between bg-background rounded-pill px-5 py-3">
                       <span className="font-medium text-sm">{fmt(price)}</span>
                       <span className="text-muted-foreground text-sm">₽</span>
                     </div>
@@ -117,7 +119,7 @@ const MortgageCalculator = () => {
                   {/* Down payment */}
                   <div>
                     <p className="text-xs text-muted-foreground mb-2">Первоначальный взнос</p>
-                    <div className="flex items-center justify-between border border-border border-b-0 rounded-pill px-5 py-3">
+                    <div className="flex items-center justify-between bg-background rounded-pill px-5 py-3">
                       <span className="font-medium text-sm">{fmt(downAmount)}</span>
                       <span className="text-muted-foreground text-sm">{down}%</span>
                     </div>
@@ -129,7 +131,7 @@ const MortgageCalculator = () => {
                   {/* Term */}
                   <div>
                     <p className="text-xs text-muted-foreground mb-2">Срок</p>
-                    <div className="flex items-center justify-between border border-border border-b-0 rounded-pill px-5 py-3">
+                    <div className="flex items-center justify-between bg-background rounded-pill px-5 py-3">
                       <span className="font-medium text-sm">{term}</span>
                       <span className="text-muted-foreground text-sm">лет</span>
                     </div>
@@ -140,7 +142,7 @@ const MortgageCalculator = () => {
                 </div>
 
                 {/* Col 3 — Results */}
-                <div className="p-6 flex-1 flex flex-col justify-between gap-6 border-l-0">
+                <div className="p-6 flex-1 flex flex-col justify-between gap-6">
                   <div className="flex flex-col gap-5">
                     <div>
                       <p className="text-xs text-muted-foreground mb-1">Ежемесячный платёж от</p>
@@ -185,12 +187,12 @@ const MortgageCalculator = () => {
                 </svg>
               </div>
               <div>
-                <div className="border-t border-background/20 pt-5 mb-6">
+                <div className="pt-5 mb-6">
                   <p className="text-background/70 text-sm leading-relaxed">
                     Рассрочка — отличное решение для тех, кому не подходит ипотека, а для полной оплаты возможности нет. Без переплат и процентов.
                   </p>
                 </div>
-                <button className="rounded-pill border border-background/30 px-6 py-3 text-sm font-medium text-background hover:bg-background/10 transition-colors">
+                <button className="rounded-pill bg-background/10 px-6 py-3 text-sm font-medium text-background hover:bg-background/20 transition-colors">
                   Подробнее
                 </button>
               </div>
@@ -200,17 +202,17 @@ const MortgageCalculator = () => {
         </ScrollReveal>
 
         {/* Extra cards */}
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
           {extraCards.map((c) => (
             <ScrollReveal key={c.title} className="flex">
-              <div className="border border-border bg-card p-6 md:p-8 flex flex-col justify-between flex-1 rounded-3xl">
+              <div className="bg-card p-6 md:p-8 flex flex-col justify-between flex-1 rounded-3xl">
                 <div>
                   <h4 className="font-display text-2xl md:text-[28px] font-medium leading-tight">{c.title}</h4>
                   <p className="text-muted-foreground mt-3 text-base leading-relaxed">{c.desc}</p>
                 </div>
                 <div className="mt-8">
                   <Link to="/purchase">
-                    <button className="rounded-pill border border-border min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] hover:bg-muted transition-colors">
+                    <button className="rounded-pill bg-muted min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] hover:bg-muted/80 transition-colors">
                       Подробнее
                     </button>
                   </Link>
@@ -219,25 +221,34 @@ const MortgageCalculator = () => {
             </ScrollReveal>
           ))}
         </div>
+        </div>
 
         {/* CTA block */}
         <ScrollReveal>
-          <div className="mt-6 bg-foreground text-background p-6 md:p-10 lg:p-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 rounded-3xl">
-            <div className="max-w-[500px]">
-              <h3 className="font-display text-2xl md:text-[36px] lg:text-[48px] font-normal leading-[1.1] uppercase tracking-[-1px]">
+          <div className="mt-3 lg:mt-4 bg-card rounded-3xl overflow-hidden flex flex-col lg:flex-row lg:items-stretch">
+            <div className="flex-1 p-6 md:p-8">
+              <h3 className="font-display text-2xl md:text-[28px] font-medium leading-tight">
                 Запишитесь на&nbsp;экскурсию
               </h3>
-              <p className="mt-6 text-background/60 text-base md:text-lg leading-relaxed">
+              <p className="text-muted-foreground mt-3 text-base leading-relaxed max-w-xl">
                 Приезжайте в наш офис продаж и&nbsp;убедитесь в&nbsp;качестве лично. Мы закажем вам такси бесплатно.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="rounded-pill bg-primary text-primary-foreground min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] hover:bg-primary/90 transition-colors">
-                Записаться →
-              </button>
-              <button className="rounded-pill border border-background/30 text-background min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] hover:bg-background/10 transition-colors">
-                Позвонить
-              </button>
+            <div className="p-6 md:p-8 lg:w-[300px] xl:w-[340px] lg:shrink-0 flex flex-col justify-center gap-3 bg-muted/15 border-t border-foreground/[0.06] lg:border-t-0 lg:border-l">
+              <Link to="/contacts" className="w-full">
+                <button className="w-full rounded-pill bg-primary text-primary-foreground min-h-[50px] px-[30px] py-[15px] text-sm font-medium hover:bg-primary/90 transition-colors flex items-center justify-between gap-2">
+                  Записаться
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              </Link>
+              <a href="tel:+79001234567" className="w-full">
+                <button className="w-full rounded-pill bg-muted min-h-[50px] px-[30px] py-[15px] text-sm font-medium hover:bg-muted/80 transition-colors flex items-center justify-between gap-2">
+                  Позвонить
+                  <Phone className="h-4 w-4 shrink-0" aria-hidden />
+                </button>
+              </a>
             </div>
           </div>
         </ScrollReveal>

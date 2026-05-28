@@ -1,30 +1,19 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
-import PillButton from "./PillButton";
-import TextReveal from "./TextReveal";
-import CountUp from "./CountUp";
 import NewsCard from "./NewsCard";
 import SectionHeading from "./SectionHeading";
+import ScrollReveal from "./ScrollReveal";
 import tektonika from "@/assets/tektonika-logo.svg";
-import logoSber from "@/assets/logo-sber.png";
-import logoVtb from "@/assets/logo-vtb.png";
-import logoTbank from "@/assets/logo-tbank.png";
+import teamPhoto from "@/assets/team-office.jpg";
 
-const stats = [
-  { value: "20", label: "лет на рынке" },
-  { value: "20+", label: "проектов" },
-  { value: "15 тыс.", label: "покупателей" },
+const metrics = [
+  { value: "923 000", unit: "м²", label: "Портфель проектов" },
+  { value: "77", unit: "га", label: "Земельный банк" },
+  { value: "3", extra: "6", label: "Проекта в реализации / в разработке" },
+  { value: "5", unit: "", label: "Регионов присутствия в Крыму" },
 ];
-
-const partnerLogos = [
-  { name: "Сбер", logo: logoSber },
-  { name: "ВТБ", logo: logoVtb },
-  { name: "Т-Банк", logo: logoTbank },
-];
-
-// Duplicate for seamless loop
-const tickerLogos = [...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos];
 
 const news = [
   {
@@ -44,118 +33,123 @@ const news = [
   },
 ];
 
+const reveal = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1], delay },
+});
+
+const aboutFacts = [
+  { value: "0.7", unit: "млн м²", label: "Портфель проектов" },
+  { value: "77", unit: "га", label: "Земельный банк" },
+  { value: "3", extra: "6", label: "В реализации / в разработке" },
+];
+
 const AboutSection = () => {
   return (
-  <section id="about" className="pt-20 pb-20 md:pt-28 md:pb-28 bg-muted">
-    <div className="site-container">
-      <div className="flex flex-col gap-8 md:gap-10">
-        {/* Logo */}
-        <TextReveal as="div" className="inline-block">
-          <img src={tektonika} alt="Тектоника" className="h-12 md:h-16" />
-        </TextReveal>
+    <>
+      <section id="about-company" className="py-16 md:py-24 bg-background">
+        <div className="site-container">
+          <SectionHeading title="О компании" />
 
-        {/* Description + stats */}
-        <div className="flex flex-col lg:flex-row justify-between gap-8 lg:gap-12">
-          <div className="max-w-[520px]">
-            <motion.p
-              className="text-muted-foreground text-base md:text-lg leading-relaxed"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-            >
-              TEKTONIKA — это девелоперская компания, специализирующаяся на создании современных жилых комплексов премиум и бизнес-класса.
-            </motion.p>
+          <div className="mt-8 md:mt-10 grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4 auto-rows-auto">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              {...reveal(0)}
+              className="lg:col-span-6 bg-card rounded-3xl py-6 pr-6 pl-0 md:py-10 md:pr-10 md:pl-0 flex flex-col justify-between min-h-[320px]"
             >
-              <PillButton variant="yellow" withArrow className="mt-8">
-                Подробнее
-              </PillButton>
+              <div className="flex items-center gap-3">
+                <img src={tektonika} alt="Тектоника" className="h-9 md:h-10 w-auto shrink-0" />
+              </div>
+
+              <div className="mt-6">
+                <p className="text-muted-foreground text-sm md:text-base leading-relaxed mt-4 max-w-xl">
+                  Мы строим в Крыму и ценим доверие покупателей: поэтому уделяем внимание качеству решений,
+                  материалам и логике пространства — чтобы дом был удобным сегодня и актуальным завтра.
+                </p>
+              </div>
+
+              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                <Link to="/contacts" className="sm:w-auto">
+                  <button
+                    type="button"
+                    className="w-full sm:w-auto rounded-pill bg-primary text-primary-foreground min-h-[50px] px-[30px] py-[15px] text-sm font-medium hover:bg-primary/90 transition-colors inline-flex items-center justify-center gap-2"
+                  >
+                    Связаться
+                    <ArrowUpRight className="h-4 w-4" />
+                  </button>
+                </Link>
+                <Link to="/contacts" className="sm:w-auto">
+                  <button
+                    type="button"
+                    className="w-full sm:w-auto rounded-pill bg-muted text-foreground min-h-[50px] px-[30px] py-[15px] text-sm font-medium hover:bg-muted/80 transition-colors inline-flex items-center justify-center gap-2"
+                  >
+                    Партнёрам
+                    <ArrowUpRight className="h-4 w-4" />
+                  </button>
+                </Link>
+              </div>
             </motion.div>
-          </div>
 
-          <div className="flex flex-col md:flex-row md:items-end md:gap-12 gap-6">
-            {stats.map((s, i) => (
-              <motion.div
-                key={s.label}
-                className={`flex items-baseline gap-4 md:flex-col md:items-start md:gap-1 ${i > 0 ? "border-t border-foreground/20 pt-6 md:border-t-0 md:pt-0 md:border-l md:pl-12" : ""}`}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 + i * 0.15 }}
-              >
-                <CountUp value={s.value} className="font-display text-5xl md:text-[64px] font-normal leading-none shrink-0" duration={2} />
-                <p className="text-muted-foreground text-sm uppercase tracking-wide">{s.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Partners ticker */}
-        <div>
-          <motion.p
-            className="text-xs uppercase tracking-widest text-muted-foreground mb-6"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Партнёры
-          </motion.p>
-          <div className="relative overflow-hidden">
-            {/* Fade edges */}
-            <div className="pointer-events-none absolute left-0 top-0 h-full w-16 z-10 bg-gradient-to-r from-muted to-transparent" />
-            <div className="pointer-events-none absolute right-0 top-0 h-full w-16 z-10 bg-gradient-to-l from-muted to-transparent" />
-            <div className="flex animate-marquee">
-              {tickerLogos.map((p, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-center shrink-0 w-48 px-10"
+            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-3 lg:gap-4 items-start self-end">
+              {aboutFacts.map((f, i) => (
+                <motion.div
+                  key={f.label}
+                  {...reveal(0.06 + i * 0.06)}
+                  className="bg-card rounded-3xl p-6 md:p-7 flex flex-col min-h-[132px] self-start"
                 >
-                  <img
-                    src={p.logo}
-                    alt={p.name}
-                    className="h-9 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
-                  />
-                </div>
+                  <div className="mt-auto">
+                    <div className="flex items-baseline gap-1 flex-wrap">
+                      <span className="font-display text-3xl md:text-[40px] font-medium leading-none text-foreground">
+                        {f.value}
+                      </span>
+                      {f.extra && (
+                        <>
+                          <span className="text-muted-foreground text-2xl font-light">/</span>
+                          <span className="font-display text-3xl md:text-[40px] font-medium leading-none text-primary">
+                            {f.extra}
+                          </span>
+                        </>
+                      )}
+                      {f.unit && (
+                        <span className="text-sm md:text-base font-medium text-muted-foreground ml-0.5">
+                          {f.unit}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-muted-foreground text-xs md:text-sm leading-snug mt-3">{f.label}</p>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Media block (merged) */}
-        <div>
+      <section id="media" className="py-16 md:py-24 bg-background">
+        <div className="site-container">
           <SectionHeading
             title="Медиа"
             rightElement={
-              <a href="/media" className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide hover:text-muted-foreground transition-colors">
+              <Link
+                to="/media"
+                className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide hover:text-muted-foreground transition-colors"
+              >
                 Все публикации
                 <ArrowUpRight className="h-4 w-4" />
-              </a>
+              </Link>
             }
           />
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             {news.map((n, i) => (
-              <motion.div
-                key={n.title}
-                className="flex"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.12 * i }}
-              >
+              <ScrollReveal key={n.title} delay={0.12 * i} className="flex">
                 <NewsCard {...n} />
-              </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
+    </>
   );
 };
 

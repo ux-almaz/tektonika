@@ -4,21 +4,21 @@ import projectHero from "@/assets/project-hero-1.webp";
 
 const projects = [
   {
-    name: "Тектоника Парк",
+    name: "Резиденция ЛЮКСОР",
     price: "от 5,8 млн ₽",
     location: "10 мин. пешком",
     image: projectHero,
     href: "/project",
   },
   {
-    name: "Тектоника Сити",
+    name: "Родная гавань",
     price: "от 7,2 млн ₽",
     location: "5 мин. пешком",
     image: projectHero,
     href: "/project",
   },
   {
-    name: "Тектоника Лайф",
+    name: "Фантастик",
     price: "от 9,1 млн ₽",
     location: "8 мин. пешком",
     image: projectHero,
@@ -35,7 +35,7 @@ const ProjectsDropdown = ({ onClose }: ProjectsDropdownProps) => {
     <div className="bg-background rounded-2xl p-6 flex gap-6 min-w-[780px]">
       {/* Left: project list */}
       <div className="flex flex-col gap-4 min-w-[340px]">
-        <span className="text-sm text-muted-foreground uppercase tracking-wider">
+        <span className="text-sm text-foreground font-semibold uppercase tracking-wider">
           Проекты
         </span>
         {projects.map((project) => (
@@ -70,7 +70,7 @@ const ProjectsDropdown = ({ onClose }: ProjectsDropdownProps) => {
       >
         <img
           src={projectHero}
-          alt="Все проекты Тектоника"
+          alt="Все проекты"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

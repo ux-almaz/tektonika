@@ -49,8 +49,8 @@ const luxorHeroGallerySections = [
 
 const luxorHeroGalleryBySections = {
   architecture: [
-    photoPath("Архитектура", "luxor1.jpg"),
-    photoPath("Архитектура", "luxor2.jpg"),
+    "/luxor2.jpg",
+    "/luxor2.jpg",
   ],
   landscaping: [
     photoPath("Благоустройство", "2026-04-30_14-55-50.png"),
@@ -122,7 +122,7 @@ const ProjectLuxor = () => {
             infrastructure: "/apteka.png",
           }}
         />
-        <ProjectGenplan imageOverride="/luxor1.jpg" markerPositionsOverride={luxorGenplanMarkerPositions} />
+        <ProjectGenplan imageOverride="/luxor2.jpg" markerPositionsOverride={luxorGenplanMarkerPositions} />
         <ProjectLocationLandscaping photoCardOverrides={["/landscapedesign.png", "/dvor.png"]} />
         <ProjectPlans />
         <ProjectCTA />

@@ -3,12 +3,8 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import projectHero from "@/assets/project-hero-1.webp";
-import aboutHero from "@/assets/about-hero.jpg";
 import valueInterior from "@/assets/value-interior.webp";
 import aboutCourtyard from "@/assets/about-courtyard.jpg";
-import partnersConstruction from "@/assets/partners-construction.webp";
-import tektonikaDark from "@/assets/tektonika-logo.svg";
-import tektonikLight from "@/assets/tektonika-logo-light.svg";
 
 type ImageCard = {
   type: "image";
@@ -50,21 +46,13 @@ const cards: OfferCard[] = [
     image: projectHero,
     value: "Старт\nпродаж!",
     valueClass: "text-[30px]",
-    label: "ЖК Тектоника",
+    label: "Резиденция ЛЮКСОР",
     href: "/project",
-  },
-  {
-    id: "installment-0",
-    type: "image",
-    image: aboutHero,
-    badge: "Рассрочка",
-    value: "0%",
-    label: "на квартиры",
-    href: "/purchase",
   },
   {
     id: "discount-10",
     type: "dark",
+    badge: "Акция",
     value: "до 10%",
     valueClass: "text-[38px]",
     label: "скидки\nна квартиры",
@@ -97,15 +85,6 @@ const cards: OfferCard[] = [
     href: "/project",
   },
   {
-    id: "partners",
-    type: "image",
-    image: partnersConstruction,
-    value: "Надёжный\nзастройщик",
-    valueClass: "text-[22px]",
-    label: "с 2004 года",
-    href: "/about",
-  },
-  {
     id: "keys",
     type: "dark",
     value: "2026",
@@ -116,6 +95,12 @@ const cards: OfferCard[] = [
 ];
 
 const CARD_H = "h-[200px] md:h-[260px]";
+
+const OfferBadge = ({ children }: { children: string }) => (
+  <span className="self-start inline-flex text-[11px] md:text-xs font-semibold text-foreground bg-background rounded-pill px-3 py-1.5 uppercase tracking-[0.35px] leading-none shadow-sm">
+    {children}
+  </span>
+);
 
 const CardWrapper = ({ id, href, i, light, isMobile, children }: { id: string; href: string; i: number; light?: boolean; isMobile?: boolean; children: React.ReactNode }) => (
   <motion.div
@@ -155,15 +140,12 @@ const SpecialOffersSection = () => {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/50" />
-                  <div className="relative h-full flex flex-col justify-between p-5">
-                    <div className="flex items-start justify-between gap-2">
-                      <img src={tektonikLight} alt="Тектоника" className="h-[14px] w-auto" />
-                      {card.badge && (
-                        <span className="text-[11px] font-medium text-white/90 bg-white/20 backdrop-blur-sm rounded-pill px-2.5 py-1 uppercase tracking-wide leading-none whitespace-nowrap">
-                          {card.badge}
-                        </span>
-                      )}
-                    </div>
+                  <div
+                    className={`relative h-full flex flex-col p-5 ${
+                      card.badge ? "justify-between" : "justify-end"
+                    }`}
+                  >
+                    {card.badge && <OfferBadge>{card.badge}</OfferBadge>}
                     <div>
                       <p className={`text-background font-medium leading-none whitespace-pre-line ${card.valueClass ?? "text-[46px]"}`}>
                         {card.value}
@@ -181,8 +163,12 @@ const SpecialOffersSection = () => {
           if (card.type === "dark") {
             return (
               <CardWrapper key={card.id} id={card.id} href={card.href} i={i} isMobile={isMobile}>
-                <div className="bg-foreground w-full h-full flex flex-col justify-between p-5">
-                  <img src={tektonikLight} alt="Тектоника" className="h-[14px] w-auto" />
+                <div
+                  className={`bg-foreground w-full h-full flex flex-col p-5 ${
+                    card.badge ? "justify-between" : "justify-end"
+                  }`}
+                >
+                  {card.badge && <OfferBadge>{card.badge}</OfferBadge>}
                   <div>
                     <p className={`text-background font-medium leading-none whitespace-pre-line ${card.valueClass ?? "text-[46px]"}`}>
                       {card.value}
@@ -198,8 +184,7 @@ const SpecialOffersSection = () => {
 
           return (
             <CardWrapper key={card.id} id={card.id} href={card.href} i={i} light isMobile={isMobile}>
-              <div className="bg-muted w-full h-full flex flex-col justify-between p-5">
-                <img src={tektonikaDark} alt="Тектоника" className="h-[14px] w-auto opacity-40" />
+              <div className="bg-muted w-full h-full flex flex-col justify-end p-5">
                 <div>
                   <p className={`text-foreground font-medium leading-none whitespace-pre-line ${card.valueClass ?? "text-[46px]"}`}>
                     {card.value}

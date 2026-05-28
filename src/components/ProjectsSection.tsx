@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import project1 from "@/assets/project1.webp";
 import project2 from "@/assets/project2.jpg";
 import project3 from "@/assets/project3.jpg";
 import floorplanImg from "@/assets/floorplan-1room.svg";
@@ -59,29 +58,23 @@ const mockApartments = [
 
 const mapProjects = [
   {
-    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&q=80&fm=webp",
-    name: "Тектоника",
+    image: "/luxor2.jpg",
+    name: "Резиденция ЛЮКСОР",
     price: "от 11 300 000 ₽",
     monthly: "от 32 769 ₽/мес",
     badge: "Ключи выданы",
   },
   {
     image: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=400&q=80&fm=webp",
-    name: "Тектоника Парк",
+    name: "Родная гавань",
     price: "от 8 500 000 ₽",
     monthly: "от 24 650 ₽/мес",
   },
   {
     image: "https://images.unsplash.com/photo-1515263487990-61b07816b324?w=400&q=80&fm=webp",
-    name: "Тектоника Сити",
+    name: "Фантастик",
     price: "от 15 200 000 ₽",
     monthly: "от 44 080 ₽/мес",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&q=80&fm=webp",
-    name: "Тектоника Лайт",
-    price: "от 6 900 000 ₽",
-    monthly: "от 20 010 ₽/мес",
   },
 ];
 
@@ -161,7 +154,7 @@ const ProjectsSection = () => {
                       <div className="px-6 pt-5 pb-0">
                         <div className="flex items-start justify-between">
                           <div>
-                            <p className="font-display text-base font-medium">ЖК Тектоника</p>
+                            <p className="font-display text-base font-medium">Резиденция ЛЮКСОР</p>
                             <p className="text-xs text-muted-foreground mt-1">
                               ул. Примерная, 1 <span className="mx-1">·</span> {apt.building}
                             </p>
@@ -255,19 +248,19 @@ const ProjectsSection = () => {
         </AnimatePresence>
 
         {!showApartments && (view === "params" ? (
-          <div className="mt-8 flex flex-col gap-6">
+          <div className="mt-8 flex flex-col gap-3 lg:gap-4">
             {/* Featured card — horizontal split */}
             <motion.div
               className="flex flex-col md:flex-row gap-0 rounded-3xl overflow-hidden border border-border"
-              initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 60, filter: "blur(12px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
               <Link
                 to="/project"
                 className="relative flex-[2] min-h-[280px] md:min-h-[500px] bg-cover bg-center group"
-                style={{ backgroundImage: `url(${project1})` }}
+                style={{ backgroundImage: "url(/luxor2.jpg)" }}
               >
                 <div className="absolute inset-0 bg-foreground/30 group-hover:bg-foreground/40 transition-colors" />
                 <div className="relative z-10 flex flex-col justify-end h-full p-5 md:p-12">
@@ -275,7 +268,7 @@ const ProjectsSection = () => {
                     Ключи выданы
                   </span>
                   <h3 className="font-display text-2xl md:text-5xl font-medium text-background uppercase leading-none">
-                    Тектоника
+                    Резиденция ЛЮКСОР
                   </h3>
                   <p className="text-background/80 text-sm mt-3">
                     Бизнес-класс в районе набережной
@@ -322,7 +315,7 @@ const ProjectsSection = () => {
             </motion.div>
 
             {/* Two smaller cards */}
-            <div className="flex flex-col md:flex-row gap-6">
+            <div className="flex flex-col md:flex-row gap-3 lg:gap-4">
               {[
                 {
                   image: project2,
@@ -335,7 +328,7 @@ const ProjectsSection = () => {
                   badge: "Скоро",
                   badgeVariant: "white" as const,
                   tags: ["Комфорт", "II кв. 2027"],
-                  name: "Тектоника Парк",
+                  name: "Родная гавань",
                   address: "Комфорт-класс рядом с парком",
                   price: "от 8,5 млн ₽",
                   priceLabel: "Стоимость квартир",
@@ -351,7 +344,7 @@ const ProjectsSection = () => {
                   badge: "Строится",
                   badgeVariant: "white" as const,
                   tags: ["Премиум", "III кв. 2026"],
-                  name: "Тектоника Сити",
+                  name: "Фантастик",
                   address: "Премиум-класс в центре города",
                   price: "от 15,2 млн ₽",
                   priceLabel: "Стоимость квартир",
@@ -360,8 +353,8 @@ const ProjectsSection = () => {
                 <motion.div
                   key={i}
                   className="flex-1"
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 60, filter: "blur(10px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{
                     duration: 0.7,
@@ -412,7 +405,7 @@ const ProjectsSection = () => {
                     Огромный выбор квартир в продаже, вы сможете найти среди них то
                     что надо
                   </p>
-                  <button className="w-full rounded-pill border border-background/30 min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] text-background hover:bg-background/10 transition-colors">
+                  <button className="w-full rounded-pill bg-background/10 min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] text-background hover:bg-background/20 transition-colors">
                     получить консультацию
                   </button>
                 </div>
