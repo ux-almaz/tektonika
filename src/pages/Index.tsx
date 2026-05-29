@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import PageIntro from "@/components/PageIntro";
 
 const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
+const AboutCompanyBento = lazy(() => import("@/components/AboutCompanyBento"));
 const MortgageCalculator = lazy(() => import("@/components/MortgageCalculator"));
 const AboutSection = lazy(() => import("@/components/AboutSection"));
 
@@ -35,6 +36,7 @@ const Index = () => {
         </div>
         <Suspense fallback={null}>
           <ProjectsSection />
+          <AboutCompanyBento />
           <MortgageCalculator />
           <AboutSection />
         </Suspense>
