@@ -46,9 +46,12 @@ const aboutFacts = [
   { value: "3", extra: "6", label: "В реализации / в разработке" },
 ];
 
+const SHOW_ABOUT_COMPANY = false;
+
 const AboutSection = () => {
   return (
     <>
+      {SHOW_ABOUT_COMPANY && (
       <section id="about-company" className="py-16 md:py-24 bg-background">
         <div className="site-container">
           <SectionHeading title="О компании" />
@@ -125,6 +128,7 @@ const AboutSection = () => {
           </div>
         </div>
       </section>
+      )}
 
       <section id="media" className="py-16 md:py-24 bg-background">
         <div className="site-container">

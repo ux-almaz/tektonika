@@ -93,7 +93,7 @@ const AboutCompanyBento = () => {
           >
             <School className="h-8 w-8 text-primary mb-3" strokeWidth={2} aria-hidden />
             <p className={bentoDescMuted}>
-              Школы, сады и сервисы в шаговой доступности от домов
+              Строим школы сады, объекты социальной инфраструктуры
             </p>
           </motion.article>
 
@@ -128,8 +128,9 @@ const AboutCompanyBento = () => {
               className="h-9 md:h-10 w-auto self-start shrink-0"
             />
             <p className={`${bentoDescMuted} leading-relaxed mt-16 md:mt-20 max-w-xl`}>
-              Мы строим в Крыму и ценим доверие покупателей: поэтому уделяем внимание качеству решений,
-              материалам и логике пространства — чтобы дом был удобным сегодня и актуальным завтра.
+              Тектоника Девелопмент — крымский девелопер, который смотрит на шаг
+              вперёд рынка. Мы не воспроизводим то, что уже есть, — мы задаём новую
+              планку: в архитектуре, в качестве, в отношении к покупателю.
             </p>
           </motion.article>
 
