@@ -14,12 +14,37 @@ type CarouselSlideKey = AdvantagePhotoKey | "education" | "transport";
 
 const hallPhoto2 = `/photos/${encodeURIComponent("Холл")}/${encodeURIComponent("photo_2026-03-27_16-55-39 (2).jpg")}`;
 
-const slides: { key: CarouselSlideKey; caption: string; image: string }[] = [
-  { key: "ecology", caption: "Тишина и приватность", image: ecologyImg },
-  { key: "education", caption: "Для семей с детьми", image: hallPhoto2 },
-  { key: "landscaping", caption: "Закрытый двор-сад", image: landscapingImg },
-  { key: "transport", caption: "Паркинг у дома", image: "/luxor-parking.png" },
-  { key: "infrastructure", caption: "Сервис и инфраструктура", image: infrastructureImg },
+const slides: { key: CarouselSlideKey; caption: string; description: string; image: string }[] = [
+  {
+    key: "ecology",
+    caption: "Тишина и приватность",
+    description: "Закрытая территория вдали от магистралей — спокойная атмосфера для отдыха и сна",
+    image: ecologyImg,
+  },
+  {
+    key: "education",
+    caption: "Для семей с детьми",
+    description: "Школа и детский сад напротив комплекса, детские площадки и безопасный двор",
+    image: hallPhoto2,
+  },
+  {
+    key: "landscaping",
+    caption: "Закрытый двор-сад",
+    description: "Авторское озеленение, зоны отдыха и прогулочные аллеи без автомобилей",
+    image: landscapingImg,
+  },
+  {
+    key: "transport",
+    caption: "Паркинг у дома",
+    description: "Подземный и наземный паркинг с удобным доступом к лифтовым холлам",
+    image: "/luxor-parking.png",
+  },
+  {
+    key: "infrastructure",
+    caption: "Сервис и инфраструктура",
+    description: "Кофейня, фитнес, аптека и сервисные зоны в шаговой доступности от подъезда",
+    image: infrastructureImg,
+  },
 ];
 
 interface ProjectAdvantagesProps {
@@ -136,10 +161,15 @@ const LuxorPremiumAdvantages = ({
                   )}
                 >
                   <img src={slide.image} alt={slide.caption} className="absolute inset-0 h-full w-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
-                  <p className="absolute bottom-0 left-0 z-10 max-w-[90%] p-4 font-display text-base font-medium leading-snug text-white md:p-5 md:text-lg">
-                    {slide.caption}
-                  </p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 z-10 max-w-[92%] p-4 md:p-5">
+                    <p className="font-display text-base font-medium leading-snug text-white md:text-lg">
+                      {slide.caption}
+                    </p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-white/85 md:text-[15px]">
+                      {slide.description}
+                    </p>
+                  </div>
                 </motion.div>
               );
 

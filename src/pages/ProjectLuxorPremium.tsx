@@ -2,13 +2,17 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LuxorPremiumCTA from "@/components/project/premium/LuxorPremiumCTA";
-import ProjectLuxorPremiumSubNav from "@/components/project/ProjectLuxorPremiumSubNav";
+import ProjectLuxorPremiumSubNav, {
+  LUXOR_PREMIUM_HEADER_H,
+  LUXOR_PREMIUM_SUBNAV_H,
+} from "@/components/project/ProjectLuxorPremiumSubNav";
 import ProjectLuxorPremiumAbout from "@/components/project/ProjectLuxorPremiumAbout";
 import LuxorPremiumHero from "@/components/project/premium/LuxorPremiumHero";
 import LuxorPremiumAdvantages from "@/components/project/premium/LuxorPremiumAdvantages";
 import LuxorPremiumGenplan from "@/components/project/premium/LuxorPremiumGenplan";
 import LuxorPremiumLocation from "@/components/project/premium/LuxorPremiumLocation";
 import LuxorPremiumPlans from "@/components/project/premium/LuxorPremiumPlans";
+import LuxorPremiumConstruction from "@/components/project/premium/LuxorPremiumConstruction";
 import { LuxorPremiumMotionProvider } from "@/contexts/LuxorPremiumMotionContext";
 
 const photoPath = (folder: string, filename: string) =>
@@ -74,9 +78,6 @@ const luxorPremiumGalleryImages = {
   architecture: ["/luxor2.jpg", ...luxorHeroGalleryBySections.architecture.slice(1)],
 };
 
-const HEADER_H = 80;
-const LUXOR_PREMIUM_SUBNAV_H = 64;
-
 const ProjectLuxorPremium = () => {
   const [headerRevealed, setHeaderRevealed] = useState(true);
 
@@ -89,19 +90,16 @@ const ProjectLuxorPremium = () => {
     return () => window.removeEventListener("tektonika:header-reveal", onReveal);
   }, []);
 
-  const premiumStickyOffset = headerRevealed
-    ? HEADER_H + LUXOR_PREMIUM_SUBNAV_H
+  const stickyScrollOffset = headerRevealed
+    ? LUXOR_PREMIUM_HEADER_H + LUXOR_PREMIUM_SUBNAV_H
     : LUXOR_PREMIUM_SUBNAV_H;
 
   return (
     <LuxorPremiumMotionProvider>
       <div className="min-h-screen bg-background">
         <Header introDone />
-        <ProjectLuxorPremiumSubNav
-          headerRevealed={headerRevealed}
-          stickyScrollOffset={premiumStickyOffset}
-        />
-        <main style={{ paddingTop: premiumStickyOffset }}>
+        <ProjectLuxorPremiumSubNav stickyScrollOffset={stickyScrollOffset} />
+        <main style={{ paddingTop: LUXOR_PREMIUM_HEADER_H }}>
           <LuxorPremiumHero
             heroImageOverride="/luxor2.jpg"
             titleOverride="ЛЮКСОР"
@@ -133,6 +131,7 @@ const ProjectLuxorPremium = () => {
             eyebrow="Планировки"
             headline="Подберите квартиру в ЛЮКСОР: студии, одно-, двух- и трёхкомнатные планировки с продуманной эргономикой. Площади, стоимость и ипотека — у менеджера."
           />
+          <LuxorPremiumConstruction />
           <LuxorPremiumCTA />
         </main>
         <Footer />

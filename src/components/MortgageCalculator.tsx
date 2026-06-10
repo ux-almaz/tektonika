@@ -12,6 +12,8 @@ const programs = [
   { name: "Ипотека с господдержкой", rate: 8 },
 ];
 
+const showExtraCards = false;
+
 const extraCards = [
   {
     title: "Материнский капитал",
@@ -201,26 +203,27 @@ const MortgageCalculator = () => {
           </div>
         </ScrollReveal>
 
-        {/* Extra cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
-          {extraCards.map((c) => (
-            <ScrollReveal key={c.title} className="flex">
-              <div className="bg-card p-6 md:p-8 flex flex-col justify-between flex-1 rounded-3xl">
-                <div>
-                  <h4 className="font-display text-2xl md:text-[28px] font-medium leading-tight">{c.title}</h4>
-                  <p className="text-muted-foreground mt-3 text-base leading-relaxed">{c.desc}</p>
+        {showExtraCards && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
+            {extraCards.map((c) => (
+              <ScrollReveal key={c.title} className="flex">
+                <div className="bg-card p-6 md:p-8 flex flex-col justify-between flex-1 rounded-3xl">
+                  <div>
+                    <h4 className="font-display text-2xl md:text-[28px] font-medium leading-tight">{c.title}</h4>
+                    <p className="text-muted-foreground mt-3 text-base leading-relaxed">{c.desc}</p>
+                  </div>
+                  <div className="mt-8">
+                    <Link to="/purchase">
+                      <button className="rounded-pill bg-muted min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] hover:bg-muted/80 transition-colors">
+                        Подробнее
+                      </button>
+                    </Link>
+                  </div>
                 </div>
-                <div className="mt-8">
-                  <Link to="/purchase">
-                    <button className="rounded-pill bg-muted min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] hover:bg-muted/80 transition-colors">
-                      Подробнее
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        )}
         </div>
 
         {/* CTA block */}

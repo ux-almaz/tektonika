@@ -10,7 +10,7 @@ interface ProjectCardProps {
   name: string;
   address: string;
   price: string;
-  priceLabel: string;
+  priceLabel?: string;
   mortgage?: string;
   mortgageLabel?: string;
   large?: boolean;
@@ -118,7 +118,9 @@ const ProjectCard = ({
         <div className="flex flex-wrap items-center gap-10 md:gap-20">
           <div>
             <p className="font-display text-lg font-medium">{price}</p>
-            <p className="text-[hsl(0,0%,49%)] text-lg">{priceLabel}</p>
+            {priceLabel && (
+              <p className="text-[hsl(0,0%,49%)] text-lg">{priceLabel}</p>
+            )}
           </div>
           {mortgage && (
             <div>

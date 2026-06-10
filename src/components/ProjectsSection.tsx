@@ -331,7 +331,6 @@ const ProjectsSection = () => {
                   name: "Родная гавань",
                   address: "Комфорт-класс рядом с парком",
                   price: "от 8,5 млн ₽",
-                  priceLabel: "Стоимость квартир",
                 },
                 {
                   image: project3,
@@ -347,7 +346,6 @@ const ProjectsSection = () => {
                   name: "Фантастик",
                   address: "Премиум-класс в центре города",
                   price: "от 15,2 млн ₽",
-                  priceLabel: "Стоимость квартир",
                 },
               ].map((card, i) => (
                 <motion.div

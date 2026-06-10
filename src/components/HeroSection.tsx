@@ -1,18 +1,53 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PillButton from "./PillButton";
 import BlurReveal from "./BlurReveal";
 import { revealTransition } from "@/lib/motion";
+import { cn } from "@/lib/utils";
+
+const SLIDE_INTERVAL_MS = 30_000;
+
+const heroSlides = [
+  { id: "luxor", image: "/luxor1.jpg", label: "Резиденция ЛЮКСОР", title: "Резиденция ЛЮКСОР", subtitle: "Старт продаж!", href: "/project" },
+  { id: "rodina", image: "/luxor2.jpg", label: "Родная гавань", title: "Резиденция ЛЮКСОР", subtitle: "Старт продаж!", href: "/project" },
+  { id: "fantastic", image: "/luxor3.jpg", label: "Фантастик", title: "Резиденция ЛЮКСОР", subtitle: "Старт продаж!", href: "/project" },
+] as const;
 
 const HeroSection = ({ introDone = false }: { introDone?: boolean }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     if (introDone && !bgLoaded) {
       setBgLoaded(true);
     }
   }, [introDone, bgLoaded]);
+
+  useEffect(() => {
+    setProgress(0);
+  }, [activeSlide]);
+
+  useEffect(() => {
+    if (!introDone || !bgLoaded) return;
+
+    const started = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - started) / SLIDE_INTERVAL_MS);
+      setProgress(p);
+      if (p >= 1) {
+        setActiveSlide((i) => (i + 1) % heroSlides.length);
+        return;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [introDone, bgLoaded, activeSlide]);
+
+  const slide = heroSlides[activeSlide];
 
   return (
     <section className="relative pt-0 flex-1 flex flex-col border-0">
@@ -24,19 +59,26 @@ const HeroSection = ({ introDone = false }: { introDone?: boolean }) => {
             animate={introDone ? { opacity: 1 } : { opacity: 0 }}
             transition={revealTransition(1.2)}
           >
-            <img
-              src={bgLoaded ? "/luxor2.jpg" : undefined}
-              alt="Резиденция Люксор"
-              className="absolute inset-0 w-full h-full object-cover"
-              decoding="async"
-              fetchPriority="high"
-              draggable={false}
-            />
+            <AnimatePresence mode="sync">
+              <motion.img
+                key={slide.image}
+                src={bgLoaded ? slide.image : undefined}
+                alt={slide.title}
+                className="absolute inset-0 w-full h-full object-cover"
+                decoding="async"
+                fetchPriority="high"
+                draggable={false}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </AnimatePresence>
             <div className="absolute inset-0 bg-foreground/40" />
           </motion.div>
 
-          <div className="relative flex flex-col justify-end flex-1 min-h-[400px] px-5 md:px-16 lg:px-20">
-            <motion.div className="pb-10 md:pb-20 pt-12 md:pt-[100px]">
+          <div className="relative flex flex-col justify-end flex-1 min-h-[400px] px-4 md:px-10 lg:px-14">
+            <motion.div className="pb-20 md:pb-28 pt-12 md:pt-[100px]">
               {introDone ? (
                 <BlurReveal
                   text="Резиденция ЛЮКСОР"
@@ -77,13 +119,49 @@ const HeroSection = ({ introDone = false }: { introDone?: boolean }) => {
                 }
                 transition={revealTransition(0.75, 0.65)}
               >
-                <Link to="/project">
+                <Link to={slide.href}>
                   <PillButton variant="yellow" withArrow className="mt-10">
                     Подробнее
                   </PillButton>
                 </Link>
               </motion.div>
             </motion.div>
+
+            <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/55 to-transparent px-3 pb-5 pt-16 md:px-6 md:pb-6 md:pt-24">
+              <div className="grid grid-cols-3 gap-2 sm:gap-0">
+                {heroSlides.map((item, i) => {
+                  const isOn = i === activeSlide;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setActiveSlide(i)}
+                      className="group flex w-full flex-col items-stretch px-1 py-2 text-left md:px-2 md:py-3"
+                    >
+                      <span
+                        className={cn(
+                          "text-[11px] font-medium leading-tight text-white sm:text-xs md:text-sm",
+                          isOn ? "opacity-100" : "opacity-85 group-hover:opacity-100",
+                        )}
+                      >
+                        {item.label}
+                      </span>
+                      <div
+                        className="relative mt-2 h-[3px] w-full overflow-hidden rounded-sm bg-white/30"
+                        aria-hidden
+                      >
+                        {isOn && (
+                          <div
+                            className="absolute left-0 top-0 h-full rounded-sm bg-white"
+                            style={{ width: `${progress * 100}%` }}
+                          />
+                        )}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
