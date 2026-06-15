@@ -124,7 +124,7 @@ const LuxorPremiumPlans = ({ eyebrow = DEFAULT_EYEBROW, headline = DEFAULT_HEADL
                     <span className="text-sm text-neutral-600">Стоимость</span>
                     <span className="font-display text-lg font-medium text-neutral-900">{plan.price}</span>
                   </motion.div>
-                  <motion.div className="flex items-center justify-between rounded-[14px] border border-neutral-200 bg-neutral-50 px-5 py-4 md:rounded-2xl">
+                  <motion.div className="flex flex-col items-start gap-3 rounded-[14px] border border-neutral-200 bg-neutral-50 px-5 py-4 md:flex-row md:items-center md:justify-between md:rounded-2xl">
                     <motion.div>
                       <span className="text-xs uppercase tracking-wide text-neutral-600">Ипотека</span>
                       <p className="mt-0.5 font-display text-2xl font-medium text-[#4D2626]">

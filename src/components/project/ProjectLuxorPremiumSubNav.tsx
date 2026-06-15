@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import { useLenis } from "lenis/react";
-import { Link } from "react-router-dom";
 import { getScrollY, useLenisScrollListener } from "@/hooks/useLenisScrollListener";
 import { cn } from "@/lib/utils";
 
@@ -25,16 +24,23 @@ const navItems = [
 const SubNavContent = ({
   activeId,
   scrollTo,
+  scrollToTop,
 }: {
   activeId: string | null;
   scrollTo: (id: string) => void;
+  scrollToTop: () => void;
 }) => (
   <div className="max-w-[2000px] mx-auto flex min-h-[64px] items-center gap-2 sm:gap-3 px-4 py-1.5 md:px-10 lg:px-16 xl:px-[100px] 2xl:px-[140px]">
-    <Link to="/" className="shrink-0 flex items-center" aria-label="На главную">
+    <button
+      type="button"
+      onClick={scrollToTop}
+      className="shrink-0 flex items-center"
+      aria-label="В начало страницы"
+    >
       <img src="/logo.png" alt="" className="h-7 w-auto max-h-8 object-contain md:h-8" />
-    </Link>
+    </button>
 
-    <div className="flex-1 min-w-0 flex justify-center overflow-x-auto scrollbar-hide">
+    <div className="hidden min-w-0 flex-1 justify-center overflow-x-auto scrollbar-hide md:flex">
       <ul className="flex items-center gap-2 md:gap-2.5 px-1">
         {navItems.map(({ id, label }) => {
           const active = activeId === id;
@@ -59,7 +65,7 @@ const SubNavContent = ({
       </ul>
     </div>
 
-    <div className="shrink-0 flex items-center">
+    <div className="ml-auto flex shrink-0 items-center md:ml-0">
       <button
         type="button"
         onClick={() => scrollTo("project-plans")}
@@ -140,6 +146,14 @@ const ProjectLuxorPremiumSubNav = ({ stickyScrollOffset }: ProjectLuxorPremiumSu
     }
   };
 
+  const scrollToTop = () => {
+    if (lenis) {
+      lenis.scrollTo(0);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <nav
       aria-label="Разделы проекта Люксор"
@@ -149,7 +163,7 @@ const ProjectLuxorPremiumSubNav = ({ stickyScrollOffset }: ProjectLuxorPremiumSu
       )}
       style={{ top: navTop }}
     >
-      <SubNavContent activeId={activeId} scrollTo={scrollTo} />
+      <SubNavContent activeId={activeId} scrollTo={scrollTo} scrollToTop={scrollToTop} />
     </nav>
   );
 };

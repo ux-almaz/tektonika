@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Maximize2, TreePine } from "lucide-react";
+import { TreePine } from "lucide-react";
 import BlurReveal from "@/components/BlurReveal";
 import { PremiumReveal } from "@/components/project/premium/PremiumParallax";
 import { cn } from "@/lib/utils";
@@ -134,16 +134,47 @@ const ProjectLuxorPremiumAbout = () => {
               </AnimatePresence>
             </div>
 
-            <button
-              type="button"
-              className="absolute right-4 top-4 z-10 flex size-9 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors hover:bg-white/25 md:right-6 md:top-6"
-              aria-label="На весь экран"
-            >
-              <Maximize2 className="size-4" strokeWidth={1.75} />
-            </button>
-
             <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/55 to-transparent px-3 pb-5 pt-16 md:px-6 md:pb-6 md:pt-24">
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-0">
+              {/* Mobile: active label + full bar + half peek, shifts on change */}
+              <div className="sm:hidden">
+                <motion.div
+                  key={active}
+                  className="flex w-full gap-2"
+                  initial={{ x: 32, opacity: 0.8 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <button
+                    type="button"
+                    className="flex min-w-0 flex-[2] flex-col items-stretch text-left"
+                    onClick={() => setActive(active)}
+                    aria-current="true"
+                  >
+                    <span className="mb-2 text-sm font-medium leading-tight text-white">
+                      {tab.label}
+                    </span>
+                    <div className="relative h-[3px] w-full overflow-hidden rounded-sm bg-white/30">
+                      <div
+                        className="absolute left-0 top-0 h-full rounded-sm bg-white"
+                        style={{ width: `${progress * 100}%` }}
+                      />
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    className="flex min-w-0 flex-1 flex-col items-stretch text-left"
+                    onClick={() => setActive((active + 1) % landscapeTabs.length)}
+                  >
+                    <span className="mb-2 truncate text-sm font-medium leading-tight text-white/85">
+                      {landscapeTabs[(active + 1) % landscapeTabs.length].label}
+                    </span>
+                    <div className="h-[3px] w-full rounded-sm bg-white/30" />
+                  </button>
+                </motion.div>
+              </div>
+
+              <div className="hidden sm:grid sm:grid-cols-4 sm:gap-0">
                 {landscapeTabs.map((item, i) => {
                   const isOn = i === active;
                   return (

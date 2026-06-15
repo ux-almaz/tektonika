@@ -66,7 +66,7 @@ const LuxorPremiumHero = ({
               delay={0.35}
               stagger={0.025}
               className={cn(
-                "w-full shrink-0 text-right text-lg sm:text-xl md:text-2xl text-white",
+                "w-full shrink-0 text-left text-lg sm:text-xl md:text-2xl lg:text-right text-white",
                 "max-w-[min(100%,520px)] sm:max-w-[min(90%,560px)] md:max-w-[min(42vw,580px)] lg:ml-auto",
                 "leading-relaxed font-medium",
                 "[text-shadow:0_1px_16px_rgba(0,0,0,0.55)]",

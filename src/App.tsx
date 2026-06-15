@@ -19,6 +19,7 @@ const ParkingAssetDetail = lazy(() => import("./pages/ParkingAssetDetail"));
 const Apartment = lazy(() => import("./pages/Apartment"));
 const About = lazy(() => import("./pages/About"));
 const HowToBuy = lazy(() => import("./pages/HowToBuy"));
+const FamilyMortgage = lazy(() => import("./pages/FamilyMortgage"));
 const Projects = lazy(() => import("./pages/Projects"));
 const Contacts = lazy(() => import("./pages/Contacts"));
 const Media = lazy(() => import("./pages/Media"));
@@ -60,6 +61,7 @@ const App = () => (
             <Route path="/flats/:id" element={<RequirePassword><Apartment /></RequirePassword>} />
             <Route path="/about" element={<RequirePassword><About /></RequirePassword>} />
             <Route path="/purchase" element={<RequirePassword><HowToBuy /></RequirePassword>} />
+            <Route path="/family-mortgage" element={<RequirePassword><FamilyMortgage /></RequirePassword>} />
             <Route path="/projects" element={<RequirePassword><Projects /></RequirePassword>} />
             <Route path="/contacts" element={<RequirePassword><Contacts /></RequirePassword>} />
             <Route path="/media" element={<RequirePassword><Media /></RequirePassword>} />

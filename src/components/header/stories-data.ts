@@ -4,7 +4,6 @@ import constructionPhoto from "@/assets/construction-photo.webp";
 import mortgageIllustration from "@/assets/mortgage-illustration.webp";
 import partnersConstruction from "@/assets/partners-construction.webp";
 import partnersCrane from "@/assets/partners-crane.webp";
-import projectHero from "@/assets/project-hero-1.webp";
 import valueInterior from "@/assets/value-interior.webp";
 import valueNature from "@/assets/value-nature.jpg";
 
@@ -27,13 +26,13 @@ export const headerStories: StoryGroup[] = [
   {
     id: "launch",
     title: "Новая очередь",
-    cover: projectHero,
+    cover: "/luxor2.jpg",
     slides: [
       {
         id: "launch-1",
         title: "Старт новой очереди",
         description: "Премиальная архитектура, камерные дворы и выразительные фасады в новом этапе проекта.",
-        image: projectHero,
+        image: "/luxor2.jpg",
         duration: 4800,
       },
       {

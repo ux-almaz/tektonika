@@ -13,6 +13,9 @@ const programs = [
 ];
 
 const showExtraCards = false;
+const showProgramDetailsButton = false;
+const showInstallmentDetailsButton = false;
+const showInstallmentArrow = false;
 
 const extraCards = [
   {
@@ -63,7 +66,7 @@ const MortgageCalculator = () => {
             <div className="flex-[3] bg-card rounded-3xl overflow-hidden flex flex-col min-w-0">
 
               {/* Card header */}
-              <div className="flex items-center justify-between px-8 pt-7 pb-6 gap-4 bg-muted/25 border-b border-foreground/[0.06]">
+              <div className="flex items-center justify-between gap-4 border-b border-foreground/[0.06] bg-muted/25 p-6">
                 <h3 className="font-display text-2xl md:text-[28px] font-medium shrink-0">Ипотека</h3>
                 <p className="text-muted-foreground text-sm text-right hidden md:block">
                   Подберём выгодную программу среди&nbsp;ведущих банков России
@@ -93,14 +96,16 @@ const MortgageCalculator = () => {
                       ))}
                     </div>
                   </div>
-                  <Link to="/purchase">
-                    <button className="w-full rounded-pill bg-muted px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted/80 text-left flex items-center justify-between group">
-                      Подробнее
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-muted-foreground group-hover:text-foreground transition-colors">
-                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </button>
-                  </Link>
+                  {showProgramDetailsButton && (
+                    <Link to="/purchase">
+                      <button className="w-full rounded-pill bg-muted px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted/80 text-left flex items-center justify-between group">
+                        Подробнее
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-muted-foreground group-hover:text-foreground transition-colors">
+                          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </button>
+                    </Link>
+                  )}
                 </div>
 
                 {/* Col 2+3 wrapper — no divider between them */}
@@ -109,11 +114,11 @@ const MortgageCalculator = () => {
                   {/* Price */}
                   <div>
                     <p className="text-xs text-muted-foreground mb-2">Стоимость жилья</p>
-                    <div className="flex items-center justify-between bg-background rounded-pill px-5 py-3">
+                    <div className="flex items-center justify-between bg-background rounded-pill py-3">
                       <span className="font-medium text-sm">{fmt(price)}</span>
                       <span className="text-muted-foreground text-sm">₽</span>
                     </div>
-                    <div className="px-5">
+                    <div>
                       <Slider min={3_000_000} max={50_000_000} step={100_000} value={[price]} onValueChange={([v]) => setPrice(v)} />
                     </div>
                   </div>
@@ -121,11 +126,11 @@ const MortgageCalculator = () => {
                   {/* Down payment */}
                   <div>
                     <p className="text-xs text-muted-foreground mb-2">Первоначальный взнос</p>
-                    <div className="flex items-center justify-between bg-background rounded-pill px-5 py-3">
+                    <div className="flex items-center justify-between bg-background rounded-pill py-3">
                       <span className="font-medium text-sm">{fmt(downAmount)}</span>
                       <span className="text-muted-foreground text-sm">{down}%</span>
                     </div>
-                    <div className="px-5">
+                    <div>
                       <Slider min={10} max={90} step={1} value={[down]} onValueChange={([v]) => setDown(v)} />
                     </div>
                   </div>
@@ -133,11 +138,11 @@ const MortgageCalculator = () => {
                   {/* Term */}
                   <div>
                     <p className="text-xs text-muted-foreground mb-2">Срок</p>
-                    <div className="flex items-center justify-between bg-background rounded-pill px-5 py-3">
+                    <div className="flex items-center justify-between bg-background rounded-pill py-3">
                       <span className="font-medium text-sm">{term}</span>
                       <span className="text-muted-foreground text-sm">лет</span>
                     </div>
-                    <div className="px-5">
+                    <div>
                       <Slider min={1} max={30} step={1} value={[term]} onValueChange={([v]) => setTerm(v)} />
                     </div>
                   </div>
@@ -166,9 +171,9 @@ const MortgageCalculator = () => {
                     </div>
                   </div>
 
-                  <Link to="/purchase">
+                  <Link to="/family-mortgage">
                     <button className="w-full rounded-pill bg-primary text-primary-foreground px-4 py-3 text-sm font-medium hover:bg-primary/90 transition-colors flex items-center justify-between gap-2">
-                      Показать предложения банков
+                      Подробнее
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                         <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
@@ -181,22 +186,31 @@ const MortgageCalculator = () => {
             </div>{/* end Ипотека card */}
 
             {/* ─── Рассрочка card ─── */}
-            <Link to="/purchase" className="lg:w-[360px] lg:shrink-0 bg-foreground text-background rounded-3xl p-8 flex flex-col justify-between gap-8 min-h-[320px] hover:opacity-90 transition-opacity">
+            <Link to="/purchase" className="lg:w-[360px] lg:shrink-0 bg-foreground text-background rounded-3xl p-6 flex flex-col justify-between gap-6 min-h-[320px] hover:opacity-90 transition-opacity">
               <div className="flex items-start justify-between">
                 <h3 className="font-display text-2xl md:text-[28px] font-medium leading-tight">Рассрочка</h3>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-background shrink-0 mt-1">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                {showInstallmentArrow && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-background shrink-0 mt-1">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )}
               </div>
-              <div>
-                <div className="pt-5 mb-6">
-                  <p className="text-background/70 text-sm leading-relaxed">
-                    Рассрочка — отличное решение для тех, кому не подходит ипотека, а для полной оплаты возможности нет. Без переплат и процентов.
-                  </p>
-                </div>
-                <button className="rounded-pill bg-background/10 px-6 py-3 text-sm font-medium text-background hover:bg-background/20 transition-colors">
-                  Подробнее
-                </button>
+
+              <div className="flex flex-col gap-6">
+                <p
+                  className="font-display text-[clamp(4.5rem,16vw,6.5rem)] font-medium leading-[0.9] tracking-[-0.04em] text-background/40"
+                  aria-label="0 процентов"
+                >
+                  0%
+                </p>
+                <p className="text-background/70 text-sm leading-relaxed max-w-[28ch]">
+                  Рассрочка — отличное решение для тех, кому не подходит ипотека, а для полной оплаты возможности нет. Без переплат и процентов.
+                </p>
+                {showInstallmentDetailsButton && (
+                  <button className="rounded-pill bg-background/10 px-6 py-3 text-sm font-medium text-background hover:bg-background/20 transition-colors w-fit">
+                    Подробнее
+                  </button>
+                )}
               </div>
             </Link>
 

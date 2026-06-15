@@ -262,18 +262,18 @@ const ProjectsSection = () => {
                 className="relative flex-[2] min-h-[280px] md:min-h-[500px] bg-cover bg-center group"
                 style={{ backgroundImage: "url(/luxor2.jpg)" }}
               >
-                <div className="absolute inset-0 bg-foreground/30 group-hover:bg-foreground/40 transition-colors" />
-                <div className="relative z-10 flex flex-col justify-end h-full p-5 md:p-12">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10 group-hover:from-black/80 transition-colors" />
+                <div className="relative z-10 flex h-full flex-col items-start justify-end p-5 text-left md:p-12">
                   <span className="self-start rounded-pill px-4 py-2 text-xs uppercase tracking-wider bg-primary text-primary-foreground mb-4">
                     Ключи выданы
                   </span>
-                  <h3 className="font-display text-2xl md:text-5xl font-medium text-background uppercase leading-none">
+                  <h3 className="font-display text-2xl md:text-5xl font-medium text-background uppercase leading-none [text-shadow:0_2px_16px_rgba(0,0,0,0.35)]">
                     Резиденция ЛЮКСОР
                   </h3>
-                  <p className="text-background/80 text-sm mt-3">
+                  <p className="mt-3 text-sm font-medium text-white/95 md:text-base [text-shadow:0_1px_12px_rgba(0,0,0,0.5)]">
                     Бизнес-класс в районе набережной
                   </p>
-                  <div className="flex items-center gap-2 mt-2 text-background/70 text-sm">
+                  <div className="mt-2 flex items-center gap-2 text-sm text-white/85 [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]">
                     <span className="inline-block w-2 h-2 rounded-full bg-primary" />
                     5 мин до моря
                   </div>
@@ -283,17 +283,17 @@ const ProjectsSection = () => {
                 </div>
               </Link>
 
-              <div className="flex-1 bg-foreground text-background flex flex-col justify-between p-5 md:p-10 min-h-[280px] md:min-h-[500px]">
-                <div>
+              <div className="flex min-h-[280px] flex-1 flex-col justify-between bg-foreground p-5 text-background max-md:items-start max-md:text-left md:min-h-[500px] md:p-10">
+                <div className="max-md:w-full">
                   <TextReveal
                     as="h3"
-                    className="font-display text-xl md:text-[38px] font-normal leading-[1.1]"
+                    className="font-display text-xl font-normal leading-[1.1] max-md:text-left md:text-[38px]"
                   >
                     Уникальные форматы квартир от&nbsp;11,3&nbsp;млн&nbsp;руб.
                   </TextReveal>
 
-                  <div className="flex flex-wrap gap-2 mt-8">
-                    {["Скидки до 15%", "Ключи 2026", "Бизнес-класс", "Вид на море", "Выгодная ипотека"].map(
+                  <div className="mt-8 flex w-full flex-wrap justify-start gap-2">
+                    {["Скидки до 15%", "Бизнес-класс", "Центр города", "Выгодная ипотека"].map(
                       (tag) => (
                         <span
                           key={tag}

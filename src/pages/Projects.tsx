@@ -29,7 +29,7 @@ const projects = [
     price: "от 11,3 млн ₽",
     priceLabel: "Стоимость квартир",
     featured: true,
-    tags: ["Скидки до 15%", "Ключи 2026", "Бизнес-класс", "Вид на море"],
+    tags: ["Скидки до 15%", "Бизнес-класс", "Центр города"],
   },
   {
     image: project2,
@@ -123,30 +123,30 @@ const Projects = () => {
                       className="relative flex-[2] min-h-[420px] md:min-h-[500px] bg-cover bg-center group"
                       style={{ backgroundImage: `url(${featured.image})` }}
                     >
-                      <div className="absolute inset-0 bg-foreground/30 group-hover:bg-foreground/40 transition-colors" />
-                      <div className="relative z-10 flex flex-col justify-end h-full p-8 md:p-12">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10 group-hover:from-black/80 transition-colors" />
+                      <div className="relative z-10 flex h-full flex-col items-start justify-end p-8 text-left md:p-12">
                         <span className="self-start rounded-pill px-4 py-2 text-xs uppercase tracking-wider bg-primary text-primary-foreground mb-4">
                           {featured.badge}
                         </span>
-                        <h3 className="font-display text-4xl md:text-5xl font-medium text-background uppercase leading-none">
+                        <h3 className="font-display text-4xl md:text-5xl font-medium text-background uppercase leading-none [text-shadow:0_2px_16px_rgba(0,0,0,0.35)]">
                           {featured.name}
                         </h3>
-                        <p className="text-background/80 text-sm mt-3">{featured.address}</p>
+                        <p className="mt-3 text-sm font-medium text-white/95 md:text-base [text-shadow:0_1px_12px_rgba(0,0,0,0.5)]">{featured.address}</p>
                         <p className="text-background font-display text-lg font-medium mt-3">
                           {featured.price}
                         </p>
                       </div>
                     </Link>
 
-                    <div className="flex-1 bg-foreground text-background flex flex-col justify-between p-8 md:p-10 min-h-[420px] md:min-h-[500px]">
-                      <div>
+                    <div className="flex min-h-[420px] flex-1 flex-col justify-between bg-foreground p-8 text-background max-md:items-start max-md:text-left md:min-h-[500px] md:p-10">
+                      <div className="max-md:w-full">
                         <TextReveal
                           as="h3"
-                          className="font-display text-[32px] md:text-[38px] font-normal leading-[1.1]"
+                          className="font-display text-[32px] font-normal leading-[1.1] max-md:text-left md:text-[38px]"
                         >
                           Уникальные форматы квартир {featured.price}
                         </TextReveal>
-                        <div className="flex flex-wrap gap-2 mt-8">
+                        <div className="mt-8 flex w-full flex-wrap justify-start gap-2">
                           {featured.tags?.map((tag) => (
                             <span
                               key={tag}

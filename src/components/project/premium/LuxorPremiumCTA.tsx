@@ -9,7 +9,7 @@ const LuxorPremiumCTA = () => (
   <section className="border-0 py-16 md:py-24">
     <div className="site-container">
       <motion.div
-        className="flex flex-col items-start justify-between gap-10 rounded-3xl p-10 text-[#faf7f6] md:p-16 lg:flex-row lg:items-center lg:p-20"
+        className="flex flex-col items-start justify-between gap-10 rounded-3xl p-6 text-[#faf7f6] sm:p-10 md:p-16 lg:flex-row lg:items-center lg:p-20"
         style={{ backgroundColor: CARD_BG }}
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ const LuxorPremiumCTA = () => (
         </div>
 
         <motion.div
-          className="flex flex-col gap-4 sm:flex-row"
+          className="flex w-full max-w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -47,14 +47,14 @@ const LuxorPremiumCTA = () => (
           <PillButton
             variant="yellow"
             withArrow
-            className="!border-transparent hover:opacity-90"
+            className="w-full !px-5 !py-3.5 text-xs sm:w-auto sm:!px-10 sm:!py-5 sm:text-sm !border-transparent hover:opacity-90"
             style={{ backgroundColor: BUTTON_BG, color: CARD_BG }}
           >
             Записаться на встречу
           </PillButton>
           <PillButton
             variant="outline"
-            className="border-[#faf7f6]/30 text-[#faf7f6] hover:bg-[#faf7f6]/10"
+            className="w-full !px-5 !py-3.5 text-xs sm:w-auto sm:!px-10 sm:!py-5 sm:text-sm border-[#faf7f6]/30 text-[#faf7f6] hover:bg-[#faf7f6]/10"
           >
             Позвонить
           </PillButton>
