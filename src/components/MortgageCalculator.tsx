@@ -172,7 +172,7 @@ const MortgageCalculator = () => {
                   </div>
 
                   <Link to="/family-mortgage">
-                    <button className="w-full rounded-pill bg-primary text-primary-foreground px-4 py-3 text-sm font-medium hover:bg-primary/90 transition-colors flex items-center justify-between gap-2">
+                    <button className="w-full btn-yellow btn-interactive rounded-pill px-4 py-3 text-sm font-medium flex items-center justify-between gap-2">
                       Подробнее
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                         <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -207,7 +207,7 @@ const MortgageCalculator = () => {
                   Рассрочка — отличное решение для тех, кому не подходит ипотека, а для полной оплаты возможности нет. Без переплат и процентов.
                 </p>
                 {showInstallmentDetailsButton && (
-                  <button className="rounded-pill bg-background/10 px-6 py-3 text-sm font-medium text-background hover:bg-background/20 transition-colors w-fit">
+                  <button className="rounded-pill border border-background/30 bg-transparent px-6 py-3 text-sm font-medium text-background hover:border-background hover:bg-transparent transition-colors w-fit">
                     Подробнее
                   </button>
                 )}
@@ -253,7 +253,7 @@ const MortgageCalculator = () => {
             </div>
             <div className="p-6 md:p-8 lg:w-[300px] xl:w-[340px] lg:shrink-0 flex flex-col justify-center gap-3 bg-muted/15 border-t border-foreground/[0.06] lg:border-t-0 lg:border-l">
               <Link to="/contacts" className="w-full">
-                <button className="w-full rounded-pill bg-primary text-primary-foreground min-h-[50px] px-[30px] py-[15px] text-sm font-medium hover:bg-primary/90 transition-colors flex items-center justify-between gap-2">
+                <button className="w-full btn-yellow btn-interactive rounded-pill min-h-[50px] px-[30px] py-[15px] text-sm font-medium flex items-center justify-between gap-2">
                   Записаться
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
                     <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -261,7 +261,7 @@ const MortgageCalculator = () => {
                 </button>
               </Link>
               <a href="tel:+79001234567" className="w-full">
-                <button className="w-full rounded-pill bg-muted min-h-[50px] px-[30px] py-[15px] text-sm font-medium hover:bg-muted/80 transition-colors flex items-center justify-between gap-2">
+                <button className="w-full btn-muted btn-interactive rounded-pill min-h-[50px] px-[30px] py-[15px] text-sm font-medium flex items-center justify-between gap-2">
                   Позвонить
                   <Phone className="h-4 w-4 shrink-0" aria-hidden />
                 </button>

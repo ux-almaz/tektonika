@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import PillButton from "./PillButton";
+import { ArrowRight } from "lucide-react";
 import BlurReveal from "./BlurReveal";
 import { revealTransition } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -78,7 +78,7 @@ const HeroSection = ({ introDone = false }: { introDone?: boolean }) => {
           </motion.div>
 
           <div className="relative flex flex-col justify-end flex-1 min-h-[400px] px-4 md:px-10 lg:px-14">
-            <motion.div className="pb-20 md:pb-28 pt-12 md:pt-[100px]">
+            <motion.div className="relative z-20 pb-20 md:pb-28 pt-12 md:pt-[100px]">
               {introDone ? (
                 <BlurReveal
                   text="Резиденция ЛЮКСОР"
@@ -119,16 +119,18 @@ const HeroSection = ({ introDone = false }: { introDone?: boolean }) => {
                 }
                 transition={revealTransition(0.75, 0.65)}
               >
-                <Link to={slide.href}>
-                  <PillButton variant="yellow" withArrow className="mt-10">
-                    Подробнее
-                  </PillButton>
+                <Link
+                  to={slide.href}
+                  className="btn-interactive btn-yellow btn-yellow-on-dark mt-10 inline-flex items-center justify-center gap-2 rounded-pill px-10 py-5 text-sm font-medium uppercase tracking-[0.35px] leading-[1.43] whitespace-nowrap"
+                >
+                  Подробнее
+                  <ArrowRight className="h-4 w-4 shrink-0" />
                 </Link>
               </motion.div>
             </motion.div>
 
-            <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/55 to-transparent px-3 pb-5 pt-16 md:px-6 md:pb-6 md:pt-24">
-              <div className="sm:hidden">
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/55 to-transparent px-3 pb-5 pt-16 md:px-6 md:pb-6 md:pt-24">
+              <div className="pointer-events-auto sm:hidden">
                 <motion.div
                   key={activeSlide}
                   className="flex w-full gap-2"
@@ -166,7 +168,7 @@ const HeroSection = ({ introDone = false }: { introDone?: boolean }) => {
                 </motion.div>
               </div>
 
-              <div className="hidden sm:grid sm:grid-cols-3 sm:gap-0">
+              <div className="pointer-events-auto hidden sm:grid sm:grid-cols-3 sm:gap-0">
                 {heroSlides.map((item, i) => {
                   const isOn = i === activeSlide;
                   return (

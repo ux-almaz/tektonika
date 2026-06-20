@@ -108,7 +108,7 @@ const ProjectFilter = () => {
                   className={`min-w-[44px] h-12 px-3 rounded-pill text-sm font-medium transition-colors border ${
                     selectedRooms.includes(r)
                       ? "bg-foreground text-background border-foreground"
-                      : "border-border text-foreground hover:bg-muted"
+                      : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
                   }`}
                 >
                   {r}
@@ -157,7 +157,7 @@ const ProjectFilter = () => {
           {/* CTA */}
           <button
             onClick={() => navigate(`/catalog${catalogParams ? `?${catalogParams}` : ""}`)}
-            className="rounded-pill bg-primary text-primary-foreground h-12 px-8 text-sm font-medium uppercase tracking-wide hover:bg-primary/90 transition-colors whitespace-nowrap"
+            className="btn-yellow btn-interactive rounded-pill h-12 px-8 text-sm font-medium uppercase tracking-wide whitespace-nowrap"
           >
             Показать квартиры
           </button>
@@ -260,7 +260,7 @@ const ProjectFilter = () => {
                       <div className="flex justify-center mt-8">
                         <button
                           onClick={() => setVisibleCount((c) => c + APARTMENTS_PER_PAGE)}
-                          className="rounded-pill border border-border px-10 h-12 text-sm font-medium hover:bg-muted transition-colors"
+                          className="rounded-pill border border-border bg-transparent px-10 h-12 text-sm font-medium hover:border-foreground hover:bg-transparent transition-colors"
                         >
                           Показать ещё
                         </button>
@@ -274,7 +274,7 @@ const ProjectFilter = () => {
                       >
                         <Link
                           to={`/catalog${catalogParams ? `?${catalogParams}` : ""}`}
-                          className="rounded-pill bg-primary text-primary-foreground px-12 h-14 inline-flex items-center text-sm font-medium uppercase tracking-wide hover:bg-primary/90 transition-colors"
+                          className="btn-yellow btn-interactive rounded-pill px-12 h-14 inline-flex items-center text-sm font-medium uppercase tracking-wide"
                         >
                           Все квартиры
                         </Link>

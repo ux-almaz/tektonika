@@ -158,7 +158,7 @@ const Projects = () => {
                         </div>
                       </div>
                       <Link to="/project">
-                        <button className="w-full rounded-pill bg-primary text-primary-foreground min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] hover:bg-primary/90 transition-colors mt-8">
+                        <button className="w-full btn-yellow btn-interactive rounded-pill min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] mt-8">
                           Перейти к проекту
                         </button>
                       </Link>
@@ -268,7 +268,7 @@ const Projects = () => {
                       Выбрать квартиру
                     </PillButton>
                   </Link>
-                  <PillButton variant="outline" className="w-full sm:w-auto whitespace-nowrap border-background/30 text-background hover:bg-background/10">
+                  <PillButton variant="outline" className="w-full sm:w-auto whitespace-nowrap border-background/30 text-background hover:border-background hover:bg-transparent">
                     Получить консультацию
                   </PillButton>
                 </div>

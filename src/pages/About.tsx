@@ -299,7 +299,7 @@ const About = () => {
                   Смотреть проекты
                 </PillButton>
               </Link>
-              <PillButton variant="outline" className="w-full sm:w-auto whitespace-nowrap border-background/30 text-background hover:bg-background/10">
+              <PillButton variant="outline" className="w-full sm:w-auto whitespace-nowrap border-background/30 text-background hover:border-background hover:bg-transparent">
                 Получить консультацию
               </PillButton>
             </div>

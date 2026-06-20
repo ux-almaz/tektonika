@@ -76,7 +76,7 @@ const AboutSection = () => {
                 <Link to="/contacts" className="sm:w-auto">
                   <button
                     type="button"
-                    className="w-full sm:w-auto rounded-pill bg-primary text-primary-foreground min-h-[50px] px-[30px] py-[15px] text-sm font-medium hover:bg-primary/90 transition-colors inline-flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto btn-yellow btn-interactive rounded-pill min-h-[50px] px-[30px] py-[15px] text-sm font-medium inline-flex items-center justify-center gap-2"
                   >
                     Связаться
                     <ArrowUpRight className="h-4 w-4" />

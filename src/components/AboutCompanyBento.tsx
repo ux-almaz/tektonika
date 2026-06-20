@@ -143,7 +143,7 @@ const AboutCompanyBento = () => {
               <Link to="/contacts" className="w-full">
                 <button
                   type="button"
-                  className="w-full rounded-pill bg-primary text-primary-foreground min-h-[50px] px-[30px] py-[15px] text-sm font-medium hover:bg-primary/90 transition-colors inline-flex items-center justify-center gap-2"
+                  className="w-full btn-yellow btn-interactive rounded-pill min-h-[50px] px-[30px] py-[15px] text-sm font-medium inline-flex items-center justify-center gap-2"
                 >
                   Связаться
                   <ArrowUpRight className="h-4 w-4" />
@@ -152,7 +152,7 @@ const AboutCompanyBento = () => {
               <Link to="/contacts" className="w-full">
                 <button
                   type="button"
-                  className="w-full rounded-pill bg-muted text-foreground min-h-[50px] px-[30px] py-[15px] text-sm font-medium hover:bg-muted/80 transition-colors inline-flex items-center justify-center gap-2"
+                  className="w-full btn-muted btn-interactive rounded-pill min-h-[50px] px-[30px] py-[15px] text-sm font-medium inline-flex items-center justify-center gap-2"
                 >
                   Партнёрам
                   <ArrowUpRight className="h-4 w-4" />

@@ -103,7 +103,7 @@ const Footer = () => {
             </a>
             <button
               type="button"
-              className="inline-flex w-full items-center justify-center whitespace-nowrap rounded-pill bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 md:w-auto"
+              className="btn-yellow btn-interactive inline-flex w-full items-center justify-center whitespace-nowrap rounded-pill px-7 py-3.5 text-sm font-medium md:w-auto"
               onClick={() => setSheetOpen(true)}
             >
               Заказать звонок

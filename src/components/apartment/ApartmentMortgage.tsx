@@ -52,7 +52,7 @@ const ApartmentMortgage = () => {
                         key={p}
                         onClick={() => setDown(p)}
                         className={`rounded-pill border px-4 py-1.5 text-sm transition-colors ${
-                          down === p ? "bg-foreground text-background border-foreground" : "border-border hover:bg-muted"
+                          down === p ? "bg-foreground text-background border-foreground" : "border-border bg-transparent hover:border-foreground hover:bg-transparent"
                         }`}
                       >
                         {p}%
@@ -90,7 +90,7 @@ const ApartmentMortgage = () => {
                       <span>{b.name}</span>
                       <span className="font-display text-lg font-medium">{fmt(bMonthly)} ₽</span>
                       <span>от {b.rate}%</span>
-                      <button className="rounded-pill border border-border px-5 py-2.5 text-xs font-medium uppercase tracking-wide hover:bg-muted transition-colors whitespace-nowrap">
+                      <button className="rounded-pill border border-border bg-transparent px-5 py-2.5 text-xs font-medium uppercase tracking-wide hover:border-foreground hover:bg-transparent transition-colors whitespace-nowrap">
                         Подать заявку
                       </button>
                     </div>

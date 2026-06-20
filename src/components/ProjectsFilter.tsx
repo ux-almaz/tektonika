@@ -26,7 +26,7 @@ const ViewToggle = ({ view = "params", onViewChange }: { view?: "params" | "map"
         className={`inline-flex items-center justify-center w-9 h-9 rounded-xl border transition-colors ${
           currentView === "params"
             ? "bg-foreground text-background border-foreground"
-            : "border-border text-foreground hover:bg-muted"
+            : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
         }`}
       >
         <SlidersHorizontal className="h-4 w-4" />
@@ -37,7 +37,7 @@ const ViewToggle = ({ view = "params", onViewChange }: { view?: "params" | "map"
         className={`inline-flex items-center justify-center w-9 h-9 rounded-xl border transition-colors ${
           currentView === "map"
             ? "bg-foreground text-background border-foreground"
-            : "border-border text-foreground hover:bg-muted"
+            : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
         }`}
       >
         <MapPin className="h-4 w-4" />
@@ -57,8 +57,7 @@ const ProjectsFilter = ({
   onFilterChange,
 }: {
   hideViewToggle?: boolean;
-  /** show=true → display apartments inline; show=false → display project cards */
-  onFilterChange?: (show: boolean, params: string, filters: FilterValues) => void;
+  onFilterChange?: (params: string, filters: FilterValues) => void;
 }) => {
   const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState("Все проекты");
@@ -73,14 +72,13 @@ const ProjectsFilter = ({
     return p.toString();
   };
 
+  const emitFilterChange = (project: string, rooms: string[], deadline: string) => {
+    onFilterChange?.(buildParams(project, rooms, deadline), { project, rooms, deadline });
+  };
+
   const handleProjectSelect = (tab: string) => {
     setSelectedProject(tab);
-    if (!onFilterChange) return;
-    if (tab === "Все проекты") {
-      onFilterChange(false, "", { project: tab, rooms: selectedRooms, deadline: selectedDeadline });
-    } else {
-      onFilterChange(true, buildParams(tab, selectedRooms, selectedDeadline), { project: tab, rooms: selectedRooms, deadline: selectedDeadline });
-    }
+    emitFilterChange(tab, selectedRooms, selectedDeadline);
   };
 
   const handleRoomToggle = (r: string) => {
@@ -88,21 +86,16 @@ const ProjectsFilter = ({
       ? selectedRooms.filter((x) => x !== r)
       : [...selectedRooms, r];
     setSelectedRooms(next);
-    if (onFilterChange && selectedProject !== "Все проекты") {
-      onFilterChange(true, buildParams(selectedProject, next, selectedDeadline), { project: selectedProject, rooms: next, deadline: selectedDeadline });
-    }
+    emitFilterChange(selectedProject, next, selectedDeadline);
   };
 
   const handleDeadlineChange = (d: string) => {
     setSelectedDeadline(d);
-    if (onFilterChange && selectedProject !== "Все проекты") {
-      onFilterChange(true, buildParams(selectedProject, selectedRooms, d), { project: selectedProject, rooms: selectedRooms, deadline: d });
-    }
+    emitFilterChange(selectedProject, selectedRooms, d);
   };
 
   return (
     <motion.div
-      className="mt-8"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -122,7 +115,7 @@ const ProjectsFilter = ({
                 className={`h-12 px-5 rounded-pill text-sm font-medium transition-colors border ${
                   selectedProject === tab
                     ? "bg-foreground text-background border-foreground"
-                    : "border-border text-foreground hover:bg-muted"
+                    : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
                 }`}
               >
                 {tab}
@@ -153,7 +146,7 @@ const ProjectsFilter = ({
                 className={`min-w-[44px] h-12 px-3 rounded-pill text-sm font-medium transition-colors border ${
                   selectedRooms.includes(r)
                     ? "bg-foreground text-background border-foreground"
-                    : "border-border text-foreground hover:bg-muted"
+                    : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
                 }`}
               >
                 {r}
@@ -169,7 +162,7 @@ const ProjectsFilter = ({
             const params = buildParams(selectedProject, selectedRooms, selectedDeadline);
             navigate(`/catalog${params ? `?${params}` : ""}`);
           }}
-          className="w-full md:w-auto rounded-pill bg-primary text-primary-foreground h-12 px-8 text-sm font-medium uppercase tracking-wide hover:bg-primary/90 transition-colors whitespace-nowrap"
+          className="btn-yellow btn-interactive w-full md:w-auto rounded-pill h-12 px-8 text-sm font-medium uppercase tracking-wide whitespace-nowrap"
         >
           Показать квартиры <span className="ml-2 font-bold">804</span>
         </button>

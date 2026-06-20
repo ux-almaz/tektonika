@@ -107,7 +107,7 @@ const ProjectConstruction = () => {
               <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-4 px-5 py-5 md:px-7 md:py-6">
                 <button
                   type="button"
-                  className="rounded-pill bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.02]"
+                  className="btn-yellow btn-yellow-on-dark btn-interactive rounded-pill px-5 py-3 text-sm font-medium"
                 >
                   Смотреть 3 фото
                 </button>

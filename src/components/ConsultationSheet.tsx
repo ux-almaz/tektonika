@@ -136,7 +136,7 @@ const ConsultationSheet = ({ open, onOpenChange, apartment }: ConsultationSheetP
                 <div className="pb-8">
                   <button
                     type="submit"
-                    className="w-full rounded-pill bg-primary text-primary-foreground h-14 text-base font-medium hover:bg-primary/90 transition-colors"
+                    className="w-full btn-yellow btn-interactive rounded-pill h-14 text-base font-medium"
                   >
                     Отправить
                   </button>

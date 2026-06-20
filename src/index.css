@@ -131,38 +131,49 @@
   .site-container {
     @apply max-w-[2000px] mx-auto w-full px-5 md:px-10 lg:px-16 xl:px-[100px] 2xl:px-[140px];
   }
-}
 
-/* Button text slide-up hover effect */
-.btn-text-slide {
-  display: inline-flex;
-  overflow: hidden;
-  position: relative;
-  height: 1.43em;
-  line-height: 1.43;
-  white-space: nowrap;
-}
+  /* Unified button hover: fill or border only, no scale/shadow */
+  .btn-interactive,
+  button.rounded-pill,
+  button.rounded-xl,
+  a.rounded-pill,
+  a.btn-yellow,
+  a.btn-muted {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
 
-.btn-text-slide-inner {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  min-height: 100%;
-}
+  .btn-interactive:focus-visible,
+  button.rounded-pill:focus-visible,
+  button.rounded-xl:focus-visible,
+  a.rounded-pill:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
 
-.btn-text-slide-inner:first-child {
-  /* sits in normal position */
-}
+  /* Yellow CTA: filled by default, transparent + yellow border on hover */
+  .btn-yellow {
+    @apply border border-transparent bg-primary text-primary-foreground;
+  }
 
-.btn-text-slide-inner:last-child {
-  position: absolute;
-  top: 100%;
-  left: 0;
-}
+  .btn-yellow:hover:not(:disabled):not([aria-disabled="true"]) {
+    @apply bg-transparent border-primary text-foreground;
+  }
 
-.group:hover .btn-text-slide-inner {
-  transform: translateY(-100%);
+  /* On dark surfaces: white text on hover */
+  .bg-foreground .btn-yellow:hover:not(:disabled):not([aria-disabled="true"]),
+  footer .btn-yellow:hover:not(:disabled):not([aria-disabled="true"]),
+  .btn-yellow-on-dark:hover:not(:disabled):not([aria-disabled="true"]) {
+    @apply bg-transparent border-primary text-background;
+  }
+
+  /* Secondary CTA: muted fill → transparent + border on hover */
+  .btn-muted {
+    @apply border border-transparent bg-muted text-foreground;
+  }
+
+  .btn-muted:hover:not(:disabled):not([aria-disabled="true"]) {
+    @apply bg-transparent border-foreground text-foreground;
+  }
 }
 
 /* Global reveal animations for images */

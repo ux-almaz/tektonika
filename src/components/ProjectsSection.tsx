@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import project2 from "@/assets/project2.jpg";
 import project3 from "@/assets/project3.jpg";
 import floorplanImg from "@/assets/floorplan-1room.svg";
@@ -80,7 +80,6 @@ const mapProjects = [
 
 const ProjectsSection = () => {
   const [view, setView] = useState<"params" | "map">("params");
-  const [showApartments, setShowApartments] = useState(false);
   const apartmentsPerPage = useApartmentsPerPage();
   const [visibleCount, setVisibleCount] = useState(apartmentsPerPage);
   const [favorites, setFavorites] = useState<number[]>([]);
@@ -88,6 +87,14 @@ const ProjectsSection = () => {
   const [selectedApt, setSelectedApt] = useState<typeof mockApartments[0] | null>(null);
   const [catalogParams, setCatalogParams] = useState("");
   const [activeFilters, setActiveFilters] = useState<FilterValues>({ project: "Все проекты", rooms: [], deadline: "Любой" });
+
+  const filtered = activeFilters.rooms.length
+    ? mockApartments.filter(apt =>
+        activeFilters.rooms.some(r => ROOM_MAP[r] === apt.rooms)
+      )
+    : mockApartments;
+  const visible = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
 
   const toggleFavorite = (id: number) =>
     setFavorites((prev) => prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]);
@@ -98,6 +105,7 @@ const ProjectsSection = () => {
   };
 
   return (
+    <>
     <section id="projects" className="py-16 md:py-24 border-0">
       <div className="site-container">
         <SectionHeading
@@ -105,149 +113,7 @@ const ProjectsSection = () => {
           rightElement={<ProjectsFilter.ViewToggle view={view} onViewChange={setView} />}
         />
 
-        <ProjectsFilter
-          hideViewToggle
-          onFilterChange={(show, params, filters) => {
-            setShowApartments(show);
-            if (show) {
-              setVisibleCount(apartmentsPerPage);
-              setCatalogParams(params);
-              setActiveFilters(filters);
-            }
-          }}
-        />
-
-        <AnimatePresence>
-        {showApartments && (
-          <motion.div
-            key="apartments"
-            className="mt-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {(() => {
-              const filtered = activeFilters.rooms.length
-                ? mockApartments.filter(apt =>
-                    activeFilters.rooms.some(r => ROOM_MAP[r] === apt.rooms)
-                  )
-                : mockApartments;
-              const visible = filtered.slice(0, visibleCount);
-              const hasMore = visibleCount < filtered.length;
-              return (<>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-6">
-              {visible.map((apt, i) => {
-                const monthly = calcMonthly(apt.price);
-                const downPayment = Math.round(apt.price * 0.2);
-                return (
-                  <motion.div
-                    key={apt.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: i * 0.05 }}
-                  >
-                    <Link
-                      to={`/flats/${apt.id}`}
-                      className="group bg-card border border-border rounded-3xl overflow-hidden flex flex-col h-full hover:shadow-lg transition-shadow cursor-pointer"
-                    >
-                      <div className="px-6 pt-5 pb-0">
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <p className="font-display text-base font-medium">Резиденция ЛЮКСОР</p>
-                            <p className="text-xs text-muted-foreground mt-1">
-                              ул. Примерная, 1 <span className="mx-1">·</span> {apt.building}
-                            </p>
-                          </div>
-                          <button
-                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(apt.id); }}
-                            className="rounded-full border border-border p-3 text-muted-foreground transition-colors hover:text-primary"
-                          >
-                            <Heart className={`h-4 w-4 ${favorites.includes(apt.id) ? "fill-primary text-primary" : ""}`} />
-                          </button>
-                        </div>
-                        <p className="text-sm text-muted-foreground mt-2">
-                          {apt.rooms === "Студия" ? "студия" : apt.rooms.replace("-комн.", "-комнатная")}
-                          <span className="mx-0.5"> · </span>{apt.area}&nbsp;м²
-                          <span className="mx-0.5"> · </span>{apt.floor}&nbsp;этаж из&nbsp;{apt.totalFloors}
-                        </p>
-                      </div>
-
-                      <div className="relative bg-background flex items-center justify-center h-[220px] px-8 py-4">
-                        <img
-                          src={floorplanImg}
-                          alt={`Планировка ${apt.rooms}`}
-                          className="max-h-[65%] object-contain opacity-80 group-hover:opacity-100 transition-opacity"
-                        />
-                        {apt.discount && (
-                          <span className="absolute top-4 left-6 rounded-pill bg-primary text-primary-foreground px-3 py-1 text-[11px] font-medium uppercase tracking-wide">
-                            Скидка
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="px-6 pt-4 pb-2">
-                        <p className="font-display text-2xl font-medium">{fmtFull(apt.price)} ₽</p>
-                        <div className="flex items-start gap-6 mt-2">
-                          <div>
-                            <p className="text-xs text-muted-foreground">Ипотека</p>
-                            <p className="text-sm font-medium">{fmtFull(monthly)} ₽/мес</p>
-                          </div>
-                          <div>
-                            <p className="text-xs text-muted-foreground">Первоначальный взнос</p>
-                            <p className="text-sm font-medium">от {fmtFull(downPayment)} ₽</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {apt.tags && apt.tags.length > 0 ? (
-                        <div className="px-6 pb-5 pt-3 flex flex-wrap gap-2">
-                          {apt.tags.map((tag) => (
-                            <span key={tag} className="rounded-pill bg-muted px-3 py-1.5 text-xs font-medium">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="pb-5" />
-                      )}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            {hasMore ? (
-              <div className="flex justify-center mt-8">
-                <button
-                  onClick={() => setVisibleCount((c) => c + apartmentsPerPage)}
-                  className="rounded-pill border border-border px-10 h-12 text-sm font-medium hover:bg-muted transition-colors"
-                >
-                  Ещё квартиры
-                </button>
-              </div>
-            ) : (
-              <motion.div
-                className="flex justify-center mt-8"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <Link
-                  to={`/catalog${catalogParams ? `?${catalogParams}` : ""}`}
-                  className="rounded-pill bg-primary text-primary-foreground px-12 h-14 inline-flex items-center text-sm font-medium uppercase tracking-wide hover:bg-primary/90 transition-colors"
-                >
-                  Все квартиры
-                </Link>
-              </motion.div>
-            )}
-            </>);
-            })()}
-          </motion.div>
-        )}
-        </AnimatePresence>
-
-        {!showApartments && (view === "params" ? (
+        {view === "params" ? (
           <div className="mt-8 flex flex-col gap-3 lg:gap-4">
             {/* Featured card — horizontal split */}
             <motion.div
@@ -307,7 +173,7 @@ const ProjectsSection = () => {
                 </div>
 
                 <Link to="/project">
-                  <button className="w-full rounded-pill bg-primary text-primary-foreground min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] hover:bg-primary/90 transition-colors mt-8">
+                  <button className="w-full btn-yellow btn-interactive rounded-pill min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] mt-8">
                     Перейти к проекту
                   </button>
                 </Link>
@@ -403,7 +269,7 @@ const ProjectsSection = () => {
                     Огромный выбор квартир в продаже, вы сможете найти среди них то
                     что надо
                   </p>
-                  <button className="w-full rounded-pill bg-background/10 min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] text-background hover:bg-background/20 transition-colors">
+                  <button className="w-full rounded-pill border border-background/30 bg-transparent min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] text-background hover:border-background hover:bg-transparent transition-colors">
                     получить консультацию
                   </button>
                 </div>
@@ -470,15 +336,145 @@ const ProjectsSection = () => {
               />
             </div>
           </motion.div>
-        ))}
+        )}
       </div>
-
-      <ConsultationSheet
-        open={sheetOpen}
-        onOpenChange={setSheetOpen}
-        apartment={selectedApt}
-      />
     </section>
+
+    <section id="apartments" className="pt-8 md:pt-12 pb-16 md:pb-24">
+      <div className="site-container">
+        <ProjectsFilter
+          hideViewToggle
+          onFilterChange={(params, filters) => {
+            setVisibleCount(apartmentsPerPage);
+            setCatalogParams(params);
+            setActiveFilters(filters);
+          }}
+        />
+
+        <motion.div
+          className="mt-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-6">
+            {visible.map((apt, i) => {
+              const monthly = calcMonthly(apt.price);
+              const downPayment = Math.round(apt.price * 0.2);
+              return (
+                <motion.div
+                  key={apt.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                >
+                  <Link
+                    to={`/flats/${apt.id}`}
+                    className="group bg-card border border-border rounded-3xl overflow-hidden flex flex-col h-full hover:shadow-lg transition-shadow cursor-pointer"
+                  >
+                    <div className="px-6 pt-5 pb-0">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <p className="font-display text-base font-medium">Резиденция ЛЮКСОР</p>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            ул. Примерная, 1 <span className="mx-1">·</span> {apt.building}
+                          </p>
+                        </div>
+                        <button
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(apt.id); }}
+                          className="rounded-full border border-border p-3 text-muted-foreground transition-colors hover:text-primary"
+                        >
+                          <Heart className={`h-4 w-4 ${favorites.includes(apt.id) ? "fill-primary text-primary" : ""}`} />
+                        </button>
+                      </div>
+                      <p className="text-sm text-muted-foreground mt-2">
+                        {apt.rooms === "Студия" ? "студия" : apt.rooms.replace("-комн.", "-комнатная")}
+                        <span className="mx-0.5"> · </span>{apt.area}&nbsp;м²
+                        <span className="mx-0.5"> · </span>{apt.floor}&nbsp;этаж из&nbsp;{apt.totalFloors}
+                      </p>
+                    </div>
+
+                    <div className="relative bg-background flex items-center justify-center h-[220px] px-8 py-4">
+                      <img
+                        src={floorplanImg}
+                        alt={`Планировка ${apt.rooms}`}
+                        className="max-h-[65%] object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                      />
+                      {apt.discount && (
+                        <span className="absolute top-4 left-6 rounded-pill bg-primary text-primary-foreground px-3 py-1 text-[11px] font-medium uppercase tracking-wide">
+                          Скидка
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="px-6 pt-4 pb-2">
+                      <p className="font-display text-2xl font-medium">{fmtFull(apt.price)} ₽</p>
+                      <div className="flex items-start gap-6 mt-2">
+                        <div>
+                          <p className="text-xs text-muted-foreground">Ипотека</p>
+                          <p className="text-sm font-medium">{fmtFull(monthly)} ₽/мес</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground">Первоначальный взнос</p>
+                          <p className="text-sm font-medium">от {fmtFull(downPayment)} ₽</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {apt.tags && apt.tags.length > 0 ? (
+                      <div className="px-6 pb-5 pt-3 flex flex-wrap gap-2">
+                        {apt.tags.map((tag) => (
+                          <span key={tag} className="rounded-pill bg-muted px-3 py-1.5 text-xs font-medium">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="pb-5" />
+                    )}
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {hasMore ? (
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={() => setVisibleCount((c) => c + apartmentsPerPage)}
+                className="rounded-pill border border-border px-10 h-12 text-sm font-medium hover:border-foreground hover:bg-transparent transition-colors"
+              >
+                Ещё квартиры
+              </button>
+            </div>
+          ) : (
+            <motion.div
+              className="flex justify-center mt-8"
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Link
+                to={`/catalog${catalogParams ? `?${catalogParams}` : ""}`}
+                className="btn-yellow btn-interactive rounded-pill px-12 h-14 inline-flex items-center text-sm font-medium uppercase tracking-wide"
+              >
+                Все квартиры
+              </Link>
+            </motion.div>
+          )}
+        </motion.div>
+      </div>
+    </section>
+
+    <ConsultationSheet
+      open={sheetOpen}
+      onOpenChange={setSheetOpen}
+      apartment={selectedApt}
+    />
+    </>
   );
 };
 
