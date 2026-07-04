@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowUpRight, School } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import SectionHeading from "./SectionHeading";
 import tektonika from "@/assets/tektonika-logo.svg";
+import advantageEcologyImg from "@/assets/advantage-ecology.jpg";
 
 const reveal = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -35,17 +36,18 @@ const AboutCompanyBento = () => {
             {...reveal(0)}
             className={`${cardBase} relative min-h-[220px] md:min-h-0 md:col-start-1 md:row-start-1`}
           >
+            <div className="absolute inset-0 bg-muted" aria-hidden />
             <img
-              src="/luxor2.jpg"
+              src="/crimea-cities-map.png"
               alt=""
-              className="absolute inset-0 h-full w-full object-cover"
+              className="pointer-events-none absolute left-1/2 top-0 z-0 h-[114%] w-[132%] max-w-none -translate-x-1/2 -translate-y-[14%] object-contain object-top"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-foreground/75 via-foreground/25 to-transparent" />
             <p className="relative z-10 mt-auto p-5 md:p-6 font-display text-xl md:text-2xl font-medium leading-snug text-background">
               <span className="text-primary">&gt;0,7 млн м²</span>
               <span className={`block mt-1 ${bentoDescOnPhoto}`}>
-                совокупный объём проектов в Крыму
+                площадь реализуемых объектов
               </span>
             </p>
           </motion.article>
@@ -56,13 +58,13 @@ const AboutCompanyBento = () => {
             className={`${cardBase} relative p-5 md:p-6 justify-end min-h-[160px] md:min-h-0 md:col-start-1 md:row-start-2 overflow-hidden`}
           >
             <img
-              src="/cities-abstract-map.png"
-              alt=""
-              className="pointer-events-none absolute left-1/2 top-0 z-0 h-[92%] w-[108%] max-w-none -translate-x-1/2 object-contain object-top"
+              src="/crimea-cities-map.png"
+              alt="Карта Крыма: Симферополь, Евпатория, Бахчисарай, Ялта, Феодосия"
+              className="pointer-events-none absolute left-1/2 top-0 z-0 h-[125%] w-[128%] max-w-none -translate-x-1/2 -translate-y-[20%] object-contain object-top"
               loading="lazy"
               decoding="async"
             />
-            <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,transparent_20%,hsl(var(--card))_100%)]" />
+            <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,transparent_15%,hsl(var(--card))_72%)]" />
             <div className="relative z-[2] mt-auto">
               <p className="font-display text-4xl md:text-5xl font-medium leading-none text-primary">
                 5
@@ -86,24 +88,24 @@ const AboutCompanyBento = () => {
             </p>
           </motion.article>
 
-          {/* 4 — инфраструктура */}
+          {/* 4 — миссия */}
           <motion.article
             {...reveal(0.1)}
-            className={`${cardBase} p-5 md:p-6 items-center justify-center text-center min-h-[140px] md:min-h-0 md:col-start-3 md:row-start-1`}
+            className={`${cardBase} p-5 md:p-6 justify-center min-h-[140px] md:min-h-0 md:col-start-3 md:row-start-1`}
           >
-            <School className="h-8 w-8 text-primary mb-3" strokeWidth={2} aria-hidden />
-            <p className={bentoDescMuted}>
-              Строим школы сады, объекты социальной инфраструктуры
+            <h4 className="font-display text-xl md:text-2xl font-medium leading-tight">Миссия</h4>
+            <p className={`${bentoDescMuted} leading-relaxed mt-4`}>
+              Создавать в Крыму жилую среду через честную архитектуру, продуманные пространства и долгосрочные отношения с покупателем.
             </p>
           </motion.article>
 
-          {/* 5 — ключи / сдача */}
+          {/* 5 — земельный банк */}
           <motion.article
             {...reveal(0.12)}
             className={`${cardBase} relative min-h-[220px] md:min-h-0 md:col-start-4 md:row-start-1`}
           >
             <img
-              src="/landscapedesign.png"
+              src={advantageEcologyImg}
               alt=""
               className="absolute inset-0 h-full w-full object-cover"
               loading="lazy"
@@ -127,10 +129,11 @@ const AboutCompanyBento = () => {
               alt="Тектоника"
               className="h-9 md:h-10 w-auto self-start shrink-0"
             />
-            <p className={`${bentoDescMuted} leading-relaxed mt-16 md:mt-20 max-w-xl`}>
-              Тектоника Девелопмент — крымский девелопер, который смотрит на шаг
-              вперёд рынка. Мы не воспроизводим то, что уже есть, — мы задаём новую
-              планку: в архитектуре, в качестве, в отношении к покупателю.
+            <p className={`${bentoDescMuted} leading-relaxed mt-16 md:mt-20 max-w-xl whitespace-pre-line`}>
+              {`Тектоника Девелопмент — крымский застройщик,
+который строит среду, а не квадратные метры:
+проекты с характером, логикой и уважением
+к жизни покупателя.`}
             </p>
           </motion.article>
 
@@ -155,6 +158,15 @@ const AboutCompanyBento = () => {
                   className="w-full btn-muted btn-interactive rounded-pill min-h-[50px] px-[30px] py-[15px] text-sm font-medium inline-flex items-center justify-center gap-2"
                 >
                   Партнёрам
+                  <ArrowUpRight className="h-4 w-4" />
+                </button>
+              </Link>
+              <Link to="/contacts" className="w-full">
+                <button
+                  type="button"
+                  className="w-full btn-muted btn-interactive rounded-pill min-h-[50px] px-[30px] py-[15px] text-sm font-medium inline-flex items-center justify-center gap-2"
+                >
+                  Тендеры
                   <ArrowUpRight className="h-4 w-4" />
                 </button>
               </Link>

@@ -2,29 +2,35 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Phone } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+import ConsultationSheet from "./ConsultationSheet";
 import { Slider } from "@/components/ui/slider";
 import ScrollReveal from "./ScrollReveal";
 
 const programs = [
+  { name: "Субсидированная ипотека 0.1%", rate: 0.1 },
   { name: "Стандартная ипотека", rate: 18 },
   { name: "Семейная ипотека", rate: 6 },
   { name: "Военная ипотека", rate: 6.75 },
   { name: "Ипотека с господдержкой", rate: 8 },
 ];
 
-const showExtraCards = false;
+const showExtraCards = true;
 const showProgramDetailsButton = false;
 const showInstallmentDetailsButton = false;
 const showInstallmentArrow = false;
 
 const extraCards = [
   {
+    title: "Социальные программы",
+    desc: "Государственные и региональные программы поддержки при покупке жилья",
+  },
+  {
     title: "Материнский капитал",
     desc: "Можно использовать как первоначальный взнос или для погашения ипотеки",
   },
   {
-    title: "Жилищные сертификаты",
-    desc: "Один из выгодных и популярных способов покупки жилья",
+    title: "Ипотека от 0.1%",
+    desc: "Подберём выгодную программу среди ведущих банков России",
   },
 ];
 
@@ -40,10 +46,11 @@ function calcMonthly(price: number, downPercent: number, rate: number, years: nu
 const fmt = (n: number) => n.toLocaleString("ru-RU");
 
 const MortgageCalculator = () => {
+  const [sheetOpen, setSheetOpen] = useState(false);
   const [price, setPrice] = useState(11_300_000);
   const [down, setDown] = useState(20);
   const [term, setTerm] = useState(20);
-  const [selectedProgram, setSelectedProgram] = useState(programs[1]);
+  const [selectedProgram, setSelectedProgram] = useState(programs[0]);
 
   const downAmount = useMemo(() => Math.round(price * down / 100), [price, down]);
   const creditAmount = useMemo(() => price - downAmount, [price, downAmount]);
@@ -97,14 +104,16 @@ const MortgageCalculator = () => {
                     </div>
                   </div>
                   {showProgramDetailsButton && (
-                    <Link to="/purchase">
-                      <button className="w-full rounded-pill bg-muted px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted/80 text-left flex items-center justify-between group">
-                        Подробнее
+                    <button
+                      type="button"
+                      onClick={() => setSheetOpen(true)}
+                      className="w-full rounded-pill bg-muted px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted/80 text-left flex items-center justify-between group"
+                    >
+                        Получить консультацию
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-muted-foreground group-hover:text-foreground transition-colors">
                           <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       </button>
-                    </Link>
                   )}
                 </div>
 
@@ -171,14 +180,16 @@ const MortgageCalculator = () => {
                     </div>
                   </div>
 
-                  <Link to="/family-mortgage">
-                    <button className="w-full btn-yellow btn-interactive rounded-pill px-4 py-3 text-sm font-medium flex items-center justify-between gap-2">
-                      Подробнее
+                  <button
+                    type="button"
+                    onClick={() => setSheetOpen(true)}
+                    className="w-full btn-yellow btn-interactive rounded-pill px-4 py-3 text-sm font-medium flex items-center justify-between gap-2"
+                  >
+                      Получить консультацию
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                         <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </button>
-                  </Link>
                 </div>
                 </div>{/* end Col 2+3 wrapper */}
 
@@ -207,8 +218,12 @@ const MortgageCalculator = () => {
                   Рассрочка — отличное решение для тех, кому не подходит ипотека, а для полной оплаты возможности нет. Без переплат и процентов.
                 </p>
                 {showInstallmentDetailsButton && (
-                  <button className="rounded-pill border border-background/30 bg-transparent px-6 py-3 text-sm font-medium text-background hover:border-background hover:bg-transparent transition-colors w-fit">
-                    Подробнее
+                  <button
+                    type="button"
+                    onClick={() => setSheetOpen(true)}
+                    className="rounded-pill border border-background/30 bg-transparent px-6 py-3 text-sm font-medium text-background hover:border-background hover:bg-transparent transition-colors w-fit"
+                  >
+                    Получить консультацию
                   </button>
                 )}
               </div>
@@ -218,7 +233,7 @@ const MortgageCalculator = () => {
         </ScrollReveal>
 
         {showExtraCards && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-4">
             {extraCards.map((c) => (
               <ScrollReveal key={c.title} className="flex">
                 <div className="bg-card p-6 md:p-8 flex flex-col justify-between flex-1 rounded-3xl">
@@ -227,11 +242,13 @@ const MortgageCalculator = () => {
                     <p className="text-muted-foreground mt-3 text-base leading-relaxed">{c.desc}</p>
                   </div>
                   <div className="mt-8">
-                    <Link to="/purchase">
-                      <button className="rounded-pill bg-muted min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] hover:bg-muted/80 transition-colors">
-                        Подробнее
-                      </button>
-                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => setSheetOpen(true)}
+                      className="rounded-pill bg-muted min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] hover:bg-muted/80 transition-colors"
+                    >
+                      Подробнее
+                    </button>
                   </div>
                 </div>
               </ScrollReveal>
@@ -270,6 +287,8 @@ const MortgageCalculator = () => {
           </div>
         </ScrollReveal>
       </div>
+
+      <ConsultationSheet open={sheetOpen} onOpenChange={setSheetOpen} />
     </section>
   );
 };
