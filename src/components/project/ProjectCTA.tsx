@@ -37,7 +37,7 @@ const ProjectCTA = () => (
         <PillButton variant="yellow" withArrow>
           Записаться на встречу
         </PillButton>
-        <PillButton variant="outline" className="border-background/30 text-background hover:border-background hover:bg-transparent">
+        <PillButton variant="outline" className="btn-outline-on-dark border-background/30 text-background">
           Позвонить
         </PillButton>
       </motion.div>

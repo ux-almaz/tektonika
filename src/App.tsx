@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import Index from "./pages/Index";
 import RequirePassword from "./components/RequirePassword";
@@ -51,7 +51,7 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<RequirePassword><Index /></RequirePassword>} />
             <Route path="/project" element={<RequirePassword><Project /></RequirePassword>} />
-            <Route path="/project-luxor" element={<RequirePassword><ProjectLuxor /></RequirePassword>} />
+            <Route path="/project-luxor" element={<Navigate to="/project-luxor-premium" replace />} />
             <Route path="/project-luxor-premium" element={<RequirePassword><ProjectLuxorPremium /></RequirePassword>} />
             <Route path="/project-luxor-new" element={<RequirePassword><ProjectLuxorNew /></RequirePassword>} />
             <Route path="/project-coast" element={<RequirePassword><ProjectCoast /></RequirePassword>} />

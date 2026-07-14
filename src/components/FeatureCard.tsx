@@ -19,11 +19,11 @@ const FeatureCard = ({ title, description, actionLabel, actionVariant = "outline
       <div className="mt-auto pt-3">
         {actionVariant === "outline" ? (
           href ? (
-            <Link to={href} className="inline-flex rounded-pill border border-border bg-transparent min-h-[42px] px-[24px] py-[10px] text-sm font-medium uppercase hover:border-foreground hover:bg-transparent transition-colors items-center">
+            <Link to={href} className="btn-interactive btn-outline inline-flex rounded-pill border border-border bg-transparent min-h-[42px] px-[24px] py-[10px] text-sm font-medium uppercase items-center">
               {actionLabel}
             </Link>
           ) : (
-            <button className="rounded-pill border border-border bg-transparent min-h-[42px] px-[24px] py-[10px] text-sm font-medium uppercase hover:border-foreground hover:bg-transparent transition-colors">
+            <button className="btn-interactive btn-outline rounded-pill border border-border bg-transparent min-h-[42px] px-[24px] py-[10px] text-sm font-medium uppercase">
               {actionLabel}
             </button>
           )

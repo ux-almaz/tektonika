@@ -144,7 +144,7 @@ const LuxorPremiumPlans = ({ eyebrow = DEFAULT_EYEBROW, headline = DEFAULT_HEADL
                   <PillButton
                     variant="yellow"
                     withArrow
-                    className="w-full !border-transparent !bg-[#4D2626] !text-[#faf7f6] hover:!bg-[#3d1f1f] hover:!text-[#faf7f6]"
+                    className="w-full !border-transparent !bg-[#4D2626] !text-[#faf7f6] hover:!opacity-90"
                   >
                     Выбрать квартиру
                   </PillButton>

@@ -27,17 +27,34 @@ export interface ProjectLocationLandscapingProps {
   eyebrow?: string;
   description?: string;
   galleryOverrides?: [GallerySlot?, GallerySlot?, GallerySlot?, GallerySlot?];
+  galleryCaptions?: [string?, string?, string?, string?];
+  heroImageObjectPosition?: string;
   photoCardOverrides?: [GallerySlot?, GallerySlot?];
 }
 
-const TileImage = ({ src, alt }: { src: string; alt: string }) => (
-  <img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover" />
+const TileImage = ({
+  src,
+  alt,
+  objectPosition,
+}: {
+  src: string;
+  alt: string;
+  objectPosition?: string;
+}) => (
+  <img
+    src={src}
+    alt={alt}
+    className="absolute inset-0 h-full w-full object-cover"
+    style={objectPosition ? { objectPosition } : undefined}
+  />
 );
 
 const LuxorPremiumLocation = ({
   eyebrow = DEFAULT_EYEBROW,
   description = DEFAULT_DESCRIPTION,
   galleryOverrides,
+  galleryCaptions,
+  heroImageObjectPosition,
   photoCardOverrides,
 }: ProjectLocationLandscapingProps) => {
   const premium = useLuxorPremiumMotion();
@@ -50,11 +67,18 @@ const LuxorPremiumLocation = ({
     galleryOverrides?.[3] ?? advantageInfrastructureImg,
   ];
 
+  const captions = [
+    galleryCaptions?.[0] ?? GRID_CAPTIONS[0],
+    galleryCaptions?.[1] ?? GRID_CAPTIONS[1],
+    galleryCaptions?.[2] ?? GRID_CAPTIONS[2],
+    galleryCaptions?.[3] ?? GRID_CAPTIONS[3],
+  ];
+
   const tiles: { src: GallerySlot; caption: string }[] = [
-    { src: hero, caption: GRID_CAPTIONS[0] },
-    { src: row[0], caption: GRID_CAPTIONS[1] },
-    { src: row[1], caption: GRID_CAPTIONS[2] },
-    { src: row[2], caption: GRID_CAPTIONS[3] },
+    { src: hero, caption: captions[0] },
+    { src: row[0], caption: captions[1] },
+    { src: row[1], caption: captions[2] },
+    { src: row[2], caption: captions[3] },
   ];
 
   const heroClass =
@@ -64,7 +88,11 @@ const LuxorPremiumLocation = ({
 
   const renderHero = () => (
     <>
-      <TileImage src={resolveSrc(tiles[0].src)} alt={tiles[0].caption} />
+      <TileImage
+        src={resolveSrc(tiles[0].src)}
+        alt={tiles[0].caption}
+        objectPosition={heroImageObjectPosition}
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
       <p className="absolute bottom-0 left-0 max-w-[min(100%,28rem)] p-4 font-medium leading-snug text-white md:p-6 md:text-lg">
         {tiles[0].caption}

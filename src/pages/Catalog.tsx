@@ -185,7 +185,7 @@ const Catalog = () => {
                       key={r}
                       onClick={() => toggleRoom(r)}
                       className={`flex-1 h-14 px-3 rounded-pill text-sm font-medium transition-colors border ${
-                      selectedRooms.includes(r) ? "bg-foreground text-background border-foreground" : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"}`
+                      selectedRooms.includes(r) ? "bg-foreground text-background border-foreground" : "btn-interactive btn-outline border-border bg-transparent text-foreground"}`
                       }>
                       
                         {r}
@@ -264,7 +264,7 @@ const Catalog = () => {
                   <p className="mb-2 text-xs text-muted-foreground">Акция</p>
                   <button
                     onClick={() => setOnlyDiscount(!onlyDiscount)}
-                    className={`flex h-14 w-full items-center gap-3 rounded-pill border px-5 text-sm font-medium transition-colors ${onlyDiscount ? "border-foreground bg-foreground text-background" : "border-border bg-transparent hover:border-foreground hover:bg-transparent"}`}>
+                    className={`flex h-14 w-full items-center gap-3 rounded-pill border px-5 text-sm font-medium transition-colors ${onlyDiscount ? "border-foreground bg-foreground text-background" : "btn-interactive btn-outline border-border bg-transparent"}`}>
                     
                     <Flame className="h-4 w-4" />
                     Со скидкой
@@ -278,7 +278,7 @@ const Catalog = () => {
                   className={`inline-flex items-center gap-2 rounded-pill border px-5 h-10 text-sm font-medium transition-colors ${
                     showAllFilters
                       ? "bg-foreground text-background border-foreground"
-                      : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
+                      : "btn-interactive btn-outline border-border bg-transparent text-foreground"
                   }`}
                 >
                   Все фильтры
@@ -311,7 +311,7 @@ const Catalog = () => {
                         className={`rounded-pill border px-4 py-2 text-sm font-medium transition-colors ${
                           selectedAmenities.includes(a)
                             ? "bg-foreground text-background border-foreground"
-                            : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
+                            : "btn-interactive btn-outline border-border bg-transparent text-foreground"
                         }`}
                       >
                         {a}
@@ -330,7 +330,7 @@ const Catalog = () => {
                         className={`rounded-pill border px-4 py-2 text-sm font-medium transition-colors ${
                           selectedViews.includes(v)
                             ? "bg-foreground text-background border-foreground"
-                            : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
+                            : "btn-interactive btn-outline border-border bg-transparent text-foreground"
                         }`}
                       >
                         {v}
@@ -349,7 +349,7 @@ const Catalog = () => {
                         className={`rounded-pill border px-4 py-2 text-sm font-medium transition-colors ${
                           selectedDirections.includes(d)
                             ? "bg-foreground text-background border-foreground"
-                            : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
+                            : "btn-interactive btn-outline border-border bg-transparent text-foreground"
                         }`}
                       >
                         {d}
@@ -409,7 +409,7 @@ const Catalog = () => {
                   <div className="relative">
                     <button
                       onClick={() => setShowSort(!showSort)}
-                      className="inline-flex items-center gap-2 rounded-pill border border-border bg-transparent px-5 py-3 text-sm font-medium transition-colors hover:border-foreground hover:bg-transparent">
+                      className="btn-interactive btn-outline inline-flex items-center gap-2 rounded-pill border border-border bg-transparent px-5 py-3 text-sm font-medium">
                       
                       {sortBy}
                       <ChevronDown className={`h-4 w-4 transition-transform ${showSort ? "rotate-180" : ""}`} />
@@ -435,14 +435,14 @@ const Catalog = () => {
                   <div className="flex rounded-pill border border-border bg-background p-1">
                     <button
                       onClick={() => setView("grid")}
-                      className={`inline-flex items-center gap-2 rounded-pill border px-5 py-3 text-sm font-medium transition-colors ${view === "grid" ? "bg-foreground text-background border-foreground" : "border-transparent text-foreground hover:border-foreground hover:bg-transparent"}`}>
+                      className={`inline-flex items-center gap-2 rounded-pill border px-5 py-3 text-sm font-medium transition-colors ${view === "grid" ? "bg-foreground text-background border-foreground" : "btn-interactive btn-outline border-transparent text-foreground"}`}>
                       
                       <LayoutGrid className="h-4 w-4" />
                       Плиткой
                     </button>
                     <button
                       onClick={() => setView("list")}
-                      className={`inline-flex items-center gap-2 rounded-pill border px-5 py-3 text-sm font-medium transition-colors ${view === "list" ? "bg-foreground text-background border-foreground" : "border-transparent text-foreground hover:border-foreground hover:bg-transparent"}`}>
+                      className={`inline-flex items-center gap-2 rounded-pill border px-5 py-3 text-sm font-medium transition-colors ${view === "list" ? "bg-foreground text-background border-foreground" : "btn-interactive btn-outline border-transparent text-foreground"}`}>
                       
                       <List className="h-4 w-4" />
                       Список

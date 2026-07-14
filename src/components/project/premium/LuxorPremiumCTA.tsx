@@ -54,7 +54,7 @@ const LuxorPremiumCTA = () => (
           </PillButton>
           <PillButton
             variant="outline"
-            className="w-full !px-5 !py-3.5 text-xs sm:w-auto sm:!px-10 sm:!py-5 sm:text-sm border-[#faf7f6]/30 text-[#faf7f6] hover:bg-[#faf7f6]/10"
+            className="btn-outline-on-dark w-full !px-5 !py-3.5 text-xs sm:w-auto sm:!px-10 sm:!py-5 sm:text-sm border-[#faf7f6]/30 text-[#faf7f6]"
           >
             Позвонить
           </PillButton>

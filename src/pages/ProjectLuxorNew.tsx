@@ -197,7 +197,7 @@ const ProjectLuxorNew = () => {
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="/catalog" className="rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground">Посмотреть все планировки</a>
-              <a href="/proposal" className="rounded-full border border-white/25 px-5 py-2.5 text-sm text-white transition-colors hover:bg-white/10">Заказать консультацию</a>
+              <a href="/proposal" className="btn-interactive btn-outline-on-dark rounded-full border border-white/25 px-5 py-2.5 text-sm text-white">Заказать консультацию</a>
             </div>
           </div>
         </section>

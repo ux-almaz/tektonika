@@ -11,8 +11,8 @@ const PillButton = ({ variant = "yellow", withArrow = false, className, children
     "btn-interactive inline-flex items-center justify-center gap-2 rounded-pill px-10 py-5 text-sm font-medium uppercase tracking-[0.35px] leading-[1.43] whitespace-nowrap";
   const variants = {
     yellow: "btn-yellow",
-    black: "border border-transparent bg-foreground text-background hover:bg-foreground/90",
-    outline: "border border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent",
+    black: "border border-transparent bg-foreground text-background hover:opacity-90",
+    outline: "btn-outline border border-border bg-transparent text-foreground",
   };
 
   return (

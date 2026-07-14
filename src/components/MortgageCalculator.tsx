@@ -221,7 +221,7 @@ const MortgageCalculator = () => {
                   <button
                     type="button"
                     onClick={() => setSheetOpen(true)}
-                    className="rounded-pill border border-background/30 bg-transparent px-6 py-3 text-sm font-medium text-background hover:border-background hover:bg-transparent transition-colors w-fit"
+                    className="btn-interactive btn-outline-on-dark rounded-pill border border-background/30 bg-transparent px-6 py-3 text-sm font-medium text-background w-fit"
                   >
                     Получить консультацию
                   </button>

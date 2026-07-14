@@ -132,14 +132,16 @@
     @apply max-w-[2000px] mx-auto w-full px-5 md:px-10 lg:px-16 xl:px-[100px] 2xl:px-[140px];
   }
 
-  /* Unified button hover: fill or border only, no scale/shadow */
+  /* Unified button hover */
   .btn-interactive,
   button.rounded-pill,
   button.rounded-xl,
   a.rounded-pill,
   a.btn-yellow,
-  a.btn-muted {
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  a.btn-muted,
+  .btn-outline,
+  .btn-outline-on-dark {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
   }
 
   .btn-interactive:focus-visible,
@@ -150,29 +152,39 @@
     outline-offset: 2px;
   }
 
-  /* Yellow CTA: filled by default, transparent + yellow border on hover */
+  /* Yellow CTA: filled → slight opacity change on hover */
   .btn-yellow {
     @apply border border-transparent bg-primary text-primary-foreground;
   }
 
   .btn-yellow:hover:not(:disabled):not([aria-disabled="true"]) {
-    @apply bg-transparent border-primary text-foreground;
+    @apply opacity-90;
   }
 
-  /* On dark surfaces: white text on hover */
+  /* On dark surfaces */
   .bg-foreground .btn-yellow:hover:not(:disabled):not([aria-disabled="true"]),
   footer .btn-yellow:hover:not(:disabled):not([aria-disabled="true"]),
   .btn-yellow-on-dark:hover:not(:disabled):not([aria-disabled="true"]) {
-    @apply bg-transparent border-primary text-background;
+    @apply opacity-90;
   }
 
-  /* Secondary CTA: muted fill → transparent + border on hover */
+  /* Outline CTA: slightly darker border on hover (light surfaces) */
+  .btn-outline:hover:not(:disabled):not([aria-disabled="true"]) {
+    @apply border-neutral-400 bg-neutral-50;
+  }
+
+  /* Outline on dark surfaces */
+  .btn-outline-on-dark:hover:not(:disabled):not([aria-disabled="true"]) {
+    @apply bg-white/10;
+  }
+
+  /* Secondary CTA: muted fill → slightly darker on hover */
   .btn-muted {
     @apply border border-transparent bg-muted text-foreground;
   }
 
   .btn-muted:hover:not(:disabled):not([aria-disabled="true"]) {
-    @apply bg-transparent border-foreground text-foreground;
+    @apply brightness-[0.96];
   }
 }
 

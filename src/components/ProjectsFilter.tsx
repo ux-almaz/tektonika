@@ -26,7 +26,7 @@ const ViewToggle = ({ view = "params", onViewChange }: { view?: "params" | "map"
         className={`inline-flex items-center justify-center w-9 h-9 rounded-xl border transition-colors ${
           currentView === "params"
             ? "bg-foreground text-background border-foreground"
-            : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
+            : "btn-interactive btn-outline border-border bg-transparent text-foreground"
         }`}
       >
         <SlidersHorizontal className="h-4 w-4" />
@@ -37,7 +37,7 @@ const ViewToggle = ({ view = "params", onViewChange }: { view?: "params" | "map"
         className={`inline-flex items-center justify-center w-9 h-9 rounded-xl border transition-colors ${
           currentView === "map"
             ? "bg-foreground text-background border-foreground"
-            : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
+            : "btn-interactive btn-outline border-border bg-transparent text-foreground"
         }`}
       >
         <MapPin className="h-4 w-4" />
@@ -115,7 +115,7 @@ const ProjectsFilter = ({
                 className={`h-12 px-5 rounded-pill text-sm font-medium transition-colors border ${
                   selectedProject === tab
                     ? "bg-foreground text-background border-foreground"
-                    : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
+                    : "btn-interactive btn-outline border-border bg-transparent text-foreground"
                 }`}
               >
                 {tab}
@@ -146,7 +146,7 @@ const ProjectsFilter = ({
                 className={`min-w-[44px] h-12 px-3 rounded-pill text-sm font-medium transition-colors border ${
                   selectedRooms.includes(r)
                     ? "bg-foreground text-background border-foreground"
-                    : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
+                    : "btn-interactive btn-outline border-border bg-transparent text-foreground"
                 }`}
               >
                 {r}

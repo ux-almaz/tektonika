@@ -15,8 +15,8 @@ import LuxorPremiumPlans from "@/components/project/premium/LuxorPremiumPlans";
 import LuxorPremiumConstruction from "@/components/project/premium/LuxorPremiumConstruction";
 import { LuxorPremiumMotionProvider } from "@/contexts/LuxorPremiumMotionContext";
 
-const photoPath = (folder: string, filename: string) =>
-  `/photos/${encodeURIComponent(folder)}/${encodeURIComponent(filename)}`;
+const presentationPath = (n: number) =>
+  `/photos/presentation/${encodeURIComponent(`иллюстративный материал (${n}).png`)}`;
 
 const luxorHeroGallerySections = [
   { key: "architecture", label: "Архитектура" },
@@ -30,53 +30,32 @@ const luxorHeroGallerySections = [
 
 const luxorHeroGalleryBySections = {
   architecture: [
-    "/luxor2.jpg",
-    "/luxor2.jpg",
+    presentationPath(38),
+    presentationPath(1),
+    presentationPath(3),
+    presentationPath(8),
+    presentationPath(36),
   ],
   landscaping: [
-    photoPath("Благоустройство", "2026-04-30_14-55-50.png"),
-    photoPath("Благоустройство", "2026-04-30_14-56-31.png"),
-    photoPath("Благоустройство", "2026-04-30_14-56-56.png"),
+    presentationPath(29),
+    presentationPath(2),
+    presentationPath(27),
+    presentationPath(28),
   ],
   vestibule: [
-    photoPath("Вестибюль", "Вестибюль 1.jpg"),
-    photoPath("Вестибюль", "Вестибюль 2.jpg"),
-    photoPath("Вестибюль", "Вестибюль 3.jpg"),
-    photoPath("Вестибюль", "Вестибюль 4.jpg"),
-    photoPath("Вестибюль", "Вестибюль 5.jpg"),
-    photoPath("Вестибюль", "Вестибюль 6.jpg"),
-    photoPath("Вестибюль", "Вестибюль 7.jpg"),
-    photoPath("Вестибюль", "Вестибюль 8.jpg"),
+    presentationPath(16),
+    presentationPath(17),
+    presentationPath(25),
+    presentationPath(37),
+    presentationPath(13),
   ],
-  stroller: [
-    photoPath("Колясочная", "Колясочная 1.jpg"),
-    photoPath("Колясочная", "Колясочная 2.jpg"),
-    photoPath("Колясочная", "Колясочная 3.jpg"),
-    photoPath("Колясочная", "Колясочная 4.jpg"),
-  ],
-  elevator: [
-    photoPath("Лифтовый холл", "Лифт_1этаж 1.jpg"),
-    photoPath("Лифтовый холл", "Лифт_1этаж 2.jpg"),
-    photoPath("Лифтовый холл", "Лифт_1этаж 3.jpg"),
-  ],
-  bathroom: [
-    photoPath("Санузел", "photo_2026-03-17_10-56-45.jpg"),
-    photoPath("Санузел", "photo_2026-03-17_10-56-451.jpg"),
-    photoPath("Санузел", "photo_2026-03-17_10-56-4511.jpg"),
-    photoPath("Санузел", "photo_2026-03-17_10-56-45111.jpg"),
-  ],
-  hall: [
-    photoPath("Холл", "photo_2026-03-27_16-55-38.jpg"),
-    photoPath("Холл", "photo_2026-03-27_16-55-39.jpg"),
-    photoPath("Холл", "photo_2026-03-27_16-55-39 (2).jpg"),
-    photoPath("Холл", "photo_2026-03-27_16-55-39 (3).jpg"),
-  ],
+  stroller: [presentationPath(26)],
+  elevator: [presentationPath(31)],
+  bathroom: [presentationPath(5)],
+  hall: [presentationPath(33), presentationPath(7), presentationPath(15)],
 };
 
-const luxorPremiumGalleryImages = {
-  ...luxorHeroGalleryBySections,
-  architecture: ["/luxor2.jpg", ...luxorHeroGalleryBySections.architecture.slice(1)],
-};
+const luxorPremiumGalleryImages = luxorHeroGalleryBySections;
 
 const ProjectLuxorPremium = () => {
   const [headerRevealed, setHeaderRevealed] = useState(true);
@@ -101,7 +80,7 @@ const ProjectLuxorPremium = () => {
         <ProjectLuxorPremiumSubNav stickyScrollOffset={stickyScrollOffset} />
         <main style={{ paddingTop: LUXOR_PREMIUM_HEADER_H }}>
           <LuxorPremiumHero
-            heroImageOverride="/luxor2.jpg"
+            heroImageOverride={presentationPath(38)}
             titleOverride="ЛЮКСОР"
             galleryCategoriesOverride={luxorHeroGallerySections}
             galleryImagesOverride={luxorPremiumGalleryImages}
@@ -110,22 +89,31 @@ const ProjectLuxorPremium = () => {
           <LuxorPremiumAdvantages
             eyebrow="Особенности ЖК"
             headline="Современный дизайн, светлые подъезды, лифты в малоэтажной застройке и комфорт с первого шага"
-            photoOverrides={{
-              ecology: "/private.png",
-              landscaping: "/blagoustroistvo.png",
-              infrastructure: "/apteka.png",
+            slideImageOverrides={{
+              ecology: presentationPath(8),
+              education: presentationPath(19),
+              landscaping: presentationPath(29),
+              transport: presentationPath(34),
+              infrastructure: presentationPath(14),
             }}
           />
-          <LuxorPremiumGenplan imageOverride="/luxor2.jpg" />
+          <LuxorPremiumGenplan imageOverride={presentationPath(32)} />
           <LuxorPremiumLocation
-            eyebrow="Всё рядом. Ничто не давит."
-            description="ЛЮКСОР находится в Центральном районе Симферополя и сочетает редкий для города баланс: приватная тишина и быстрая доступность ключевых точек. Ужин в центре — и через несколько минут вы уже в другом мире, дома."
+            eyebrow="О резиденции"
+            description="Резиденция — это атмосфера с первого шага: лобби с консьерж-сервисом, светлые лифтовые холлы, продуманные планировки и террасы для жизни на высоте."
             galleryOverrides={[
-              "/landscapedesign.png",
-              "/dvor.png",
-              "/private.png",
-              "/blagoustroistvo.png",
+              presentationPath(25),
+              presentationPath(17),
+              presentationPath(33),
+              presentationPath(27),
             ]}
+            galleryCaptions={[
+              "Лобби и входная группа",
+              "Лифтовые холлы и подъезды",
+              "Интерьеры квартир",
+              "Террасы и патио",
+            ]}
+            heroImageObjectPosition="center 88%"
           />
           <LuxorPremiumPlans
             eyebrow="Планировки"

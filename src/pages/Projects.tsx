@@ -268,7 +268,7 @@ const Projects = () => {
                       Выбрать квартиру
                     </PillButton>
                   </Link>
-                  <PillButton variant="outline" className="w-full sm:w-auto whitespace-nowrap border-background/30 text-background hover:border-background hover:bg-transparent">
+                  <PillButton variant="outline" className="w-full sm:w-auto whitespace-nowrap btn-outline-on-dark border-background/30 text-background">
                     Получить консультацию
                   </PillButton>
                 </div>

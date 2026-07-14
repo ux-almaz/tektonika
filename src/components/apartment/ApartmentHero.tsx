@@ -102,7 +102,7 @@ const ApartmentHero = () => {
                   className={`h-12 px-5 rounded-pill text-sm font-medium transition-colors border ${
                     activeTab === i
                       ? "bg-foreground text-background border-foreground"
-                      : "border-border bg-transparent text-muted-foreground hover:border-foreground hover:bg-transparent"
+                      : "btn-interactive btn-outline border-border bg-transparent text-muted-foreground"
                   }`}
                 >
                   {tab}

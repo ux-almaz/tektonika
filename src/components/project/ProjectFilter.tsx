@@ -108,7 +108,7 @@ const ProjectFilter = () => {
                   className={`min-w-[44px] h-12 px-3 rounded-pill text-sm font-medium transition-colors border ${
                     selectedRooms.includes(r)
                       ? "bg-foreground text-background border-foreground"
-                      : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
+                      : "btn-interactive btn-outline border-border bg-transparent text-foreground"
                   }`}
                 >
                   {r}
@@ -260,7 +260,7 @@ const ProjectFilter = () => {
                       <div className="flex justify-center mt-8">
                         <button
                           onClick={() => setVisibleCount((c) => c + APARTMENTS_PER_PAGE)}
-                          className="rounded-pill border border-border bg-transparent px-10 h-12 text-sm font-medium hover:border-foreground hover:bg-transparent transition-colors"
+                          className="btn-interactive btn-outline rounded-pill border border-border bg-transparent px-10 h-12 text-sm font-medium"
                         >
                           Показать ещё
                         </button>

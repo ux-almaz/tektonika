@@ -9,10 +9,7 @@ import BlurReveal from "@/components/BlurReveal";
 import { PremiumReveal } from "@/components/project/premium/PremiumParallax";
 import { cn } from "@/lib/utils";
 
-type AdvantagePhotoKey = "ecology" | "landscaping" | "infrastructure";
-type CarouselSlideKey = AdvantagePhotoKey | "education" | "transport";
-
-const hallPhoto2 = `/photos/${encodeURIComponent("Холл")}/${encodeURIComponent("photo_2026-03-27_16-55-39 (2).jpg")}`;
+type CarouselSlideKey = "ecology" | "landscaping" | "infrastructure" | "education" | "transport";
 
 const slides: { key: CarouselSlideKey; caption: string; description: string; image: string }[] = [
   {
@@ -25,7 +22,7 @@ const slides: { key: CarouselSlideKey; caption: string; description: string; ima
     key: "education",
     caption: "Для семей с детьми",
     description: "Школа и детский сад напротив комплекса, детские площадки и безопасный двор",
-    image: hallPhoto2,
+    image: ecologyImg,
   },
   {
     key: "landscaping",
@@ -37,7 +34,7 @@ const slides: { key: CarouselSlideKey; caption: string; description: string; ima
     key: "transport",
     caption: "Паркинг у дома",
     description: "Подземный и наземный паркинг с удобным доступом к лифтовым холлам",
-    image: "/luxor-parking.png",
+    image: infrastructureImg,
   },
   {
     key: "infrastructure",
@@ -48,7 +45,7 @@ const slides: { key: CarouselSlideKey; caption: string; description: string; ima
 ];
 
 interface ProjectAdvantagesProps {
-  photoOverrides?: Partial<Record<AdvantagePhotoKey, string>>;
+  slideImageOverrides?: Partial<Record<CarouselSlideKey, string>>;
   eyebrow?: string;
   headline?: string;
 }
@@ -60,16 +57,13 @@ const DEFAULT_HEADLINE =
 const slideBasis = "shrink-0 grow-0 basis-[82%] sm:basis-[52%] md:basis-[31.5%]";
 
 const LuxorPremiumAdvantages = ({
-  photoOverrides,
+  slideImageOverrides,
   eyebrow = DEFAULT_EYEBROW,
   headline = DEFAULT_HEADLINE,
 }: ProjectAdvantagesProps) => {
   const resolvedSlides = slides.map((s) => {
-    if (s.key === "ecology" || s.key === "landscaping" || s.key === "infrastructure") {
-      const o = photoOverrides?.[s.key];
-      return o ? { ...s, image: o } : s;
-    }
-    return s;
+    const override = slideImageOverrides?.[s.key];
+    return override ? { ...s, image: override } : s;
   });
 
   const [emblaRef, emblaApi] = useEmblaCarousel({

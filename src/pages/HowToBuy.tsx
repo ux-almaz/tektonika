@@ -342,7 +342,7 @@ const HowToBuy = () => {
                     className={`px-4 py-2.5 rounded-full text-sm transition-all whitespace-nowrap shrink-0 ${
                       activeCalcProgram === p.id
                         ? "bg-foreground text-background"
-                        : "bg-background border border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
+                        : "btn-interactive btn-outline bg-background border border-border bg-transparent text-foreground"
                     }`}
                   >
                     {p.tab}
@@ -386,7 +386,7 @@ const HowToBuy = () => {
                             className={`rounded-pill border px-4 py-1.5 text-sm transition-colors ${
                               calcDown === p
                                 ? "bg-foreground text-background border-foreground"
-                                : "border-border bg-transparent text-foreground hover:border-foreground hover:bg-transparent"
+                                : "btn-interactive btn-outline border-border bg-transparent text-foreground"
                             }`}
                           >
                             {p}%
@@ -619,7 +619,7 @@ const HowToBuy = () => {
                       Смотреть проекты
                     </PillButton>
                   </Link>
-                  <PillButton variant="outline" className="w-full sm:w-auto whitespace-nowrap border-background/30 text-background hover:border-background hover:bg-transparent">
+                  <PillButton variant="outline" className="w-full sm:w-auto whitespace-nowrap btn-outline-on-dark border-background/30 text-background">
                     Получить консультацию
                   </PillButton>
                 </div>

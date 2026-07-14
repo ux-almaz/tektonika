@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { TreePine } from "lucide-react";
 import BlurReveal from "@/components/BlurReveal";
 import { PremiumReveal } from "@/components/project/premium/PremiumParallax";
 import { cn } from "@/lib/utils";
 
-const SIDE_NOTE =
-  "Дом, который не нужно объяснять: тишина, сервис и продуманная среда для жизни в центре Симферополя";
+const presentationPath = (n: number) =>
+  `/photos/presentation/${encodeURIComponent(`иллюстративный материал (${n}).png`)}`;
 
 const HEADLINE =
-  "ЛЮКСОР — резиденция бизнес-класса в Центральном районе Симферополя. Это единый независимый квартал с закрытым двором, проработанной коммерцией и сервисом, где каждый сценарий повседневной жизни уже предусмотрен.";
+  "ЛЮКСОР — резиденция бизнес-класса в Центральном районе Симферополя. Это единый независимый квартал с закрытым двором, проработанной коммерцией и сервисом, где каждый сценарий повседневной жизни уже продуман.";
 
 const landscapeTabs = [
   {
@@ -17,26 +16,26 @@ const landscapeTabs = [
     label: "Центральный район",
     overlay:
       "Тихая локация без магистралей — в центре Симферополя, но в стороне от шума трасс.",
-    image: "/private.png",
+    image: presentationPath(22),
   },
   {
     id: "family",
     label: "Школа и детский сад",
     overlay: "Школа и детский сад напротив комплекса, через дорогу — всё для семьи в шаговой доступности.",
-    image: "/photos/Холл/photo_2026-03-27_16-55-39 (2).jpg",
+    image: presentationPath(35),
   },
   {
     id: "courtyard",
     label: "Закрытый двор-сад",
     overlay: "Закрытый двор-сад на стилобате — только для резидентов, без посторонних и машин.",
-    image: "/blagoustroistvo.png",
+    image: presentationPath(29),
   },
   {
     id: "layouts",
     label: "40 планировок",
     overlay:
       "Архитектура с узнаваемым фасадом, лобби уровня 5*, консьерж-сервис и 40 планировок — от функциональных решений до резиденций с террасами и патио.",
-    image: "/photos/Вестибюль/Вестибюль 3.jpg",
+    image: presentationPath(33),
   },
 ] as const;
 
@@ -72,13 +71,8 @@ const ProjectLuxorPremiumAbout = () => {
       <div className="site-container">
         <PremiumReveal className="mb-12 flex flex-col gap-8 md:mb-16 lg:mb-20 lg:flex-row lg:items-start lg:justify-between lg:gap-12 xl:gap-24">
           <div className="flex max-w-md shrink-0 gap-3 lg:max-w-[min(100%,340px)]">
-            <TreePine
-              className="mt-0.5 size-5 shrink-0 text-[#1a4d35] md:size-[1.35rem]"
-              strokeWidth={1.75}
-              aria-hidden
-            />
             <BlurReveal
-              text={SIDE_NOTE}
+              text="О проекте"
               as="p"
               mode="words"
               className="text-[15px] leading-snug text-neutral-700 md:text-base md:leading-snug"
@@ -90,7 +84,7 @@ const ProjectLuxorPremiumAbout = () => {
             mode="words"
             delay={0.08}
             stagger={0.03}
-            className="max-w-4xl text-xl font-medium leading-[1.25] tracking-tight text-neutral-900 md:text-2xl lg:text-[28px] lg:leading-snug"
+            className="max-w-[46rem] text-xl font-medium leading-[1.25] tracking-tight text-neutral-900 md:text-2xl lg:text-[28px] lg:leading-snug"
           />
         </PremiumReveal>
 

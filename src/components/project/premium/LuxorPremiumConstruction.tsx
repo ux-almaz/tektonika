@@ -4,9 +4,8 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, Radio } from "lucide-react";
 import BlurReveal from "@/components/BlurReveal";
 import CountUp from "@/components/CountUp";
 import { PremiumReveal } from "@/components/project/premium/PremiumParallax";
-import constructionPhoto from "@/assets/construction-photo.webp";
-import aboutConstructionPhoto from "@/assets/about-construction.jpg";
-import partnersConstructionPhoto from "@/assets/partners-construction.webp";
+const presentationPath = (n: number) =>
+  `/photos/presentation/${encodeURIComponent(`иллюстративный материал (${n}).png`)}`;
 
 const chartBars = [
   { height: 12, filled: true },
@@ -24,18 +23,18 @@ const chartBars = [
 
 const constructionSlides = [
   {
-    src: constructionPhoto,
-    alt: "Строительная площадка резиденции ЛЮКСОР зимой",
+    src: presentationPath(4),
+    alt: "Общий вид резиденции ЛЮКСОР на закате",
     updatedAt: "4 февраля 2026",
   },
   {
-    src: aboutConstructionPhoto,
-    alt: "Фасады и ход строительства резиденции ЛЮКСОР",
+    src: presentationPath(21),
+    alt: "Резиденция ЛЮКСОР — архитектура и освещение фасадов",
     updatedAt: "28 января 2026",
   },
   {
-    src: partnersConstructionPhoto,
-    alt: "Строительные работы на территории резиденции ЛЮКСОР",
+    src: presentationPath(23),
+    alt: "Фасады и благоустройство резиденции ЛЮКСОР",
     updatedAt: "16 января 2026",
   },
 ];

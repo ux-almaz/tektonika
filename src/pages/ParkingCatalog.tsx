@@ -154,7 +154,7 @@ const ParkingCatalog = () => {
 
                 <button
                   onClick={() => setOnlyDiscount((prev) => !prev)}
-                  className={`flex h-14 items-center gap-3 rounded-pill border px-5 text-sm font-medium transition-colors ${onlyDiscount ? "border-foreground bg-foreground text-background" : "border-border bg-transparent hover:border-foreground hover:bg-transparent"}`}
+                  className={`flex h-14 items-center gap-3 rounded-pill border px-5 text-sm font-medium transition-colors ${onlyDiscount ? "border-foreground bg-foreground text-background" : "btn-interactive btn-outline border-border bg-transparent"}`}
                 >
                   <Flame className="h-4 w-4" />
                   Со скидкой
@@ -162,7 +162,7 @@ const ParkingCatalog = () => {
 
                 <button
                   onClick={() => setOnlyCharging((prev) => !prev)}
-                  className={`flex h-14 items-center gap-3 rounded-pill border px-5 text-sm font-medium transition-colors ${onlyCharging ? "border-foreground bg-foreground text-background" : "border-border bg-transparent hover:border-foreground hover:bg-transparent"}`}
+                  className={`flex h-14 items-center gap-3 rounded-pill border px-5 text-sm font-medium transition-colors ${onlyCharging ? "border-foreground bg-foreground text-background" : "btn-interactive btn-outline border-border bg-transparent"}`}
                 >
                   <Zap className="h-4 w-4" />
                   Зарядка для авто
@@ -213,14 +213,14 @@ const ParkingCatalog = () => {
                 <div className="flex rounded-pill border border-border bg-background p-1">
                   <button
                     onClick={() => setView("scheme")}
-                    className={`inline-flex items-center gap-2 rounded-pill border px-5 py-3 text-sm font-medium transition-colors ${view === "scheme" ? "bg-foreground text-background border-foreground" : "border-transparent text-foreground hover:border-foreground hover:bg-transparent"}`}
+                    className={`inline-flex items-center gap-2 rounded-pill border px-5 py-3 text-sm font-medium transition-colors ${view === "scheme" ? "bg-foreground text-background border-foreground" : "btn-interactive btn-outline border-transparent text-foreground"}`}
                   >
                     <LayoutGrid className="h-4 w-4" />
                     Схема
                   </button>
                   <button
                     onClick={() => setView("list")}
-                    className={`inline-flex items-center gap-2 rounded-pill border px-5 py-3 text-sm font-medium transition-colors ${view === "list" ? "bg-foreground text-background border-foreground" : "border-transparent text-foreground hover:border-foreground hover:bg-transparent"}`}
+                    className={`inline-flex items-center gap-2 rounded-pill border px-5 py-3 text-sm font-medium transition-colors ${view === "list" ? "bg-foreground text-background border-foreground" : "btn-interactive btn-outline border-transparent text-foreground"}`}
                   >
                     <List className="h-4 w-4" />
                     Список

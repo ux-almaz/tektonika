@@ -269,7 +269,7 @@ const ProjectsSection = () => {
                     Огромный выбор квартир в продаже, вы сможете найти среди них то
                     что надо
                   </p>
-                  <button className="w-full rounded-pill border border-background/30 bg-transparent min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] text-background hover:border-background hover:bg-transparent transition-colors">
+                  <button className="btn-interactive btn-outline-on-dark w-full rounded-pill border border-background/30 bg-transparent min-h-[50px] px-[30px] py-[15px] text-sm font-medium uppercase tracking-[0.35px] text-background">
                     получить консультацию
                   </button>
                 </div>
@@ -444,7 +444,7 @@ const ProjectsSection = () => {
             <div className="flex justify-center mt-8">
               <button
                 onClick={() => setVisibleCount((c) => c + apartmentsPerPage)}
-                className="rounded-pill border border-border px-10 h-12 text-sm font-medium hover:border-foreground hover:bg-transparent transition-colors"
+                className="btn-interactive btn-outline rounded-pill border border-border px-10 h-12 text-sm font-medium"
               >
                 Ещё квартиры
               </button>
